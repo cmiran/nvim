@@ -25,7 +25,7 @@ local diagnostics = {
 local diff = {
   "diff",
   colored = true,
-  symbols = { added = "", modified = "", removed = "" }, -- changes diff symbols
+  symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width,
 }
 
@@ -83,6 +83,7 @@ local lsp_name = {
 -- local progress = function()
 -- 	local current_line = vim.fn.line(".")
 -- 	local total_lines = vim.fn.line("$")
+-- 	local chars = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " " }
 -- 	local chars = { " ", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
 -- 	local line_ratio = current_line / total_lines
 -- 	local index = math.ceil(line_ratio * #chars)
@@ -113,8 +114,8 @@ lualine.setup {
   sections = {
     lualine_a = { "mode", },
     lualine_b = { "branch", }, -- { {'b:gitsigns_head', icon = ''}, },
-    lualine_c = { diagnostics, },
-    lualine_x = { diff, time, filetype, lsp_name, "encoding", }, -- { {'diff', source = diff_source}, }
+    lualine_c = { diff, },
+    lualine_x = { diagnostics, time, filetype, lsp_name, "encoding", }, -- { {'diff', source = diff_source}, }
     lualine_y = { "progress", },
     lualine_z = {},
   },

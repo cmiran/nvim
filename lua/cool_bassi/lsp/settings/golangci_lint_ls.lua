@@ -1,0 +1,7 @@
+return {
+	-- filetypes = {
+  --   'go',
+  --   'gomod',
+  -- },
+}
+

@@ -3,6 +3,6 @@ if not status_ok then
   return
 end
 
-require("cool_bassi.lsp.lsp-installer")
+require("cool_bassi.lsp.mason")
 require("cool_bassi.lsp.handlers").setup()
 require("cool_bassi.lsp.null-ls")

@@ -93,7 +93,8 @@ return packer.startup(function(use)
 
 	-- LSP
 	use "neovim/nvim-lspconfig" -- github.com/neovim/nvim-lspconfig
-	use "williamboman/nvim-lsp-installer" -- github.com/williamboman/nvim-lsp-installer
+  use "williamboman/mason.nvim" -- github.com/williamboman/manson.nvim
+  use "williamboman/mason-lspconfig.nvim" -- github.com/williamboman/mason-lspconfig.nvim
 	use "jose-elias-alvarez/null-ls.nvim" -- github.com/jose-elias-alvarez/null-ls.nvim
 
   -- NvimTree

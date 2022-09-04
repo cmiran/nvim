@@ -89,7 +89,7 @@ return packer.startup(function(use)
   use "lukas-reineke/indent-blankline.nvim" -- github.com/lukas-reineke/indent-blankline.nvim
 
   -- Lazygit
-  use "kdheepak/lazygit.nvim"
+  -- use "kdheepak/lazygit.nvim"
 
   -- Lualine
   use "nvim-lualine/lualine.nvim"
@@ -117,6 +117,9 @@ return packer.startup(function(use)
   -- Telescope
   use "nvim-telescope/telescope.nvim" -- github.com/nvim-telescope/telescope.nvim/
   use "nvim-telescope/telescope-media-files.nvim" -- github.com/nvim-telescope/telescope-media-files.nvim
+
+  -- Toggleterm
+  use "akinsho/toggleterm.nvim" -- github.com/akinsho/toggleterm.nvim
 
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- github.com/nvim-treesitter/nvim-treesitter

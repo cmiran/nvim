@@ -13,4 +13,5 @@ require "cool_bassi.gitsigns"
 require "cool_bassi.nvim-tree"
 require "cool_bassi.bufferline"
 require "cool_bassi.lualine"
+require "cool_bassi.indent-blankline"
 

@@ -42,6 +42,8 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<Leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer=false}))<CR>", opts)
 keymap("n", "<Leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown({layout_strategy='vertical',layout_config={height=0.80}}))<CR>", opts)
 -- keymap("n", "<Leader>gw", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_cursor())<CR>", opts)
+-- Toggleterm
+keymap("n", "<Leader>lg", ":lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- visual
 -- "tab" line left and right while staying in indent mode

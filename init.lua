@@ -15,4 +15,5 @@ require "cool_bassi.bufferline"
 require "cool_bassi.lualine"
 require "cool_bassi.indent-blankline"
 require "cool_bassi.toggleterm"
+require "cool_bassi.impatient"
 

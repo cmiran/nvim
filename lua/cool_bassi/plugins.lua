@@ -85,6 +85,9 @@ return packer.startup(function(use)
   -- use { "jstemmer/gotags", ft = { "go" }, requires = { "preservim/tagbar" } } -- github.com/jstemmer/gotags
   -- use { "preservim/tagbar", opt = true } -- github.com/preservim/tagbar
 
+  -- Indent Blankline
+  use "lukas-reineke/indent-blankline.nvim" -- github.com/lukas-reineke/indent-blankline.nvim
+
   -- Lazygit
   use "kdheepak/lazygit.nvim"
 

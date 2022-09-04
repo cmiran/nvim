@@ -36,11 +36,12 @@ keymap("n", "D", ":Bdelete<CR>", opts)
 -- keymap("n", "J", ":m .+1<CR>==", opts)
 -- keymap("n", "K", ":m .-2<CR>==", opts)
 keymap("n", "<Esc>", ":noh<CR>", opts) -- toggle search highlight
--- Telescope
-keymap("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
-keymap("n", "<Leader>g", "<cmd>lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown())<CR>", opts)
 -- Nvim-Tree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+-- Telescope
+keymap("n", "<Leader>f", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer=false}))<CR>", opts)
+keymap("n", "<Leader>g", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown({layout_strategy='vertical',layout_config={height=0.80}}))<CR>", opts)
+-- keymap("n", "<Leader>gw", "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_cursor())<CR>", opts)
 
 -- visual
 -- "tab" line left and right while staying in indent mode

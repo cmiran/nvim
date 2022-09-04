@@ -1,5 +1,5 @@
 vim.cmd("source /Users/cesar/.vimrc") -- source a vimscript file
-vim.cmd("source /Users/cesar/.config/nvim/help.vim") -- source a vimscript file
+-- vim.cmd("source /Users/cesar/.config/nvim/help.vim") -- source a vimscript file
 require "cool_bassi.options"
 require "cool_bassi.keymaps"
 require "cool_bassi.plugins"

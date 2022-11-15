@@ -13,6 +13,36 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
 
+-- local branch = {
+--   function()
+--     local gitsigns_buffer_head = vim.b.gitsigns_head
+
+--     if gitsigns_buffer_head then
+--       return gitsigns_buffer_head
+--     end
+--   end,
+--   icon = "",
+-- }
+
+local diff = {
+  "diff",
+  colored = true,
+  symbols = { added = "+ ", modified = "~ ", removed = "- " }, -- changes diff symbols
+  -- symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+  cond = hide_in_width,
+  source = function()
+    local gitsigns_status = vim.b.gitsigns_status_dict
+
+    if gitsigns_status then
+      return {
+        added = gitsigns_status.added,
+        modified = gitsigns_status.changed,
+        removed = gitsigns_status.removed
+      }
+    end
+  end,
+}
+
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
@@ -22,11 +52,6 @@ local diagnostics = {
   always_visible = false,
 }
 
-local diff = {
-  "diff",
-  colored = true,
-  symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-  cond = hide_in_width,
 }
 
 local filetype = {
@@ -59,17 +84,6 @@ local lsp_name = {
     return ""
   end,
 }
-
--- local diff_source = function()
---   local gitsigns = vim.b.gitsigns_status_dict
---   if gitsigns then
---     return {
---       added = gitsigns.added,
---       modified = gitsigns.changed,
---       removed = gitsigns.removed
---     }
---   end
--- end
 
 -- local location = {
 --   "location",
@@ -114,9 +128,9 @@ lualine.setup {
   sections = {
     lualine_a = { "mode", },
     lualine_b = { "branch", }, -- { {'b:gitsigns_head', icon = ''}, },
-    lualine_c = { diff, },
     lualine_x = { diagnostics, time, filetype, lsp_name, "encoding", }, -- { {'diff', source = diff_source}, }
     lualine_y = { "progress", },
+    lualine_c = { diff, }, -- { {'diff', source = diff_source} }
     lualine_z = {},
   },
   inactive_sections = {

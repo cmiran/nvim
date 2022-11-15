@@ -81,47 +81,17 @@ local lsp_name = {
 
     return ""
   end,
+  cond = hide_in_width,
 }
-
--- local location = {
---   "location",
---   padding = 0,
--- }
-
--- local spaces = function()
---   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
--- end
-
--- local progress = function()
--- 	local current_line = vim.fn.line(".")
--- 	local total_lines = vim.fn.line("$")
--- 	local chars = { "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " " }
--- 	local chars = { " ", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
--- 	local line_ratio = current_line / total_lines
--- 	local index = math.ceil(line_ratio * #chars)
--- 	return chars[index]
--- end
 
 lualine.setup {
   options = {
-    icons_enabled = true,
-    theme = 'auto',
     -- theme = theme,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
     -- disabled_filetypes = { "alpha" },
     always_divide_middle = true,
     globalstatus = true,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
   },
   sections = {
     lualine_a = { "mode", },
@@ -131,16 +101,5 @@ lualine.setup {
     lualine_y = { time, },
     lualine_z = {},
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { 'filename' },
-    lualine_x = { 'location' },
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
   extensions = {}
 }

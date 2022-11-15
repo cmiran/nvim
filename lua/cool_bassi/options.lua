@@ -1,7 +1,6 @@
 local opt = vim.opt
 
 opt.backspace = "2" -- make backspace work like most other programs
-opt.backup = false -- keep backup file after overwriting a file
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 opt.cmdheight = 1 -- number of lines to use for the command-line
 opt.colorcolumn = "80" -- columns to highlight
@@ -38,7 +37,7 @@ opt.termguicolors = true -- set term gui colors (most terminals support this)
 opt.timeoutlen = 247 -- time to wait for a mapped sequence to complete (in milliseconds)
 opt.title = true -- let NeoVim set the title of the window
 opt.undofile = true -- save undo information in a file
-opt.updatetime = 100 -- faster completion (4000ms default)
+opt.updatetime = 100 -- faster completion
 -- opt.whichwrap:append { '<', '>', '[' , ']', 'h', 'l' } -- allow specified keys to cross line boundaries
 opt.wrap = true -- long lines wrap and continue on the next line
 opt.writebackup = false -- make a backup before overwriting a file

@@ -121,7 +121,10 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- github.com/nvim-telescope/telescope-fzf-native.nvim
 
   -- Toggleterm
-  use "akinsho/toggleterm.nvim" -- github.com/akinsho/toggleterm.nvim
+  use {
+    'akinsho/toggleterm.nvim', -- github.com/akinsho/toggleterm.nvim
+    tag = '*',
+  }
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- github.com/nvim-treesitter/nvim-treesitter

@@ -116,9 +116,15 @@ return packer.startup(function(use)
   use 'rafamadriz/friendly-snippets' -- github.com/rafamadriz/friendly-snippets
 
   -- Telescope
-  use "nvim-telescope/telescope.nvim" -- github.com/nvim-telescope/telescope.nvim/
-  use "nvim-telescope/telescope-media-files.nvim" -- github.com/nvim-telescope/telescope-media-files.nvim
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- github.com/nvim-telescope/telescope-fzf-native.nvim
+  use {
+    'nvim-telescope/telescope.nvim', -- github.com/nvim-telescope/telescope.nvim
+    branch = '0.1.x',
+    requires = {
+      'nvim-lua/plenary.nvim', -- github.com/nvim-lua/plenary.nvim
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- github.com/nvim-telescope/telescope-fzf-native.nvim
+      -- 'nvim-telescope/telescope-media-files.nvim', -- github.com/nvim-telescope/telescope-media-files.nvim
+    },
+  }
 
   -- Toggleterm
   use {

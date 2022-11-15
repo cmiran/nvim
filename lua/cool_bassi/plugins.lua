@@ -72,6 +72,13 @@ return packer.startup(function(use)
   -- Comment
   use 'numToStr/Comment.nvim' -- github.com/numToStr/Comment.nvim
 
+  -- DAP
+  use 'mfussenegger/nvim-dap' -- github.com/mfussenegger/nvim-dap
+  use 'theHamsta/nvim-dap-virtual-text' -- github.com/theHamsta/nvim-dap-virtual-text
+  use 'rcarriga/nvim-dap-ui' -- github.com/rcarriga/nvim-dap-ui
+  use 'jbyuki/one-small-step-for-vimkind' -- github.com/jbyuki/one-small-step-for-vimkind
+  use 'leoluz/nvim-dap-go' -- github.com/leoluz/nvim-dap-go
+
   -- Fuzzy Finder
   -- use '/usr/local/opt/fzf' -- github.com/junegunn/fzf
 

@@ -45,9 +45,9 @@ local diff = {
 
 local diagnostics = {
   "diagnostics",
-  sources = { "nvim_diagnostic" },
+  sources = { "nvim_lsp" },
   sections = { "error", "warn", "info" },
-  symbols = { error = " ", warn = " ", info = ' ' },
+  symbols = { error = " ", warn = " ", info = " " },
   colored = true,
   always_visible = false,
 }

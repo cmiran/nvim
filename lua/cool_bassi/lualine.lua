@@ -52,15 +52,13 @@ local diagnostics = {
   always_visible = false,
 }
 
+local time = {
+  "os.date('%H:%M')",
 }
 
 local filetype = {
   "filetype",
   icons_enabled = false,
-}
-
-local time = {
-  "os.date('%H:%M')",
 }
 
 local lsp_name = {
@@ -129,8 +127,8 @@ lualine.setup {
     lualine_a = { "mode", },
     lualine_b = { "branch", }, -- { {'b:gitsigns_head', icon = ''}, },
     lualine_x = { diagnostics, time, filetype, lsp_name, "encoding", }, -- { {'diff', source = diff_source}, }
-    lualine_y = { "progress", },
     lualine_c = { diff, }, -- { {'diff', source = diff_source} }
+    lualine_y = { time, },
     lualine_z = {},
   },
   inactive_sections = {

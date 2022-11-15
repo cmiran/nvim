@@ -137,6 +137,9 @@ return packer.startup(function(use)
   -- Vim-Visual-Multi
   -- use "mg979/vim-visual-multi" --  github.com/mg979/vim-visual-multi
 
+  -- Whichkey
+  use 'folke/which-key.nvim' -- github.com/folke/which-key.nvim
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

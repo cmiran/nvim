@@ -19,4 +19,5 @@ require "cool_bassi.toggleterm"
 require "cool_bassi.impatient"
 require "cool_bassi.alpha"
 require "cool_bassi.whichkey"
+require "cool_bassi.autocommands"
 

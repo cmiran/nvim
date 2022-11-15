@@ -7,13 +7,25 @@ toggleterm.setup({
 	size = vim.api.nvim_win_get_height(0) * 0.5,
 	open_mapping = [[«]],
 	hide_numbers = true,
-	shade_filetypes = {},
-	shade_terminals = true,
-	shading_factor = 2,
+  highlights = {
+    Normal = {
+      guibg = "#000000",
+    },
+    NormalFloat = {
+      link = 'Normal'
+    },
+    -- FloatBorder = {
+    --   guifg = "<VALUE-HERE>",
+    --   guibg = "<VALUE-HERE>",
+    -- },
+  },
+	-- shade_filetypes = {},
+	shade_terminals = false,
+	-- shading_factor = 3,
 	start_in_insert = true,
 	insert_mappings = true,
 	persist_size = true,
-	direction = "float", -- horizontal
+	direction = "horizontal", -- horizontal
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
@@ -40,7 +52,19 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal = require("toggleterm.terminal").Terminal
 
-local htop = Terminal:new({ cmd = "htop", hidden = true })
+local htop = Terminal:new({
+  cmd = "htop",
+  hidden = true,
+  direction = "float",
+  highlights = {
+    NormalFloat = {
+      guibg = "#000000",
+    },
+  },
+  float_opts = {
+    border = "none",
+  },
+})
 function _HTOP_TOGGLE()
 	htop:toggle()
 end
@@ -48,12 +72,21 @@ end
 local lazygit = Terminal:new({
   cmd = "lazygit",
   hidden = true,
-  -- direction = "float",
-  -- float_opts = {
-  --   border = "none",
-  --   width = 100000,
-  --   height = 100000,
-  -- },
+  direction = "float",
+  highlights = {
+    NormalFloat = {
+      guibg = "#000000",
+    },
+    -- FloatBorder = {
+    --   guibg = "#000000",
+    --   guifg = "<VALUE-HERE>",
+    -- },
+  },
+  float_opts = {
+    border = "none",
+    -- width = vim.api.nvim_win_get_width(0) - 2, -- 100000,
+    -- height = vim.api.nvim_win_get_height(0) - 1, -- 100000,
+  },
   -- on_open = function(_)
   --   vim.cmd "startinsert!"
   --   -- vim.cmd "set laststatus=0"
@@ -70,13 +103,24 @@ end
 local lua = Terminal:new({
   cmd = "lua", 
   hidden = true,
-  direction = "horizontal",
 })
 function _LUA_TOGGLE()
 	lua:toggle()
 end
 
-local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
+local ncdu = Terminal:new({
+  cmd = "ncdu",
+  hidden = true,
+  direction = 'float',
+  highlights = {
+    NormalFloat = {
+      guibg = "#000000",
+    },
+  },
+  float_opts = {
+    border = "none",
+  },
+})
 function _NCDU_TOGGLE()
 	ncdu:toggle()
 end

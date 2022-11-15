@@ -105,8 +105,13 @@ return packer.startup(function(use)
   -- use 'RRethy/vim-illuminate' -- github.com/RRethy/vim-illuminate
 
   -- NvimTree
-  use 'kyazdani42/nvim-tree.lua' -- github.com/kyazdani42/nvim-tree.lua/
-  use 'kyazdani42/nvim-web-devicons' -- github.com/kyazdani42/nvim-web-devicons
+  use {
+    'nvim-tree/nvim-tree.lua', -- github.com/kyazdani42/nvim-tree.lua/
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- github.com/kyazdani42/nvim-web-devicons
+    },
+    tag = 'nightly',
+  }
 
   -- Ruby
   -- { use 'vim-ruby/vim-ruby', ft = { 'rb' } } -- github.com/vim-ruby/vim-ruby

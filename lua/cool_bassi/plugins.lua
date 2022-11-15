@@ -127,6 +127,7 @@ return packer.startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim', -- github.com/nvim-lua/plenary.nvim
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- github.com/nvim-telescope/telescope-fzf-native.nvim
+      'ANGkeith/telescope-terraform-doc.nvim', -- github.com/ANGkeith/telescope-terraform-doc.nvim
       -- 'nvim-telescope/telescope-media-files.nvim', -- github.com/nvim-telescope/telescope-media-files.nvim
     },
   }

@@ -5,11 +5,21 @@ end
 
 gitsigns.setup {
   signs = {
-    add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" }, -- "▎"
-    change = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" }, -- "▎"
-    changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" }, -- "▎"
-    delete = { hl = "GitSignsDelete", text = "-", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" }, -- "▎" | "契"
-    topdelete = { hl = "GitSignsDelete", text = "-", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" }, -- "▎" | "契"
+    add = {
+      text = '▎',
+    },
+    change = {
+      text = '▎',
+    },
+    changedelete = {
+      text = '▎',
+    },
+    delete = {
+      text = '▎', -- '契'
+    },
+    topdelete = {
+      text = '▎', -- '契'
+    },
   },
   current_line_blame_opts = {
     delay = 0,

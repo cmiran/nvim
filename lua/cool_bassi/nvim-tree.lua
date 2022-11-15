@@ -36,7 +36,7 @@ nvim_tree.setup {
       padding = " ",
       symlink_arrow = " ➛ ",
       show = {
-        file = true,
+        file = false,
         folder = true,
         folder_arrow = true,
         git = true,
@@ -49,7 +49,6 @@ nvim_tree.setup {
       },
     },
   },
-
   update_focused_file = {
     enable = true,
     update_cwd = true,
@@ -63,10 +62,14 @@ nvim_tree.setup {
   },
   actions = {
     open_file = {
+      quit_on_open = false,
       window_picker = {
         chars = "123456789QWERTYUIOPASDFGHJKLZXCVBNM",
       },
     },
+  },
+  git = {
+    ignore = false,
   },
 }
 

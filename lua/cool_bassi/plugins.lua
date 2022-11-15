@@ -120,6 +120,7 @@ return packer.startup(function(use)
   -- Telescope
   use "nvim-telescope/telescope.nvim" -- github.com/nvim-telescope/telescope.nvim/
   use "nvim-telescope/telescope-media-files.nvim" -- github.com/nvim-telescope/telescope-media-files.nvim
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- github.com/nvim-telescope/telescope-fzf-native.nvim
 
   -- Toggleterm
   use "akinsho/toggleterm.nvim" -- github.com/akinsho/toggleterm.nvim

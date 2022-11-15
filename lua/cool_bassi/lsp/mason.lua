@@ -1,10 +1,10 @@
-local status_ok, mason = pcall(require, "mason")
-if not status_ok then
+local mason_status_ok, mason = pcall(require, "mason")
+if not mason_status_ok then
   return
 end
 
-local status_ok_1, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not status_ok_1 then
+local mason_lspconfig_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_status_ok then
   return
 end
 
@@ -22,7 +22,7 @@ local settings = {
 }
 
 local servers = {
-  "golangci_lint_ls", -- github.com/golangci/golangci-lint
+  "golangci_lint_ls", -- github.com/nametake/golangci-lint-langserver & github.com/golangci/golangci-lint
   "gopls", -- github.com/golang/tools/tree/master/gopls
   "jsonls",
   "sqls", -- github.com/lighttiger2505/sqls
@@ -33,76 +33,72 @@ local servers = {
 }
 
 mason.setup(settings)
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = servers,
   automatic_installation = true,
-}
+})
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
   return
 end
 
+local configs_status_ok, configs = pcall(require, "lspconfig/configs")
+if not configs_status_ok then
+  return
+end
+
 for _, server in pairs(servers) do
-	local opts = {
-		on_attach = require("cool_bassi.lsp.handlers").on_attach,
-		capabilities = require("cool_bassi.lsp.handlers").capabilities,
-	}
+  local opts = {
+    on_attach = require("cool_bassi.lsp.handlers").on_attach,
+    capabilities = require("cool_bassi.lsp.handlers").capabilities,
+  }
 
   if server == "golangci_lint_ls" then
+    configs.golangcilsp = {
+      default_config = {
+        cmd = {
+          "golangci-lint-langserver"
+        },
+        root_dir = lspconfig.util.root_pattern("go.mod", ".golangci.yaml", ".git"),
+        init_options = {
+          -- command = function()
+          --   if file_exits(root_pattern(".golangci.yml")) then
+          --     return {
+          --       "golangci-lint",
+          --       "run",
+          --       "--out-format",
+          --       "json",
+          --     }
+          --   else
+          --     return {
+          --       "golangci-lint",
+          --       "run",
+          --       "--enable-all",
+          --       "--disable",
+          --       "lll",
+          --       "--out-format",
+          --       "json",
+          --       "--issues-exit-code=1"
+          --     }
+          --   end
+          -- end,
+          command = {
+            "golangci-lint",
+            "run",
+          },
+        },
+      },
+    }
     local golangci_lint_ls = require("cool_bassi.lsp.settings.golangci_lint_ls")
     opts = vim.tbl_deep_extend("force", golangci_lint_ls, opts)
+  else
+    local has_custom_opts, server_opts = pcall(require, "user.lsp.settings." .. server)
 
-    -- github.com/nametake/golangci-lint-langserver#configuration-for-nvim-lspconfig
-    -- local configs = require('lspconfig/configs')
-    -- if not configs.golangcilsp then
-    --   configs.golangcilsp = {
-    --     default_config = {
-    --       cmd = {
-    --         'golangci-lint-langserver'
-    --       },
-    --       root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
-    --       init_options = {
-    --         command = {
-    --           "golangci-lint",
-    --           "run",
-    --           "--enable-all",
-    --           "--disable",
-    --           "lll",
-    --           "--out-format",
-    --           "json",
-    --           "--issues-exit-code=1",
-    --         },
-    --       },
-    --     },
-    --   }
-    -- end
+    if has_custom_opts then
+      opts = vim.tbl_deep_extend("force", opts, server_opts)
+    end
   end
 
-  if server == "jsonls" then
-    local jsonls_opts = require "cool_bassi.lsp.settings.jsonls"
-    opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
-  end
-
-  if server == "sqls" then
-    local sqls_opts = require "cool_bassi.lsp.settings.sqls"
-    opts = vim.tbl_deep_extend("force", sqls_opts, opts)
-  end
-
-  if server == "solargraph" then
-    local solargraph_opts = require "cool_bassi.lsp.settings.solargraph"
-    opts = vim.tbl_deep_extend("force", solargraph_opts, opts)
-  end
-
-  if server == "sumneko_lua" then
-    local sumneko_opts = require "cool_bassi.lsp.settings.sumneko_lua"
-    opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
-  end
-
-  if server == "yamlls" then
-    local yamlls_opts = require "cool_bassi.lsp.settings.yamlls"
-    opts = vim.tbl_deep_extend("force", yamlls_opts, opts)
-  end
-
-	lspconfig[server].setup(opts)
+  lspconfig[server].setup(opts)
 end

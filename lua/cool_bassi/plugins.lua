@@ -43,8 +43,8 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
   use "nvim-lua/popup.nvim"
 
-  -- Any-Jump
-  -- use  "pechorin/any-jump.vim" -- github.com/pechorin/any-jump.vim
+  -- Alpha
+  use 'goolord/alpha-nvim' -- github.com/goolord/alpha-nvim
 
   -- Autopairs, integrates with both cmp and treesitter
   use "windwp/nvim-autopairs" -- github.com/windwp/nvim-autopairs

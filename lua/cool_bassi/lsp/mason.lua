@@ -23,6 +23,7 @@ local settings = {
 
 local servers = {
   "golangci_lint_ls", -- github.com/golangci/golangci-lint
+  "gopls", -- github.com/golang/tools/tree/master/gopls
   "jsonls",
   "sqls", -- github.com/lighttiger2505/sqls
   "solargraph", -- github.com/castwide/solargraph

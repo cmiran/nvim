@@ -15,7 +15,7 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
---   פּ ﯟ   some other good icons
+-- find more here: https://www.nerdfonts.com/cheat-sheet
 local kind_icons = {
   Text = "",
   Method = "m",
@@ -43,12 +43,42 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+  confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = false,
+  },
+  -- disable completion in certain contexts, such as comments
+  -- enabled = function()
+  --   -- disable completion in comments
+  --   local context = require "cmp.config.context"
+  --   -- keep command mode completion enabled when cursor is in a comment
+  --   if vim.api.nvim_get_mode().mode == "c" then
+  --     return true
+  --   else
+  --     return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+  --   end
+  -- end,
+  experimental = {
+    ghost_text = false,
+    native_menu = false,
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      -- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      vim_item.menu = ({
+        nvim_lsp = "lsp",
+        nvim_lua = "lsp",
+        cmdline = "lsp",
+        luasnip = "snippet",
+        buffer = "buffer",
+        path = "path",
+      })[entry.source.name]
+      return vim_item
     end,
   },
   mapping = {
@@ -94,48 +124,28 @@ cmp.setup {
       "s",
     }),
   },
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = ({
-        nvim_lua = "[LSP]",
-        nvim_lsp = "[LSP]",
-        cmdline = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
     end,
   },
   sources = {
-    { name = "nvim_lua" },
     { name = "nvim_lsp" },
+    { name = "nvim_lua" },
     { name = "cmdline" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
   },
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
   view = {
     entries = {
-      name = 'custom',
-      selection_order = 'near_cursor'
+      name = "custom",
+      selection_order = "near_cursor"
     },
   },
   window = {
     documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      border = "none" -- { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     }
-  },
-  experimental = {
-    ghost_text = false,
-    native_menu = false,
   },
 }

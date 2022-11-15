@@ -55,8 +55,6 @@ nvim_tree.setup {
     update_cwd = true,
   },
   ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
     "alpha",
   },
   diagnostics = {

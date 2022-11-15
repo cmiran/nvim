@@ -101,8 +101,8 @@ lualine.setup {
       statusline = {},
       winbar = {},
     },
-    -- disabled_filetypes = { "alpha", "dashboard" },
     ignore_focus = {},
+    -- disabled_filetypes = { "alpha" },
     always_divide_middle = true,
     globalstatus = true,
     refresh = {

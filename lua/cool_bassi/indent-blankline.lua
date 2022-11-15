@@ -6,7 +6,7 @@ end
 indent_blankline.setup {
   filetype_exclude = {
     "checkhealth",
-    --[[ "dashboard", ]]
+    "alpha",
     "help",
     "lspinfo",
     "man",

@@ -126,8 +126,8 @@ lualine.setup {
   sections = {
     lualine_a = { "mode", },
     lualine_b = { "branch", }, -- { {'b:gitsigns_head', icon = ''}, },
-    lualine_x = { diagnostics, time, filetype, lsp_name, "encoding", }, -- { {'diff', source = diff_source}, }
     lualine_c = { diff, }, -- { {'diff', source = diff_source} }
+    lualine_x = { diagnostics, filetype, lsp_name, "encoding", "progress", },
     lualine_y = { time, },
     lualine_z = {},
   },

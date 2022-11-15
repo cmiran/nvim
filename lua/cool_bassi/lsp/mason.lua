@@ -26,6 +26,7 @@ local servers = {
   "jsonls",
   "sqls", -- github.com/lighttiger2505/sqls
   "solargraph", -- github.com/castwide/solargraph
+  -- "sorbet", -- github.com/sorbet/sorbet
   "sumneko_lua", -- github.com/sumneko/lua-language-server
   "yamlls", -- github.com/redhat-developer/yaml-language-server
 }

@@ -145,6 +145,9 @@ return packer.startup(function(use)
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- github.com/JoosepAlviste/nvim-ts-context-commentstring
   -- use { 'lewis6991/gitsigns.nvim', commit = 'c18e016864c92ecf9775abea1baaa161c28082c3' }
 
+  -- github.com/vim-test/vim-test
+  use 'vim-test/vim-test'
+
   -- Vim-Visual-Multi
   -- use 'mg979/vim-visual-multi' --  github.com/mg979/vim-visual-multi
 
@@ -152,7 +155,7 @@ return packer.startup(function(use)
   use 'folke/which-key.nvim' -- github.com/folke/which-key.nvim
 
   -- Automatically set up your configuration after cloning packer.nvim.
-  --  Put this at the end after all plugins
+  -- Put this at the end after all plugins.
   if packer_bootstrap then
     require('packer').sync()
   end

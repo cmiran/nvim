@@ -9,7 +9,11 @@ autopairs.setup {
     javascript = { "string", "template_string" },
     java = false,
   },
-  disable_filetype = { "TelescopePrompt", "spectre_panel" },
+  disable_filetype = {
+    "alpha",
+    "spectre_panel",
+    "TelescopePrompt",
+  },
   fast_wrap = {
     map = "<M-e>", -- does not seem's to work
     chars = { "{", "[", "(", '"', "'" },

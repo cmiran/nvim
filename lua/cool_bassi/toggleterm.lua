@@ -12,7 +12,8 @@ toggleterm.setup({
       guibg = "#000000",
     },
     NormalFloat = {
-      link = 'Normal'
+      guibg = "#000000",
+      -- link = 'Normal'
     },
     -- FloatBorder = {
     --   guifg = "<VALUE-HERE>",
@@ -29,7 +30,7 @@ toggleterm.setup({
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
-		border = "curved",
+		border = "none",
 		winblend = 0,
 		highlights = {
 			border = "Normal",

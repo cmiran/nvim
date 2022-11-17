@@ -15,50 +15,58 @@ local servers = {
 
 for _, server in pairs(servers) do
   local opts = {
-    on_attach = require("cool_bassi.lsp.handlers").on_attach,
-    capabilities = require("cool_bassi.lsp.handlers").capabilities,
+    on_attach = require("cool_bassi.lsp.settings").on_attach,
+    capabilities = require("cool_bassi.lsp.settings").capabilities,
   }
 
   if server == "golangci_lint_ls" then
+    local root_dir = lspconfig.util.root_pattern("go.mod", ".golangci.yaml", ".git")
+
     configs.golangcilsp = {
       default_config = {
         cmd = {
           "golangci-lint-langserver"
         },
-        root_dir = lspconfig.util.root_pattern("go.mod", ".golangci.yaml", ".git"),
+        root_dir = root_dir,
         init_options = {
-          -- command = function()
-          --   if file_exits(root_pattern(".golangci.yml")) then
-          --     return {
-          --       "golangci-lint",
-          --       "run",
-          --       "--out-format",
-          --       "json",
-          --     }
-          --   else
-          --     return {
-          --       "golangci-lint",
-          --       "run",
-          --       "--enable-all",
-          --       "--disable",
-          --       "lll",
-          --       "--out-format",
-          --       "json",
-          --       "--issues-exit-code=1"
-          --     }
-          --   end
-          -- end,
-          command = {
-            "golangci-lint",
-            "run",
+          cmd = { 'golangci-lint-langserver' },
+          root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+          init_options = {
+            command = function()
+              local path = root_dir .. ".golangci.yml"
+              local file = io.open(path, "r")
+
+              if file then
+                io.close(file)
+
+                return {
+                  "golangci-lint",
+                  "run",
+                  "--out-format",
+                  "json",
+                  "--issues-exit-code=1",
+                }
+              else
+                return {
+                  "golangci-lint",
+                  "run",
+                  "--enable-all",
+                  "--disable",
+                  "lll",
+                  "--out-format",
+                  "json",
+                  "--issues-exit-code=1",
+                }
+              end
+            end,
           },
         },
       },
     }
-    local golangci_lint_ls = require("cool_bassi.lsp.settings.golangci_lint_ls")
+    local golangci_lint_ls = require("cool_bassi.lsp.golangci_lint_ls")
     opts = vim.tbl_deep_extend("force", golangci_lint_ls, opts)
   else
-    local has_custom_opts, server_opts = pcall(require, "user.lsp.settings." .. server)
+    local has_custom_opts, server_opts = pcall(require, "cool_bassi.lsp." .. server)
 
     if has_custom_opts then
       opts = vim.tbl_deep_extend("force", opts, server_opts)

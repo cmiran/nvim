@@ -41,7 +41,7 @@ dashboard.section.buttons.val = {
   dashboard.button("e", "פּ " .. " Explore", ":NvimTreeToggle<cr>"),
   dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<cr>"),
   dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua<cr>"),
-  dashboard.button("q", " " .. " Quit all!", ":qa!<cr>"),
+  dashboard.button("q", " " .. " Quit", ":q<cr>"),
   -- dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
 }
 

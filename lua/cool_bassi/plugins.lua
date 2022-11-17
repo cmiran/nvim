@@ -61,6 +61,7 @@ return packer.startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp' -- github.com/hrsh7th/cmp-nvim-lsp
   use 'hrsh7th/cmp-nvim-lua' -- github.com/hrsh7th/cmp-nvim-lua
   use 'ii14/emmylua-nvim' -- github.com/ii14/emmylua-nvim
+  use 'lukas-reineke/cmp-under-comparator' -- github.com/lukas-reineke/cmp-under-comparator
 
   -- Comment
   use 'numToStr/Comment.nvim' -- github.com/numToStr/Comment.nvim

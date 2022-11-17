@@ -159,7 +159,7 @@ local n_mappings = {
       ":Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { ":lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { ":lua vim.lsp.buf.format()<cr>", "Format" },
     i = { ":LspInfo<cr>", "Info" },
     I = { ":LspInstallInfo<cr>", "Installer Info" },
     j = {

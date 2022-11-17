@@ -102,6 +102,10 @@ return packer.startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- github.com/jose-elias-alvarez/null-ls.nvim
   -- use 'RRethy/vim-illuminate' -- github.com/RRethy/vim-illuminate
 
+  -- github.com/rcarriga/nvim-notify
+  use {
+    'rcarriga/nvim-notify'
+  }
   -- NvimTree
   use {
     'nvim-tree/nvim-tree.lua', -- github.com/kyazdani42/nvim-tree.lua/

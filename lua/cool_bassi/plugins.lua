@@ -96,6 +96,17 @@ return packer.startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- github.com/jose-elias-alvarez/null-ls.nvim
   -- use 'RRethy/vim-illuminate' -- github.com/RRethy/vim-illuminate
 
+  -- github.com/
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-go"
+      -- "antoinemadec/FixCursorHold.nvim"
+    }
+  }
+
   -- github.com/rcarriga/nvim-notify
   use {
     'rcarriga/nvim-notify'

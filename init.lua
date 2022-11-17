@@ -20,4 +20,5 @@ require "cool_bassi.impatient"
 require "cool_bassi.alpha"
 require "cool_bassi.whichkey"
 require "cool_bassi.autocommands"
+require "cool_bassi.neotest"
 

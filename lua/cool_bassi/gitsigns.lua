@@ -15,6 +15,9 @@ require('gitsigns').setup {
     topdelete = {
       text = '▎', -- '契'
     },
+    untracked = {
+      text = '▎',
+    },
   },
   current_line_blame_opts = {
     delay = 0,

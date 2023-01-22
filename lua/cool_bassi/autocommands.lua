@@ -4,8 +4,9 @@ create_autocmd({ "FileType" }, {
   pattern = {
     "qf",
     "help",
-    "man",
     "lspinfo",
+    "notify",
+    "man",
     "Markdown",
   },
   callback = function()

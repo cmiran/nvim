@@ -1,9 +1,9 @@
 -- vim.cmd("source /Users/cesar/.config/nvim/help.vim") -- source a vimscript file
 require "cool_bassi.options"
+require "cool_bassi.colorscheme"
 require "cool_bassi.keymaps"
 require "cool_bassi.plugins"
 require "cool_bassi.nvim-notify"
-require "cool_bassi.colorscheme"
 require "cool_bassi.treesitter"
 require "cool_bassi.cmp"
 require "cool_bassi.lsp"

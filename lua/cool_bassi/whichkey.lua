@@ -177,6 +177,13 @@ local n_mappings = {
     S = {
       ":Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
+
+  n = {
+    name = "Notification",
+    d = { ":lua require('notify').dismiss()<cr>", "Clear Notification(s)" },
+    h = {
+      ":lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      "History"
     },
   },
 

@@ -25,6 +25,5 @@ require("nightfox").setup {
   },
 }
 
-vim.cmd "colorscheme nightfox"
-vim.g.palette = require("nightfox.palette").load("nightfox") 
-
+vim.cmd("colorscheme nightfox")
+vim.g.palette = require("nightfox.palette").load("nightfox")

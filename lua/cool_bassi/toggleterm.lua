@@ -46,9 +46,9 @@ end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
-local Terminal = require("toggleterm.terminal").Terminal
+local terminal = require("toggleterm.terminal").Terminal
 
-local htop = Terminal:new({
+local htop = terminal:new({
   cmd = "htop",
   hidden = true,
   direction = "float",
@@ -65,7 +65,7 @@ function _HTOP_TOGGLE()
 	htop:toggle()
 end
 
-local lazygit = Terminal:new({
+local lazygit = terminal:new({
   cmd = "lazygit",
   hidden = true,
   direction = "float",
@@ -80,8 +80,8 @@ local lazygit = Terminal:new({
   },
   float_opts = {
     border = "none",
-    -- width = vim.api.nvim_win_get_width(0) - 2, -- 100000,
-    -- height = vim.api.nvim_win_get_height(0) - 1, -- 100000,
+    width = math.floor(vim.o.columns * 0.95),
+    height = math.floor(vim.o.lines * 0.92),
   },
   -- on_open = function(_)
   --   vim.cmd "startinsert!"
@@ -96,15 +96,15 @@ function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
 
-local lua = Terminal:new({
-  cmd = "lua", 
+local lua = terminal:new({
+  cmd = "lua",
   hidden = true,
 })
 function _LUA_TOGGLE()
 	lua:toggle()
 end
 
-local ncdu = Terminal:new({
+local ncdu = terminal:new({
   cmd = "ncdu",
   hidden = true,
   direction = 'float',

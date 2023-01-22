@@ -24,8 +24,11 @@ end
 local diff = {
   "diff",
   colored = true,
-  symbols = { added = "+ ", modified = "~ ", removed = "- " }, -- changes diff symbols
-  -- symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+  symbols = {
+    added = "+ ",
+    modified = "~ ",
+    removed = "- "
+  },
   cond = hide_in_width,
   source = function()
     local gitsigns_status = vim.b.gitsigns_status_dict
@@ -42,9 +45,19 @@ local diff = {
 
 local diagnostics = {
   "diagnostics",
-  sources = { "nvim_lsp" },
-  sections = { "error", "warn", "info" },
-  symbols = { error = " ", warn = " ", info = " " },
+  sources = {
+    "nvim_lsp"
+  },
+  sections = {
+    "error",
+    "warn",
+    "info"
+  },
+  symbols = {
+    error = " ",
+    warn = " ",
+    info = " "
+  },
   colored = true,
   always_visible = false,
 }

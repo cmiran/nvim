@@ -1,8 +1,3 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-	return
-end
-
 local parsers = {
   "bash",
   "c",
@@ -30,7 +25,7 @@ local parsers = {
   "yaml",
 }
 
-configs.setup({
+require("nvim-treesitter.configs").setup({
 	ensure_installed = parsers, -- one of "all" or a list of languages
   sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
   auto_install = true, -- Automatically install missing parsers when entering buffer

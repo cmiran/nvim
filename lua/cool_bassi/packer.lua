@@ -95,6 +95,12 @@ return packer.startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- github.com/jose-elias-alvarez/null-ls.nvim
   -- use 'RRethy/vim-illuminate' -- github.com/RRethy/vim-illuminate
 
+  -- https://github.com/iamcco/markdown-preview.nvim
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
   -- github.com/nvim-neotest/neotest
   use {
     "nvim-neotest/neotest",

@@ -21,4 +21,5 @@ require "cool_bassi.alpha"
 require "cool_bassi.whichkey"
 require "cool_bassi.autocommands"
 require "cool_bassi.neotest"
+require "cool_bassi.markdown-preview"
 

@@ -20,7 +20,6 @@ require("nightfox").setup {
       NvimTreeWinSeparator = { bg = "bg1", fg = "bg1" },
       TelescopeBorder = { bg = "bg0", fg = "bg0" },
       TelescopeNormal = { bg = "bg0" },
-      WinSeparator = { fg = "bg1" },
       -- WhichKey = { bg = "bg2" },
     },
   },

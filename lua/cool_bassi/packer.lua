@@ -1,3 +1,4 @@
+-- Install and set up packer.nvim on any machine you clone your configuration to.
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -13,15 +14,10 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
+-- Use packer after this line
+
 local packer = require('packer')
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
-
--- Have packer use a popup window
 packer.init {
   display = {
     open_fn = function()
@@ -30,13 +26,14 @@ packer.init {
   },
 }
 
+-- Find awsome plugins: github.com/rockerBOO/awesome-neovim
 return packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- Have packer manage itself
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
 
-  -- Alpha
-  use 'goolord/alpha-nvim' -- github.com/goolord/alpha-nvim
+  -- github.com/goolord/alpha-nvim 
+  use 'goolord/alpha-nvim'
 
   -- Autopairs, integrates with both cmp and treesitter
   use 'windwp/nvim-autopairs' -- github.com/windwp/nvim-autopairs
@@ -53,8 +50,10 @@ return packer.startup(function(use)
   use 'catppuccin/nvim' -- github.com/catppuccin/nvim
 
   -- CMP
-  use 'hrsh7th/nvim-cmp' -- github.com/hrsh7th/nvim-cmp
-  use 'hrsh7th/cmp-buffer' -- github.com/hrsh7th/cmp-buffer
+  -- github.com/hrsh7th/nvim-cmp
+  use 'hrsh7th/nvim-cmp'
+  -- github.com/hrsh7th/cmp-buffer
+  use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path' -- github.com/hrsh7th/cmp-path
   use 'hrsh7th/cmp-cmdline' -- github.com/hrsh7th/cmp-cmdline
   use 'saadparwaiz1/cmp_luasnip' --github.com/saadparwaiz1/cmp_luasnip
@@ -66,7 +65,7 @@ return packer.startup(function(use)
   -- Comment
   use 'numToStr/Comment.nvim' -- github.com/numToStr/Comment.nvim
 
-  -- Fuzzy Finder
+  -- FZF
   -- use '/usr/local/opt/fzf' -- github.com/junegunn/fzf
 
   -- Git
@@ -79,16 +78,16 @@ return packer.startup(function(use)
   -- use { 'jstemmer/gotags', ft = { 'go' }, requires = { 'preservim/tagbar' } } -- github.com/jstemmer/gotags
   -- use { 'preservim/tagbar', opt = true } -- github.com/preservim/tagbar
 
-  -- Impatient
-  use 'lewis6991/impatient.nvim' -- github.com/lewis6991/impatient.nvim
+  -- github.com/lewis6991/impatient.nvim 
+  use 'lewis6991/impatient.nvim'
 
-  -- Indent Blankline
-  use 'lukas-reineke/indent-blankline.nvim' -- github.com/lukas-reineke/indent-blankline.nvim
+  -- github.com/lukas-reineke/indent-blankline.nvim 
+  use 'lukas-reineke/indent-blankline.nvim'
 
   -- Lazygit
   -- use 'kdheepak/lazygit.nvim'
 
-  -- Lualine
+  -- github.com/nvim-lualine/lualine.nvim
   use 'nvim-lualine/lualine.nvim'
 
   -- LSP
@@ -96,14 +95,14 @@ return packer.startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- github.com/jose-elias-alvarez/null-ls.nvim
   -- use 'RRethy/vim-illuminate' -- github.com/RRethy/vim-illuminate
 
-  -- github.com/
+  -- github.com/nvim-neotest/neotest
   use {
     "nvim-neotest/neotest",
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
       "nvim-neotest/neotest-go"
-      -- "antoinemadec/FixCursorHold.nvim"
     }
   }
 
@@ -111,9 +110,10 @@ return packer.startup(function(use)
   use {
     'rcarriga/nvim-notify'
   }
-  -- NvimTree
+
+  --github.com/kyazdani42/nvim-tree.lua/ 
   use {
-    'nvim-tree/nvim-tree.lua', -- github.com/kyazdani42/nvim-tree.lua/
+    'nvim-tree/nvim-tree.lua',
     requires = {
       'nvim-tree/nvim-web-devicons', -- github.com/kyazdani42/nvim-web-devicons
     },
@@ -127,30 +127,46 @@ return packer.startup(function(use)
   use 'L3MON4D3/LuaSnip' -- github.com/L3MON4D3/LuaSnip/
   use 'rafamadriz/friendly-snippets' -- github.com/rafamadriz/friendly-snippets
 
-  -- Telescope
+  -- github.com/nvim-telescope/telescope.nvim
   use {
-    'nvim-telescope/telescope.nvim', -- github.com/nvim-telescope/telescope.nvim
+    'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     requires = {
-      'nvim-lua/plenary.nvim', -- github.com/nvim-lua/plenary.nvim
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- github.com/nvim-telescope/telescope-fzf-native.nvim
-      'ANGkeith/telescope-terraform-doc.nvim', -- github.com/ANGkeith/telescope-terraform-doc.nvim
-      -- 'nvim-telescope/telescope-media-files.nvim', -- github.com/nvim-telescope/telescope-media-files.nvim
+      -- github.com/nvim-lua/plenary.nvim
+      'nvim-lua/plenary.nvim',
+
+      -- github.com/nvim-telescope/telescope-fzf-native.nvim
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+
+      -- github.com/ANGkeith/telescope-terraform-doc.nvim
+      'ANGkeith/telescope-terraform-doc.nvim',
+
+      -- github.com/nvim-telescope/telescope-github.nvim
+      -- 'nvim-telescope/telescope-github.nvim',
+
+      -- github.com/nvim-telescope/telescope-media-files.nvim
+      -- 'nvim-telescope/telescope-media-files.nvim',
     },
   }
 
-  -- Toggleterm
-  use {
-    'akinsho/toggleterm.nvim', -- github.com/akinsho/toggleterm.nvim
-    tag = '*',
-  }
+  -- github.com/akinsho/toggleterm.nvim
+  use { 'akinsho/toggleterm.nvim', tag = '*' }
 
-  -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- github.com/nvim-treesitter/nvim-treesitter
-  use 'p00f/nvim-ts-rainbow' -- github.com/p00f/nvim-ts-rainbow
-  use 'nvim-treesitter/playground' -- github.com/nvim-treesitter/playground
-  use 'JoosepAlviste/nvim-ts-context-commentstring' -- github.com/JoosepAlviste/nvim-ts-context-commentstring
-  -- use { 'lewis6991/gitsigns.nvim', commit = 'c18e016864c92ecf9775abea1baaa161c28082c3' }
+  -- github.com/nvim-treesitter/nvim-treesitter 
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    requires = {
+      -- github.com/p00f/nvim-ts-rainbow
+      'p00f/nvim-ts-rainbow',
+
+      -- github.com/JoosepAlviste/nvim-ts-context-commentstring
+      'JoosepAlviste/nvim-ts-context-commentstring',
+
+      -- github.com/nvim-treesitter/playground
+      'nvim-treesitter/playground',
+    },
+    run = ':TSUpdate',
+  }
 
   -- github.com/vim-test/vim-test
   use 'vim-test/vim-test'
@@ -158,11 +174,11 @@ return packer.startup(function(use)
   -- Vim-Visual-Multi
   -- use 'mg979/vim-visual-multi' --  github.com/mg979/vim-visual-multi
 
-  -- Whichkey
-  use 'folke/which-key.nvim' -- github.com/folke/which-key.nvim
+  -- github.com/folke/which-key.nvim 
+  use 'folke/which-key.nvim'
 
-  -- Automatically set up your configuration after cloning packer.nvim.
-  -- Put this at the end after all plugins.
+  -- Set up your configuration after cloning packer.nvim.
+  -- Put this at the end of startup after all plugins.
   if packer_bootstrap then
     require('packer').sync()
   end

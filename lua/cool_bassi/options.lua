@@ -9,6 +9,7 @@ opt.colorcolumn = "80" -- columns to highlight
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- convert tabs to spaces
 opt.fileencoding = "utf-8" -- the encoding written to a file
+opt.fillchars = { eob = " " } -- characters to use for displaying special items
 -- opt.formatoptions:remove { "cro" } -- TODO: this doesn't seem to work
 -- opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 opt.hlsearch = true -- highlight all matches on previous search pattern

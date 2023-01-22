@@ -2,10 +2,9 @@ require("nightfox").setup {
   groups = {
     all = {
       ColorColumn = { link = "CursorLine" },
-      EndOfBuffer = { fg = "bg1" },
+      -- EndOfBuffer = { fg = "bg1" },
       FloatBorder = { bg = "bg0" },
       LspFloatWinBorder = { fg = "bg0" },
-      NvimTreeEndOfBuffer = { fg = "bg0" },
       -- NotifyBackground = { bg = "bg0", fg = "bg0" },
       NotifyERRORBody = { bg = "bg0" },
       NotifyWARNBody = { bg = "bg0" },
@@ -17,6 +16,7 @@ require("nightfox").setup {
       NotifyINFOBorder = { bg = "bg0" },
       NotifyDEBUGBorder = { bg = "bg0" },
       NotifyTRACEBorder = { bg = "bg0" },
+      -- NvimTreeEndOfBuffer = { fg = "bg0" },
       NvimTreeWinSeparator = { bg = "bg1", fg = "bg1" },
       TelescopeBorder = { bg = "bg0", fg = "bg0" },
       TelescopeNormal = { bg = "bg0" },

@@ -10,6 +10,7 @@ local servers = {
   -- "sorbet", -- github.com/sorbet/sorbet
   "sumneko_lua", -- github.com/sumneko/lua-language-server
   "terraformls", -- github.com/hashicorp/terraform-ls
+  "tflint", -- github.com/terraform-linters/tflint
   "yamlls", -- github.com/redhat-developer/yaml-language-server
 }
 

@@ -18,10 +18,9 @@ local get_notification_height = function(win)
 end
 
 notify.setup({
-	-- background_colour = vim.g.palette.bg0,
-	fps = 60,
+	fps = 90,
   max_width = 60,
-  minimum_width = 60,
+  minimum_width = 5,
 	on_open = function(win)
 		if vim.api.nvim_win_is_valid(win) then
 			vim.api.nvim_win_set_option(win, "wrap", true)
@@ -33,7 +32,7 @@ notify.setup({
 	end,
 	render = "compact",
 	stages = "fade_in_slide_out",
-	timeout = 200,
+	timeout = 400,
 })
 
 vim.notify = notify

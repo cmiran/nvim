@@ -55,10 +55,19 @@ local n_mappings = {
   },
   D = { ":Bdelete<cr>", "delete buffer" },
   e = { ":NvimTreeToggle<cr>", "tree" },
-  f = { ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>", "find files" },
-  r = { ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>", "recent files" },
+  f = {
+    ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
+    "find files",
+  },
+  r = {
+    ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
+    "recent files",
+  },
   Q = { ":qa!<cr>", "quit all!" },
-  G = { ":lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy({grep_open_files=true,hidden=true}))<cr>", "grep" },
+  G = {
+    ":lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy({grep_open_files=true,hidden=true}))<cr>",
+  "grep",
+},
   w = { ":w<cr>", "save" },
   -- ["P"] = { ":Telescope projects<cr>", "Projects" },
 
@@ -88,50 +97,46 @@ local n_mappings = {
 
   g = {
     name = "Git",
-    g = { ":lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
-    b = { ":lua require('telescope.builtin').git_branches(require('telescope.themes').get_dropdown({previewer=false}))<cr>", "checkout branch" },
-    c = { ":lua require('telescope.builtin').git_commits(require('telescope.themes').get_dropdown({previewer=false}))<cr>", "checkout branch" },
-    j = { ":lua require('gitsigns').next_hunk()<cr>", "Next Hunk" },
-    k = { ":lua require('gitsigns').prev_hunk()<cr>", "Prev Hunk" },
-    l = { ":lua require('gitsigns').blame_line()<cr>", "Blame" },
-    p = { ":lua require('gitsigns').preview_hunk()<cr>", "Preview Hunk" },
-    r = { ":lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk" },
-    R = { ":lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer" },
-    s = { ":lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk" },
-    u = { ":lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-    o = { ":Telescope git_status<cr>", "Open changed file" },
-    d = { ":Gitsigns diffthis HEAD<cr>", "Diff" },
+    g = { ":lua _LAZYGIT_TOGGLE()<cr>", "lazygit" },
+    b = {
+      ":lua require('telescope.builtin').git_branches(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      "list branch(es)"
+    },
+    c = {
+      ":lua require('telescope.builtin').git_commits(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      "list commit(s)"
+    },
+    d = { ":Gitsigns diffthis HEAD<cr>", "diff" },
+    f = {
+      ":lua require('telescope.builtin').git_status(require('telescope.themes').get_dropdown())<cr>",
+      "list changed file(s)"
+    },
+    j = { ":lua require('gitsigns').next_hunk()<cr>", "next hunk" },
+    k = { ":lua require('gitsigns').prev_hunk()<cr>", "prev hunk" },
+    l = { ":lua require('gitsigns').blame_line()<cr>", "blame" },
+    p = { ":lua require('gitsigns').preview_hunk()<cr>", "preview hunk" },
+    r = { ":lua require('gitsigns').reset_hunk()<cr>", "reset hunk" },
+    R = { ":lua require('gitsigns').reset_buffer()<cr>", "reset buffer" },
+    s = { ":lua require('gitsigns').stage_hunk()<cr>", "stage hunk" },
+    u = { ":lua require('gitsigns').undo_stage_hunk()<cr>", "undo stage hunk" },
   },
 
   l = {
     name = "LSP",
     a = { ":lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = {
-      ":Telescope lsp_document_diagnostics<cr>",
-      "Document Diagnostics",
-    },
-    w = {
-      ":Telescope lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
-    },
+    d = { ":Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
+    w = { ":Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { ":lua vim.lsp.buf.format()<cr>", "Format" },
     i = { ":LspInfo<cr>", "Info" },
     I = { ":LspInstallInfo<cr>", "Installer Info" },
-    j = {
-      ":lua vim.lsp.diagnostic.goto_next()<cr>",
-      "Next Diagnostic",
-    },
-    k = {
-      ":lua vim.lsp.diagnostic.goto_prev()<cr>",
-      "Prev Diagnostic",
-    },
+    j = { ":lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+    k = { ":lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
     l = { ":lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    q = { ":lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+    q = { ":lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     r = { ":lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = { ":Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    S = {
-      ":Telescope lsp_dynamic_workspace_symbols<cr>",
-      "Workspace Symbols",
+    S = { ":Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+  },
 
   n = {
     name = "Notification",
@@ -153,7 +158,10 @@ local n_mappings = {
 
   s = {
     name = "Search",
-    l = { ":lua require('telescope.builtin').highlights(require('telescope.themes').get_dropdown({previewer=top,layout_strategy='vertical',layout_config={height=0.8}}))<cr>", "highlights" },
+    l = {
+      ":lua require('telescope.builtin').highlights(require('telescope.themes').get_dropdown({previewer=top,layout_strategy='vertical',layout_config={height=0.8}}))<cr>",
+      "highlights"
+    },
     c = { ":Telescope colorscheme<cr>", "Colorscheme" },
     h = { ":Telescope help_tags<cr>", "Find Help" },
     M = { ":Telescope man_pages<cr>", "Man Pages" },
@@ -175,12 +183,13 @@ local n_mappings = {
 
   ['\\'] = {
     name = "Terminal",
-    t = { ":lua _HTOP_TOGGLE()<cr>", "Htop" },
-    u = { ":lua _NCDU_TOGGLE()<cr>", "NCDU" },
-    l = { ":lua _LUA_TOGGLE_TOGGLE()<cr>", "Python" },
-    f = { ":ToggleTerm direction=float<cr>", "Float" },
-    h = { ":ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    v = { ":ToggleTerm size=60 direction=vertical<cr>", "Vertical" },
+    f = { ":ToggleTerm direction=float<cr>", "float" },
+    g = { ":lua _LAZYGIT_TOGGLE()<cr>", "lazygit" },
+    h = { ":ToggleTerm size=10 direction=horizontal<cr>", "horizontal" },
+    l = { ":lua _LUA_TOGGLE_TOGGLE()<cr>", "python" },
+    t = { ":lua _HTOP_TOGGLE()<cr>", "htop" },
+    u = { ":lua _NCDU_TOGGLE()<cr>", "ncdu" },
+    v = { ":ToggleTerm size=60 direction=vertical<cr>", "vertical split" },
   },
 }
 

@@ -1,5 +1,6 @@
 local create_autocmd = vim.api.nvim_create_autocmd
 
+-- Quit window with 'q' or 'ESC' on filetype.
 create_autocmd({ "FileType" }, {
   pattern = {
     "qf",
@@ -24,6 +25,15 @@ create_autocmd({ "TextYankPost" }, {
   end,
 })
 
+-- Reloads neovim whenever you save the plugins.lua file.
+-- vim.cmd [[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]
+
+-- Hide status bar filetype.
 -- create_autocmd({ "User" }, {
 --   pattern = { "AlphaReady" },
 --   callback = function()
@@ -32,11 +42,3 @@ create_autocmd({ "TextYankPost" }, {
 --     ]]
 --   end,
 -- })
---
--- Autocommand that reloads neovim whenever you save the plugins.lua file
--- vim.cmd [[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]]

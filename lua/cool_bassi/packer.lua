@@ -113,9 +113,7 @@ return packer.startup(function(use)
   }
 
   -- github.com/rcarriga/nvim-notify
-  use {
-    'rcarriga/nvim-notify'
-  }
+  use 'rcarriga/nvim-notify'
 
   --github.com/kyazdani42/nvim-tree.lua/ 
   use {

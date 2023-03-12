@@ -24,11 +24,7 @@ end
 local diff = {
   "diff",
   colored = true,
-  symbols = {
-    added = "+ ",
-    modified = "~ ",
-    removed = "- "
-  },
+  symbols = { added = "+ ", modified = "~ ", removed = "- " },
   cond = hide_in_width,
   source = function()
     local gitsigns_status = vim.b.gitsigns_status_dict
@@ -45,33 +41,18 @@ local diff = {
 
 local diagnostics = {
   "diagnostics",
-  sources = {
-    "nvim_lsp"
-  },
-  sections = {
-    "error",
-    "warn",
-    "info"
-  },
-  symbols = {
-    error = " ",
-    warn = " ",
-    info = " "
-  },
+  sources = { "nvim_lsp" },
+  sections = { "error", "warn", "info" },
+  symbols = { error = " ", warn = " ", info = " " },
   colored = true,
   always_visible = false,
 }
 
--- local time = {
---   "os.date('%H:%M')",
--- }
+-- local time = { "os.date('%H:%M')" }
 
-local filetype = {
-  "filetype",
-  icons_enabled = false,
-}
+local filetype = { "filetype", icons_enabled = false }
 
-local lsp_name = {
+local lsp_names = {
   function()
     local names = {}
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
@@ -104,11 +85,11 @@ lualine.setup {
     globalstatus = true,
   },
   sections = {
-    lualine_a = { "mode", },
-    lualine_b = { "branch", }, -- { {'b:gitsigns_head', icon = ''}, },
-    lualine_c = { diff, }, -- { {'diff', source = diff_source} }
-    lualine_x = { diagnostics, filetype, lsp_name, },
-    lualine_y = { "progress", },
+    lualine_a = { "mode" },
+    lualine_b = { "branch" }, -- { {'b:gitsigns_head', icon = ''}, },
+    lualine_c = { diff }, -- { {'diff', source = diff_source} }
+    lualine_x = { diagnostics, filetype, lsp_names },
+    lualine_y = { "progress" },
     lualine_z = {},
   },
   extensions = {}

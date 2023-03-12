@@ -1,8 +1,8 @@
 return {
   cmd = {
     'tflint',
-    '--config',
-    os.getenv("HOME") .. '/.config/tflint/tflint.hcl',
+    -- '--config',
+    -- os.getenv("HOME") .. '/.config/tflint/tflint.hcl',
     '--langserver',
   },
   filetypes = {

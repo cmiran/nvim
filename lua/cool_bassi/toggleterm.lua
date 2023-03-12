@@ -80,8 +80,10 @@ local lazygit = terminal:new({
   },
   float_opts = {
     border = "none",
-    width = math.floor(vim.o.columns * 0.95),
-    height = math.floor(vim.o.lines * 0.92),
+    width = vim.o.columns,
+    height = vim.o.lines,
+    -- width = math.floor(vim.o.columns * 0.95),
+    -- height = math.floor(vim.o.lines * 0.92),
   },
   -- on_open = function(_)
   --   vim.cmd "startinsert!"

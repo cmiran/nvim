@@ -12,6 +12,7 @@ local servers = {
 	"sqls", -- github.com/lighttiger2505/sqls
 	-- "solargraph", -- github.com/castwide/solargraph
 	-- "sorbet", -- github.com/sorbet/sorbet
+	"lua_ls", -- github.com/sumneko/lua-language-server
 	"terraformls", -- github.com/hashicorp/terraform-ls
 	"tsserver", -- github.com/typescript-language-server/typescript-language-server
 	"tflint", -- github.com/terraform-linters/tflint

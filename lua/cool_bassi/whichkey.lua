@@ -53,7 +53,7 @@ local n_mappings = {
     ":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer=false})<cr>",
     "buffers",
   },
-  D = { ":Bdelete<cr>", "delete buffer" },
+  D = { ":Bdelete!<cr>", "delete buffer!" },
   e = { ":NvimTreeToggle<cr>", "tree" },
   f = {
     ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",

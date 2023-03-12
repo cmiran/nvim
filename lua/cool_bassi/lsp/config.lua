@@ -10,6 +10,7 @@ local servers = {
 	"gopls",
 	"jsonls",
 	"sqls", -- github.com/lighttiger2505/sqls
+	-- "spectral", -- github.com/stoplightio/spectral
 	-- "solargraph", -- github.com/castwide/solargraph
 	-- "sorbet", -- github.com/sorbet/sorbet
 	"lua_ls", -- github.com/sumneko/lua-language-server

@@ -95,6 +95,15 @@ return packer.startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- github.com/jose-elias-alvarez/null-ls.nvim
   -- use 'RRethy/vim-illuminate' -- github.com/RRethy/vim-illuminate
 
+  -- github.com/yanskun/gotests.nvim
+  use {
+    'yanskun/gotests.nvim',
+    ft = 'go',
+    config = function()
+      require("gotests").setup()
+    end,
+  }
+
   -- https://github.com/iamcco/markdown-preview.nvim
   use({
     "iamcco/markdown-preview.nvim",

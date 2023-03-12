@@ -22,4 +22,4 @@ require "cool_bassi.whichkey"
 require "cool_bassi.autocommands"
 require "cool_bassi.neotest"
 require "cool_bassi.markdown-preview"
-
+-- require "cool_bassi.gotests"

@@ -9,4 +9,7 @@ return {
   root_dir = {
     root_dir = require('lspconfig').util.root_pattern('.terraform', '.git'),
   },
+  experimentalFeatures = {
+    prefillRequiredFields = true,
+  },
 }

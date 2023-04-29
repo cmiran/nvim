@@ -4,7 +4,6 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
   disable_netrw = true,
-  open_on_setup = true,
   sync_root_with_cwd = true,
   view = {
     side = "left",
@@ -37,9 +36,6 @@ nvim_tree.setup {
   update_focused_file = {
     enable = true,
     update_root = true,
-  },
-  ignore_ft_on_setup = {
-    "alpha",
   },
   diagnostics = {
     enable = true,

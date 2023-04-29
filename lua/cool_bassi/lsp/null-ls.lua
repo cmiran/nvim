@@ -29,6 +29,9 @@ null_ls.setup({
 		-- github.com/get-alex/alex
 		-- diagnostics.alex,
 
+		-- github.com/mrtazz/checkmake
+		-- diagnostics.checkmake,
+
 		-- github.com/streetsidesoftware/cspell
 		-- diagnostics.cspell,
 

@@ -1,5 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
+  -- bootstrap lazy.nvim
+  -- stylua: ignore
   vim.fn.system({
     "git",
     "clone",
@@ -9,57 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
--- Find awsome plugins: github.com/rockerBOO/awesome-neovim
 require("lazy").setup({
+  spec = {
   -- github.com/nvim-lua/plenary.nvim
   'nvim-lua/plenary.nvim',
   -- github.com/nvim-lua/popup.nvim
   'nvim-lua/popup.nvim',
-
-  -- github.com/goolord/alpha-nvim
-  'goolord/alpha-nvim',
-
-  -- Autopairs, integrates with both cmp and treesitter
-  -- github.com/windwp/nvim-autopairs
-  'windwp/nvim-autopairs',
-
-  -- Bufferline
-  -- github.com/akinsho/bufferline.nvim
-  'akinsho/bufferline.nvim',
-  -- github.com/moll/vim-bbye
-  'moll/vim-bbye',
-
-  -- colorschemes
-  -- github.com/EdenEast/nightfox.nvim
-  'EdenEast/nightfox.nvim',
-  -- github.com/folke/tokyonight.nvim
-  'folke/tokyonight.nvim',
-  -- github.com/catppuccin/nvim
-  'catppuccin/nvim',
-  -- github.com/rebelot/kanagawa.nvim
-  'rebelot/kanagawa.nvim',
-
-  -- CMP
-  -- github.com/hrsh7th/nvim-cmp
-  'hrsh7th/nvim-cmp',
-  -- github.com/hrsh7th/cmp-buffer
-  'hrsh7th/cmp-buffer',
-  -- github.com/hrsh7th/cmp-path
-  'hrsh7th/cmp-path',
-  -- github.com/hrsh7th/cmp-cmdline
-  'hrsh7th/cmp-cmdline',
-  --github.com/saadparwaiz1/cmp_luasnip
-  'saadparwaiz1/cmp_luasnip',
-  -- github.com/hrsh7th/cmp-nvim-lsp
-  'hrsh7th/cmp-nvim-lsp',
-  -- github.com/hrsh7th/cmp-nvim-lua
-  'hrsh7th/cmp-nvim-lua',
-  -- github.com/ii14/emmylua-nvim
-  'ii14/emmylua-nvim',
-  -- github.com/lukas-reineke/cmp-under-comparator
-  'lukas-reineke/cmp-under-comparator',
 
   -- github.com/numToStr/Comment.nvim
  'numToStr/Comment.nvim',
@@ -114,6 +73,8 @@ require("lazy").setup({
  'jose-elias-alvarez/null-ls.nvim',
  -- githu.com/j-hui/fidget.nvim
  'j-hui/fidget.nvim',
+ -- github.com/ii14/emmylua-nvim
+ 'ii14/emmylua-nvim',
 
   -- github.com/yanskun/gotests.nvim
   {
@@ -214,14 +175,31 @@ require("lazy").setup({
   },
 
   -- github.com/vim-test/vim-test
- 'vim-test/vim-test',
+  'vim-test/vim-test',
 
   -- Vim-Visual-Multi
   -- use 'mg979/vim-visual-multi' --  github.com/mg979/vim-visual-multi
 
   -- github.com/folke/which-key.nvim 
- 'folke/which-key.nvim',
+  'folke/which-key.nvim',
 
-  -- Set up your configuration after cloning packer.nvim.
-  -- Put this at the end of startup after all plugins.
+   { import = "plugins" },
+  },
+  install = { colorscheme = { "nightfox" } },
+  checker = { enabled = true }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      -- disable some rtp plugins
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })

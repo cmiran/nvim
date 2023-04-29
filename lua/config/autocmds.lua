@@ -12,9 +12,9 @@ create_autocmd({ "FileType" }, {
   },
   callback = function()
     vim.cmd [[
-      nnoremap <silent> <buffer> q :close<cr> 
-      nnoremap <silent> <buffer> <esc> :close<cr> 
-      set nobuflisted 
+      nnoremap <silent> <buffer> q :close<cr>
+      nnoremap <silent> <buffer> <esc> :close<cr>
+      set nobuflisted
     ]]
   end,
 })

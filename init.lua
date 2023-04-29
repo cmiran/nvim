@@ -1,27 +1,16 @@
--- vim.cmd("source /Users/cesar/.config/nvim/help.vim") -- source a vimscript file
-require "cool_bassi.options"
-require "cool_bassi.keymaps"
--- require "cool_bassi.packer"
-require "cool_bassi.lazy"
-require "cool_bassi.colorscheme"
-require "cool_bassi.nvim-notify"
-require "cool_bassi.treesitter"
-require "cool_bassi.cmp"
-require "cool_bassi.lsp"
-require "cool_bassi.telescope"
-require "cool_bassi.autopairs"
-require "cool_bassi.comment"
-require "cool_bassi.gitsigns"
-require "cool_bassi.nvim-tree"
-require "cool_bassi.bufferline"
-require "cool_bassi.lualine"
-require "cool_bassi.indent-blankline"
-require "cool_bassi.toggleterm"
--- require "cool_bassi.impatient"
-require "cool_bassi.alpha"
-require "cool_bassi.whichkey"
-require "cool_bassi.autocommands"
-require "cool_bassi.neotest"
-require "cool_bassi.markdown-preview"
-require "cool_bassi.illuminate"
--- require "cool_bassi.gotests"
+require("config.lazy")
+
+require("cool_bassi.nvim-notify")
+require("cool_bassi.treesitter")
+require("cool_bassi.lsp")
+require("cool_bassi.telescope")
+require("cool_bassi.autopairs")
+require("cool_bassi.comment")
+require("cool_bassi.gitsigns")
+require("cool_bassi.nvim-tree")
+require("cool_bassi.lualine")
+require("cool_bassi.indent-blankline")
+require("cool_bassi.toggleterm")
+require("cool_bassi.neotest")
+require("cool_bassi.markdown-preview")
+require("cool_bassi.illuminate")

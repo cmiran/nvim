@@ -9,23 +9,32 @@ local servers = {
 	-- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 	"gopls",
 	"jsonls",
-	"sqls", -- github.com/lighttiger2505/sqls
-	-- "spectral", -- github.com/stoplightio/spectral
-	-- "solargraph", -- github.com/castwide/solargraph
-	-- "sorbet", -- github.com/sorbet/sorbet
-	"lua_ls", -- github.com/sumneko/lua-language-server
-	"terraformls", -- github.com/hashicorp/terraform-ls
-	"tsserver", -- github.com/typescript-language-server/typescript-language-server
-	"tflint", -- github.com/terraform-linters/tflint
-	"yamlls", -- github.com/redhat-developer/yaml-language-server
+  -- github.com/sumneko/lua-language-server
+	"lua_ls",
+  -- github.com/lighttiger2505/sqls
+	"sqls",
+  -- github.com/stoplightio/spectral
+	-- "spectral",
   -- github.com/hyperledger/solang
   "solang",
+  -- github.com/castwide/solargraph
+	-- "solargraph",
   -- github.com/ethereum/solc-js
   "solc",
   -- github.com/qiuxiang/solidity-ls
   "solidity",
   -- github.com/juanfranblanco/vscode-solidity
   "solidity_ls",
+  -- github.com/sorbet/sorbet
+	-- "sorbet",
+  -- github.com/hashicorp/terraform-ls
+	"terraformls",
+  -- github.com/typescript-language-server/typescript-language-server
+	"tsserver",
+  -- github.com/terraform-linters/tflint
+	"tflint",
+  -- github.com/redhat-developer/yaml-language-server
+	"yamlls",
 }
 
 for _, server in pairs(servers) do

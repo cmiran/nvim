@@ -18,6 +18,14 @@ local servers = {
 	"tsserver", -- github.com/typescript-language-server/typescript-language-server
 	"tflint", -- github.com/terraform-linters/tflint
 	"yamlls", -- github.com/redhat-developer/yaml-language-server
+  -- github.com/hyperledger/solang
+  "solang",
+  -- github.com/ethereum/solc-js
+  "solc",
+  -- github.com/qiuxiang/solidity-ls
+  "solidity",
+  -- github.com/juanfranblanco/vscode-solidity
+  "solidity_ls",
 }
 
 for _, server in pairs(servers) do

@@ -17,4 +17,22 @@ null_ls.setup({
     formatting.stylua,
     -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
   },
+		-- github.com/streetsidesoftware/cspell
+		-- code_actions.cspell,
+
+		-- github.com/L3MON4D3/LuaSnip
+		completion.luasnip,
+
+		-- github.com/rhysd/actionlint
+		diagnostics.actionlint,
+
+		-- github.com/get-alex/alex
+		-- diagnostics.alex,
+
+		-- github.com/streetsidesoftware/cspell
+		-- diagnostics.cspell,
+
+		-- github.com/codespell-project/codespell
+		diagnostics.codespell,
+
 })

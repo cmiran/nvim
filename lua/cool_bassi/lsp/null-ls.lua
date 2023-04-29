@@ -44,4 +44,11 @@ null_ls.setup({
 		-- github.com/stedolan/jq
 		formatting.jq,
 
+    -- github.com/JohnnyMorganz/StyLua
+    formatting.stylua.with({
+      condition = function(utils)
+        return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
+      end,
+    }),
+
 })

@@ -102,7 +102,7 @@ telescope.setup {
   },
 }
 
-telescope.load_extension('fzf')
+-- telescope.load_extension('fzf')
 telescope.load_extension("notify")
 telescope.load_extension('terraform_doc')
 -- telescope.load_extension('media_files')

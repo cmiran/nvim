@@ -3,18 +3,19 @@ require("indent_blankline").setup {
     "checkhealth",
     "alpha",
     "help",
+    "lazy",
     "lspinfo",
     "man",
     "NvimTree",
-    "packer",
     "startify",
     "",
-    --[[ "neogitstatus", ]]
-    --[[ "text", ]]
-    --[[ "Trouble", ]]
+    -- "neogitstatus",
+    -- "text",
+    -- "Trouble",
   },
   use_treesitter = true,
   use_treesitter_scope = true,
+  -- show_current_context = true,
   show_first_indent_level = false,
   show_trailing_blankline_indent = false,
 }

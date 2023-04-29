@@ -38,4 +38,7 @@ null_ls.setup({
 		-- github.com/codespell-project/codespell
 		diagnostics.codespell,
 
+		-- github.com/protofire/solhint
+		diagnostics.solhint,
+
 })

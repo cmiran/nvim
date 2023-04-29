@@ -41,4 +41,7 @@ null_ls.setup({
 		-- github.com/protofire/solhint
 		diagnostics.solhint,
 
+		-- github.com/stedolan/jq
+		formatting.jq,
+
 })

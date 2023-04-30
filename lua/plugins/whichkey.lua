@@ -68,27 +68,6 @@ return {
       g = {
         name = "Git",
         g = { ":lua _LAZYGIT_TOGGLE()<cr>", "lazygit" },
-        b = {
-          ":lua require('telescope.builtin').git_branches(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
-          "list branch(es)"
-        },
-        c = {
-          ":lua require('telescope.builtin').git_commits(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
-          "list commit(s)"
-        },
-        d = { ":Gitsigns diffthis HEAD<cr>", "diff" },
-        f = {
-          ":lua require('telescope.builtin').git_status(require('telescope.themes').get_dropdown())<cr>",
-          "list changed file(s)"
-        },
-        j = { ":lua require('gitsigns').next_hunk()<cr>", "next hunk" },
-        k = { ":lua require('gitsigns').prev_hunk()<cr>", "prev hunk" },
-        l = { ":lua require('gitsigns').blame_line()<cr>", "blame" },
-        p = { ":lua require('gitsigns').preview_hunk()<cr>", "preview hunk" },
-        r = { ":lua require('gitsigns').reset_hunk()<cr>", "reset hunk" },
-        R = { ":lua require('gitsigns').reset_buffer()<cr>", "reset buffer" },
-        s = { ":lua require('gitsigns').stage_hunk()<cr>", "stage hunk" },
-        u = { ":lua require('gitsigns').undo_stage_hunk()<cr>", "undo stage hunk" },
       },
       l = {
         name = "LSP",
@@ -105,13 +84,6 @@ return {
         r = { ":lua vim.lsp.buf.rename()<cr>", "Rename" },
         s = { ":Telescope lsp_document_symbols<cr>", "Document Symbols" },
         S = { ":Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
-      },
-      n = {
-        name = "Notification",
-        h = {
-          ":lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
-          "History"
-        },
       },
       s = { name = "+search" },
       t = {

@@ -26,6 +26,24 @@ return {
       ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
       desc = "recent files",
     },
+    {
+      "<leader>gb",
+      ":lua require('telescope.builtin').git_branches(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      -- mode = {"n", "v"},
+      desc = "list branch(es)",
+    },
+    {
+      "<leader>gc",
+      ":lua require('telescope.builtin').git_commits(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      -- mode = {"n", "v"},
+      desc = "list commit(s)",
+    },
+    {
+      "<leader>gs",
+      ":lua require('telescope.builtin').git_status(require('telescope.themes').get_dropdown())<cr>",
+      -- mode = {"n", "v"},
+      desc = "git status",
+    },
     { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "auto commands" },
     { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "command history" },
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "commands" },
@@ -37,7 +55,11 @@ return {
       desc = "highlights"
     },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "keymaps" },
-    { "<leader>sn", "<cmd>Telescope notify<cr>", desc = "notifications" },
+    {
+      "<leader>sn",
+      ":lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      desc = "notifications"
+    },
     { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "resume" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "options" },
   },

@@ -1,64 +1,70 @@
-local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local keys = require("lazy.core.handler").handlers.keys
+  local function map(mode, lhs, rhs, opts)
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts = { noremap = true, silent = true, unpack(opts)}
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+end
 
 -- remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-
--- normal_mode: n
+-- map("", "<Space>", "<Nop>", opts)
 
 -- jump to visible line
-keymap("n", "<Down>", "gj", opts)
-keymap("n", "<Up>", "gk", opts)
+map("n", "<Down>", "gj", { desc = "move cursor down" })
+map("n", "<Up>", "gk", { desc = "move cursor up" })
 
 -- navigate between windows with arrows 
-keymap("n", "<A-Left>", "<C-w>h", opts)
-keymap("n", "<A-Down>", "<C-w>j", opts)
-keymap("n", "<A-Up>", "<C-w>k", opts)
-keymap("n", "<A-Right>", "<C-w>l", opts)
+map("n", "<A-Left>", "<C-w>h", { desc = "go to left window" })
+map("n", "<A-Down>", "<C-w>j", { desc = "go to lower window" })
+map("n", "<A-Up>", "<C-w>k", { desc = "go to upper window" })
+map("n", "<A-Right>", "<C-w>l", { desc = "go to right window" })
 
 -- resize windows with <A-kjhl> (macos)
-keymap("n", "˙", ":vertical resize +2<CR>", opts)
-keymap("n", "∆", ":resize +2<CR>", opts)
-keymap("n", "˚", ":resize -2<CR>", opts)
-keymap("n", "¬", ":vertical resize -2<CR>", opts)
-
--- delete buffer!
-keymap("n", "D", ":Bdelete!<CR>", opts)
+map("n", "<A-S-Left>", ":vertical resize +2<CR>", { desc = "increase window width" })
+map("n", "<A-S-Down>", ":resize +2<CR>", { desc = "increase window height" })
+map("n", "<A-S-Up>", ":resize -2<CR>", { desc = "decrease window height" })
+map("n", "<A-S-Right>", ":vertical resize -2<CR>", { desc = "decrease window width" })
 
 -- navigate buffers
-keymap("n", "H", ":bprevious<CR>", opts)
-keymap("n", "L", ":bnext<CR>", opts)
+map("n", "H", ":bprevious<CR>", { desc = "previous buffer" })
+map("n", "L", ":bnext<CR>", { desc = "next buffer" })
 
 -- quit all!
--- keymap("n", "Q", ":qa!<CR>", opts)
--- keymap("n", "<M-tab>", "<C-6>", opts)
+map("n", "<leader>Q", ":qa!<CR>", { desc = "quit all!" })
 
--- visual_mode: v
+-- save file
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "save file" })
 
 -- "tab" line left and right while staying in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+map("v", "<", "<gv", { desc = "indent line" })
+map("v", ">", ">gv", { desc = "outdent line" })
 
--- move line up and down
-keymap("v", "J", ":m .+1<CR>==", opts)
-keymap("v", "K", ":m .-2<CR>==", opts)
+-- move line up and down with <A-jk>
+map("n", "∆", "<cmd>m .+1<cr>==", { desc = "move down" })
+map("n", "˚", "<cmd>m .-2<cr>==", { desc = "move up" })
+map("i", "∆", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+map("i", "˚", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+map("v", "∆", ":m '>+1<cr>gv=gv", { desc = "move down" })
+map("v", "˚", ":m '<-2<cr>gv=gv", { desc = "move up" })
 
  -- keep copy past memory
-keymap("v", "p", '"_dP', opts)
+map("v", "p", '"_dP')
 
--- visual_block_mode: x
+-- clear search with <esc>
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "clear hlsearch" })
 
--- move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+-- new file
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "new file" })
 
--- term_mode: t
+-- show highlight group under cursor
+map("n", "<leader>ui", vim.show_pos, { desc = "inspect under cursor" })
+
+map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "location list" })
+map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "quickfix list" })
 
 -- better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
--- command_mode: c
--- insert_mode: i
+-- map("t", "<C-h>", "<C-\\><C-N><C-w>h", term_{ desc = "" })
+-- map("t", "<C-j>", "<C-\\><C-N><C-w>j", term_{ desc = "" })
+-- map("t", "<C-k>", "<C-\\><C-N><C-w>k", term_{ desc = "" })
+-- map("t", "<C-l>", "<C-\\><C-N><C-w>l", term_{ desc = "" })

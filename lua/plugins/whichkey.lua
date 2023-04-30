@@ -40,8 +40,6 @@ return {
       silent = true,
       noremap = true,
       nowait = true,
-      Q = { ":qa!<cr>", "quit all!" },
-      w = { ":w<cr>", "save" },
       -- ["P"] = { ":Telescope projects<cr>", "Projects" },
       -- d = {
       --   name = "Debug",
@@ -110,7 +108,6 @@ return {
       },
       n = {
         name = "Notification",
-        d = { ":lua require('notify').dismiss()<cr>", "Clear Notification(s)" },
         h = {
           ":lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
           "History"
@@ -126,6 +123,7 @@ return {
         t = { ":TestNearest<cr>", "near cursor" },
         T = { ":TestFile<cr>", "all file" },
       },
+      u = { name = "ui" },
       ['\\'] = {
         name = "Terminal",
         f = { ":ToggleTerm direction=float<cr>", "float" },

@@ -36,9 +36,7 @@ return {
         root_folder_modifier = ":t", -- ":~:s?$?/..?"
         indent_markers = {
           enable = true,
-          icons = {
-            corner = "│",
-          },
+          icons = { corner = "│" }
         },
         icons = {
           -- git_placement = "after",

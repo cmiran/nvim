@@ -21,7 +21,7 @@ return {
       padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
     },
     layout = {
-      height = { min = 2 }, -- min and max height of the columns
+      height = { min = 3 }, -- min and max height of the columns
     },
     disable = {
       filetypes = {

@@ -4,7 +4,6 @@ return {
   dependencies = {
     -- github.com/JoosepAlviste/nvim-ts-context-commentstring
     "JoosepAlviste/nvim-ts-context-commentstring"
-
   },
   opts = {
     ignore = '^$', -- ignores empty lines

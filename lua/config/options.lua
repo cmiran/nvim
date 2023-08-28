@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 local opt = vim.opt
 
-opt.autowrite = true -- enable auto write
+-- opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 opt.colorcolumn = "80" -- columns to highlight
 opt.completeopt = "menu,menuone,noselect"

@@ -21,7 +21,8 @@ opt.ignorecase = false -- ignore case in search patterns
 opt.iskeyword:append '-' -- characters included in keywords
 opt.laststatus = 0
 opt.list = true -- show <Tab> and <EOL>
-opt.listchars = "trail:-,nbsp:+" -- characters for displaying in list mode
+opt.listchars:append("tab:  ") -- characters for displaying in list mode
+opt.listchars:append("trail: ")
 -- opt.listchars:append "space:."
 -- opt.listchars:append "eol:↴"
 opt.mouse = "a" -- allow the mouse to be used in neovim

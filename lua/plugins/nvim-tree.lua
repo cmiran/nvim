@@ -1,3 +1,25 @@
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+  local keymap = require("util").keymap
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr }
+  end
+
+  api.config.mappings.default_on_attach(bufnr)
+
+  vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'o', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'w', api.node.navigate.parent_close, opts('Close Directory'))
+  vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+  -- keymap('n', 'l', api.node.open.edit, opts('Open'))
+  -- keymap('n', '<CR>', api.node.open.edit, opts('Open'))
+  -- keymap('n', 'o', api.node.open.edit, opts('Open'))
+  -- keymap('n', 'w', api.node.navigate.parent_close, opts('Close Directory'))
+  -- keymap('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+end
+
 return {
   -- github.com/kyazdani42/nvim-tree.lua/
   "nvim-tree/nvim-tree.lua",
@@ -13,23 +35,15 @@ return {
     "NvimTreeToggle",
   },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "toggle tree" },
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle tree" },
   },
   opts = function()
-    local tree_cb = require("nvim-tree.config").nvim_tree_callback
-
     return {
+      on_attach = on_attach,
       disable_netrw = true,
       sync_root_with_cwd = true,
       view = {
         side = "left",
-        mappings = {
-          list = {
-            { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-            { key = "w", cb = tree_cb "close_node" },
-            { key = "v", cb = tree_cb "vsplit" },
-          },
-        },
       },
       renderer = {
         highlight_git = true,
@@ -41,8 +55,6 @@ return {
         icons = {
           -- git_placement = "after",
           show = {
-            file = false,
-            folder = false,
             git = false,
           },
         },
@@ -64,7 +76,9 @@ return {
           },
         },
       },
-      git = { ignore = false }
+      git = {
+        ignore = false,
+      }
     }
   end,
 }

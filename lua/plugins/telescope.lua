@@ -14,54 +14,86 @@ return {
     {
       "<leader>fb",
       ":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer=false})<cr>",
-      desc = "buffers",
+      desc = "Buffers",
     },
     {
       "<leader>ff",
       ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
-      desc = "find files",
+      desc = "Find files",
     },
     {
       "<leader>fr",
       ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
-      desc = "recent files",
+      desc = "Recent files",
     },
     {
       "<leader>gb",
       ":lua require('telescope.builtin').git_branches(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
       -- mode = {"n", "v"},
-      desc = "list branch(es)",
+      desc = "List branch(es)",
     },
     {
       "<leader>gc",
       ":lua require('telescope.builtin').git_commits(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
       -- mode = {"n", "v"},
-      desc = "list commit(s)",
+      desc = "List commit(s)",
     },
     {
       "<leader>gs",
       ":lua require('telescope.builtin').git_status(require('telescope.themes').get_dropdown())<cr>",
       -- mode = {"n", "v"},
-      desc = "git status",
+      desc = "Status",
     },
-    { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "auto commands" },
-    { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "command history" },
-    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "commands" },
-    { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "diagnostics" },
-    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "help" },
+    {
+      "<leader>sa",
+      "<cmd>Telescope autocommands<cr>",
+      desc = "Autocommands",
+    },
+    {
+      "<leader>sc",
+      "<cmd>Telescope command_history<cr>",
+      desc = "Command history",
+    },
+    {
+      "<leader>sC",
+      "<cmd>Telescope commands<cr>",
+      desc = "Commands",
+    },
+    {
+      "<leader>sd",
+      "<cmd>Telescope diagnostics<cr>",
+      desc = "Diagnostics",
+    },
+    {
+      "<leader>sh",
+      "<cmd>Telescope help_tags<cr>",
+      desc = "Help",
+    },
     {
       "<leader>sH",
       ":lua require('telescope.builtin').highlights(require('telescope.themes').get_dropdown({previewer=top,layout_strategy='vertical',layout_config={height=0.8}}))<cr>",
-      desc = "highlights"
+      desc = "Highlights"
     },
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "keymaps" },
+    {
+      "<leader>sk",
+      "<cmd>Telescope keymaps<cr>",
+      desc = "Keymaps",
+    },
     {
       "<leader>sn",
       ":lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
-      desc = "notifications"
+      desc = "Notifications",
     },
-    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "resume" },
-    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "options" },
+    {
+      "<leader>sr",
+      "<cmd>Telescope resume<cr>",
+      desc = "Resume",
+    },
+    {
+      "<leader>so",
+      "<cmd>Telescope vim_options<cr>",
+      desc = "Options",
+    },
   },
   opts = function()
     local actions = require("telescope.actions")

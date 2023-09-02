@@ -2,7 +2,7 @@ return {
   "goolord/alpha-nvim",
   event = "VimEnter",
   keys = {
-    { "<leader>a", ":Alpha<cr>", desc = "alpha" },
+    { "<leader>a", ":Alpha<cr>", desc = "Alpha" },
   },
   opts = function()
     local dashboard = require("alpha.themes.dashboard")

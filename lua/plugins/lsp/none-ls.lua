@@ -1,8 +1,8 @@
 local augroup = vim.api.nvim_create_augroup("NLSFormatting", {})
 
 return {
-  -- github.com/jose-elias-alvarez/null-ls.nvim
-  "jose-elias-alvarez/null-ls.nvim",
+  -- github.com/nvimtools/none-ls.nvim
+  "nvimtools/none-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
   on_attach = function(client, buffer)
     if client.supports_method("textDocument/formatting") then

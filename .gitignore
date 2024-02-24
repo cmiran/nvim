@@ -1,6 +1,5 @@
 after/
 queries/
-plugins/
 .luarc.json
 lazy-lock.json
 wip*

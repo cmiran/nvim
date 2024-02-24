@@ -4,25 +4,25 @@ return {
   -- github.com/nvimtools/none-ls.nvim
   "nvimtools/none-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
-  on_attach = function(client, buffer)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({
-        group = augroup,
-        buffer = buffer,
-      })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = buffer,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = buffer })
-        end,
-      })
-    end
-  end,
   opts = function()
     local nls = require("null-ls")
     return {
       debug = false,
+      on_attach = function(client, buffer)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({
+            group = augroup,
+            buffer = buffer,
+          })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = buffer,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = buffer })
+            end,
+          })
+        end
+      end,
       sources = {
         -- github.com/fatih/gomodifytags
         nls.builtins.code_actions.gomodifytags,
@@ -46,7 +46,7 @@ return {
         -- diagnostics.checkmake,
 
         -- github.com/streetsidesoftware/cspell
-        -- diagnostics.cspell,
+        -- nls.builtins.diagnostics.cspell,
 
         -- github.com/codespell-project/codespell
         nls.builtins.diagnostics.codespell,
@@ -67,9 +67,6 @@ return {
 
         -- pkg.go.dev/golang.org/x/tools/cmd/goimports
         nls.builtins.formatting.goimports,
-
-        -- github.com/stedolan/jq
-        nls.builtins.formatting.jq,
 
         -- github.com/testdouble/standard
         -- formatting.standardrb,

@@ -13,34 +13,34 @@ return {
   keys = {
     {
       "<leader>fb",
-      ":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer=false})<cr>",
+      "<cmd>Telescope buffers<cr>",
       desc = "Buffers",
     },
     {
       "<leader>ff",
-      ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
-      desc = "Find files",
+      "<cmd>Telescope find_files<cr>",
+      desc = "Files",
     },
     {
       "<leader>fr",
-      ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>",
+      "<cmd>Telescope oldfiles<cr>",
       desc = "Recent files",
     },
     {
       "<leader>gb",
-      ":lua require('telescope.builtin').git_branches(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      "<cmd>Telescope git_branches<cr>",
       -- mode = {"n", "v"},
       desc = "List branch(es)",
     },
     {
       "<leader>gc",
-      ":lua require('telescope.builtin').git_commits(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      "<cmd>Telescope git_commits<cr>",
       -- mode = {"n", "v"},
       desc = "List commit(s)",
     },
     {
       "<leader>gs",
-      ":lua require('telescope.builtin').git_status(require('telescope.themes').get_dropdown())<cr>",
+      "<cmd>Telescope git_status<cr>",
       -- mode = {"n", "v"},
       desc = "Status",
     },
@@ -71,7 +71,7 @@ return {
     },
     {
       "<leader>sH",
-      ":lua require('telescope.builtin').highlights(require('telescope.themes').get_dropdown({previewer=top,layout_strategy='vertical',layout_config={height=0.8}}))<cr>",
+      "<cmd>Telescope highlights<cr>",
       desc = "Highlights"
     },
     {
@@ -80,8 +80,19 @@ return {
       desc = "Keymaps",
     },
     {
-      "<leader>sn",
-      ":lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      "<leader>sm",
+      function()
+        require('telescope').extensions.notify.notify(
+          {
+            theme = "dropdown",
+            layout_strategy = "vertical",
+            layout_config = {
+              height = 0.8,
+              width = 0.6,
+            },
+          }
+        )
+      end,
       desc = "Notifications",
     },
     {
@@ -93,6 +104,11 @@ return {
       "<leader>so",
       "<cmd>Telescope vim_options<cr>",
       desc = "Options",
+    },
+    {
+      "<leader>sw",
+      "<cmd>Telescope grep_string<cr>",
+      desc = "Word (root dir)"
     },
   },
   opts = function()

@@ -17,7 +17,7 @@ return {
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
     window = {
-      position = "top",
+      position = "bottom",
       margin = { 1, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
       padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
     },

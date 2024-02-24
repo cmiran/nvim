@@ -15,6 +15,7 @@ local get_notification_height = function(win)
 end
 
 return {
+  -- github.com/rcarriga/nvim-notify
   "rcarriga/nvim-notify",
   dependencies = {
     -- github.com/folke/noice.nvim
@@ -30,6 +31,7 @@ return {
     },
   },
   opts = {
+    background_color = "NvimTreeNormal",
     fps = 90,
     max_height = function()
       return math.floor(vim.o.lines * 0.75)
@@ -44,12 +46,13 @@ return {
         vim.api.nvim_win_set_config(win, {
           -- border = "solid",
           height = get_notification_height(win),
+          zindex = 100,
         })
       end
     end,
     render = "compact",
-    stages = "fade_in_slide_out",
-    timeout = 300,
+    stages = "static",
+    timeout = 3000,
   },
   init = function()
     vim.notify = require("notify")

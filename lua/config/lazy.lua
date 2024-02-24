@@ -30,14 +30,8 @@ require("lazy").setup(
         "nvim-neotest/neotest-go"
       }
     },
-    -- Vim-Visual-Multi
-    -- use 'mg979/vim-visual-multi' --  github.com/mg979/vim-visual-multi
   },
   {
-    install = {
-      colorscheme = { "nightfox" }
-    },
-    checker = { enabled = true }, -- automatically check for plugin updates
     performance = {
       rtp = {
         -- disable some rtp plugins
@@ -53,8 +47,5 @@ require("lazy").setup(
         },
       },
     },
-    ui = {
-      border = "rounded",
-    }
   }
 )

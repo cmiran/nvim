@@ -15,6 +15,7 @@ return {
         "lazy",
         -- "neo-tree",
         "NvimTree",
+        "Noice",
         -- "Trouble",
       },
       callback = function()

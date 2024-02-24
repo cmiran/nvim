@@ -21,12 +21,7 @@ return {
     -- options for vim.diagnostic.config()
     diagnostics = {
       float = {
-        focusable = true,
-        style = "minimal",
-        border = "solid",
-        source = "always",
-        header = "",
-        prefix = "",
+        header = ""
       },
       severity_sort = true,
       underline = false,
@@ -119,15 +114,6 @@ return {
     -- end
 
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-
-    -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    --   border = "solid",
-    --   width = 78,
-    -- })
-    -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    --   border = "solid",
-    --   width = 78,
-    -- })
 
     -- servers
     local servers = opts.servers

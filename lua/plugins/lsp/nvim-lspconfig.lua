@@ -45,7 +45,7 @@ return {
       -- github.com/sumneko/lua-language-server
       "lua_ls",
       -- github.com/lighttiger2505/sqls
-      -- "sqlls",
+      "sqlls",
       -- github.com/stoplightio/spectral
       -- "spectral",
       -- github.com/hyperledger/solang

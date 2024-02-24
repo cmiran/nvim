@@ -42,7 +42,7 @@ keymap("v", "∆", ":m '>+1<cr>gv=gv", { desc = "move down" })
 keymap("v", "˚", ":m '<-2<cr>gv=gv", { desc = "move up" })
 
  -- keep copy past memory
-keymap("v", "p", '"_dP')
+keymap("v", "p", '"_dP', {})
 
 -- clear search with <esc>
 keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "clear hlsearch" })

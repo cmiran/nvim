@@ -5,17 +5,11 @@ local M = {}
 ---@param rhs any
 ---@param opts table
 function M.keymap(mode, lhs, rhs, opts)
-  local Keys = require("lazy.core.handler").handlers.keys
-  if not Keys.active[Keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts = {
-      noremap = true,
-      nowait = true,
-      silent = true,
-      unpack(opts),
-    }
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+  opts = opts or {}
+  opts.noremap = true
+  opts.nowait = true
+  opts.silent = true
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 ---@param on_attach fun(client, buffer)
@@ -38,8 +32,8 @@ end
 ---@param path string
 ---@return boolean
 function M.file_exists(path)
-   local file = io.open(path, "r")
-   return io.close(file)["suc"]
+  local file = io.open(path, "r")
+  return io.close(file)["suc"]
 end
 
 ---@param paths string[]

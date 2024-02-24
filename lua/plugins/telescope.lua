@@ -5,10 +5,12 @@ return {
   dependencies = {
     -- github.com/nvim-lua/plenary.nvim
     "nvim-lua/plenary.nvim",
+    -- github.com/nvim-telescope/telescope-ui-select.nvim
+    "nvim-telescope/telescope-ui-select.nvim"
     -- github.com/nvim-telescope/telescope-fzf-native.nvim
-    -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     -- github.com/nvim-telescope/telescope-github.nvim
-    -- 'nvim-telescope/telescope-github.nvim',
+    -- "nvim-telescope/telescope-github.nvim",
   },
   keys = {
     {
@@ -206,21 +208,25 @@ return {
           no_ignore = true,
           previewer = false,
         },
-      }
-      -- extensions = {
-      --   fzf = {
-      --     fuzzy = true,                    -- false will only do exact matching
-      --     override_generic_sorter = true,  -- override the generic sorter
-      --     override_file_sorter = true,     -- override the file sorter
-      --     case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-      --   },
-      -- },
+      },
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_cursor{},
+        },
+        -- fzf = {
+        --   fuzzy = true,                    -- false will only do exact matching
+        --   override_generic_sorter = true,  -- override the generic sorter
+        --   override_file_sorter = true,     -- override the file sorter
+        --   case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        -- },
+      },
     }
   end,
   config = function(_, opts)
+    require("telescope").setup(opts)
+    -- require("telescope").load_extension("fzf")
     require("telescope").load_extension("noice")
     require("telescope").load_extension("notify")
-    -- require("telescope").load_extension("fzf")
-    require("telescope").setup(opts)
+    require("telescope").load_extension("ui-select")
   end
 }

@@ -6,16 +6,11 @@ return {
     -- github.com/folke/neoconf.nvim
     { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
     -- github.com/folke/neodev.nvim
-    { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
-    {
-      -- github.com/hrsh7th/cmp-nvim-lsp
-      "hrsh7th/cmp-nvim-lsp",
-      -- cond = function()
-      --   return require("util").has("nvim-cmp")
-      -- end,
-    },
+    { "folke/neodev.nvim",  opts = { experimental = { pathStrict = true } } },
+    -- github.com/hrsh7th/cmp-nvim-lsp
+    "hrsh7th/cmp-nvim-lsp",
     -- github.com/ii14/emmylua-nvim
-    'ii14/emmylua-nvim',
+    "ii14/emmylua-nvim",
   },
   opts = {
     -- options for vim.diagnostic.config()
@@ -29,21 +24,13 @@ return {
       virtual_text = {
         spacing = 4,
         source = "if_many",
-        prefix = "●",
-        -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-        -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-        -- prefix = "icons",
       },
     },
-    -- add any global capabilities here
     capabilities = {
       textDocument = { completion = { completionItem = { snippetSupport = true } } },
     },
-    -- Automatically format on save
     autoformat = true,
-    -- options for vim.lsp.buf.format
-    -- `bufnr` and `filter` is handled by the LazyVim formatter,
-    -- but can be also overridden when specified
+    -- options for vim.lsp.buf.format()
     format = {
       formatting_options = nil,
       timeout_ms = nil,
@@ -86,12 +73,7 @@ return {
     setup = {},
   },
   config = function(_, opts)
-    local Util = require("util")
-    -- setup autoformat
-    -- require("lazyvim.plugins.lsp.format").autoformat = opts.autoformat
-    -- setup formatting and keymaps
-    Util.on_attach(function(client, buffer)
-      -- require("plugins.lsp.format").on_attach(client, buffer)
+    require("util").on_attach(function(client, buffer)
       require("plugins.lsp.util").on_attach(client, buffer)
     end)
 
@@ -102,21 +84,9 @@ return {
       vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
     end
 
-    -- if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-    --   opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-    --   or function(diagnostic)
-    --     for d, icon in pairs(icons) do
-    --       if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-    --         return icon
-    --       end
-    --     end
-    --   end
-    -- end
-
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
     -- servers
-    local servers = opts.servers
     local capabilities = vim.tbl_deep_extend(
       "force",
       {},
@@ -138,7 +108,7 @@ return {
       require("lspconfig")[server].setup(server_opts)
     end
 
-    for _,s in pairs(servers) do
+    for _, s in pairs(opts.servers) do
       setup(s)
     end
   end,

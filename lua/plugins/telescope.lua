@@ -115,11 +115,9 @@ return {
     local actions = require("telescope.actions")
     return {
       defaults = {
-        border = false,
-        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
-        prompt_prefix = " ", -- "> "
-        selection_caret = " ", -- "> "
+        layout_strategy = "center",
         path_display = { "absolute" },
+        sorting_strategy = "ascending",
         vimgrep_arguments = {
           "rg",
           "--color=never",
@@ -157,6 +155,58 @@ return {
           },
         },
       },
+      pickers = {
+        buffers = {
+          theme = "dropdown",
+          previewer = false,
+          show_all_buffers = true,
+        },
+        diagnostics = {
+          theme = "dropdown",
+          layout_strategy = "vertical",
+        },
+        find_files = {
+          theme = "dropdown",
+          hidden = true,
+          no_ignore = true,
+          previewer = false,
+        },
+        git_branches = {
+          theme = "dropdown",
+          previewer = false,
+        },
+        git_commits = {
+          theme = "dropdown",
+          previewer = false,
+        },
+        git_status = {
+          theme = "dropdown",
+          layout_strategy = "vertical",
+          layout_config = {
+            height = 0.8,
+          },
+        },
+        grep_string = {
+          theme = "ivy",
+          layout_strategy = "vertical",
+        },
+        highlights = {
+          theme = "dropdown",
+          layout_strategy = "vertical",
+          layout_config = {
+            height = 0.6,
+          },
+        },
+        lsp_references = {
+          layout_strategy = "vertical",
+        },
+        oldfiles = {
+          theme = "dropdown",
+          hidden = true,
+          no_ignore = true,
+          previewer = false,
+        },
+      }
       -- extensions = {
       --   fzf = {
       --     fuzzy = true,                    -- false will only do exact matching
@@ -167,7 +217,8 @@ return {
       -- },
     }
   end,
-  config = function()
+  config = function(_, opts)
+    require("telescope").load_extension("noice")
     require("telescope").load_extension("notify")
     -- require("telescope").load_extension("fzf")
   end

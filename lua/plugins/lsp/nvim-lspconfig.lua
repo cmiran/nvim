@@ -20,7 +20,7 @@ return {
       },
       severity_sort = true,
       underline = false,
-      update_in_insert = true,
+      update_in_insert = false,
       virtual_text = {
         spacing = 4,
         source = "if_many",

@@ -29,6 +29,16 @@ return {
       desc = "Recent files",
     },
     {
+      "<leader>fs",
+      "<cmd>Telescope lsp_document_symbols<cr>",
+      desc = "Document Symbols",
+    },
+    {
+      "<leader>fS",
+      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+      desc = "Workspace Symbols",
+    },
+    {
       "<leader>gb",
       "<cmd>Telescope git_branches<cr>",
       -- mode = {"n", "v"},

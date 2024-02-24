@@ -37,15 +37,4 @@ return {
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
     end,
   },
-  -- dependencies = {
-  --   {
-  --     "folke/which-key.nvim",
-  --     optional = true,
-  --     opts = {
-  --       defaults = {
-  --         ["<leader>gh"] = { name = "+hunks" },
-  --       },
-  --     },
-  --   },
-  -- },
 }

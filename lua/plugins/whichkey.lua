@@ -31,14 +31,15 @@ return {
         "TelescopePrompt",
       },
     },
-    defaults = {
-      -- layout_config = {
-      --   vertical = { height = 1.5 }
-      -- },
+  },
+  config = function(_, opts)
+    local wk = require("which-key")
+    local defaults = {
       mode = { "n", "v" },
       prefix = "<leader>",
       nowait = true,
-      -- ["P"] = { ":Telescope projects<cr>", "Projects" },
+    }
+    local groups = {
       ['\\'] = { name = "terminal" },
       b = { name = "buffer" },
       c = {
@@ -53,7 +54,6 @@ return {
       g = {
         name = "git",
         h = { name = "hunks" },
-        -- g = { ":lua _LAZYGIT_TOGGLE()<cr>", "lazygit" },
       },
       s = {
         name = "search",
@@ -61,12 +61,9 @@ return {
       },
       u = { name = "ui" },
       x = { name = "extra" },
-    },
-  },
-  config = function(_, opts)
-    local wk = require("which-key")
+    }
 
     wk.setup(opts)
-    wk.register(opts.defaults)
+    wk.register(groups, defaults)
   end,
 }

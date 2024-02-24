@@ -55,5 +55,7 @@ opt.updatetime = 100 -- faster completion
 opt.wildmode = "longest:full,full" -- command-line completion mode
 opt.writebackup = false -- make a backup before overwriting a file
 
--- Fix markdown indentation settings
+-- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+-- skip backwards compatibility routines and speed up loading
+vim.g.skip_ts_context_commentstring_module = true

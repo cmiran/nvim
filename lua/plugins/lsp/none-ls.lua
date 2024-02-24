@@ -14,7 +14,7 @@ return {
         group = augroup,
         buffer = buffer,
         callback = function()
-          vim.lsp.buf.format({bufnr = buffer})
+          vim.lsp.buf.format({ bufnr = buffer })
         end,
       })
     end
@@ -24,6 +24,12 @@ return {
     return {
       debug = false,
       sources = {
+        -- github.com/fatih/gomodifytags
+        nls.builtins.code_actions.gomodifytags,
+
+        -- github.com/josharian/impl
+        nls.builtins.code_actions.impl,
+
         -- github.com/streetsidesoftware/cspell
         -- code_actions.cspell,
 
@@ -56,8 +62,8 @@ return {
 
         -- formatting.black.with({ extra_args = { "--fast" } }),
 
-        -- pkg.go.dev/cmd/gofmt 
-        nls.builtins.formatting.gofmt,
+        -- https://github.com/mvdan/gofumpt
+        nls.builtins.formatting.gofumpt,
 
         -- pkg.go.dev/golang.org/x/tools/cmd/goimports
         nls.builtins.formatting.goimports,

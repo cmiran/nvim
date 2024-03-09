@@ -1,3 +1,13 @@
+local get_top_padding = function(ext)
+  ext = ext or 0
+  local win_height = math.floor(vim.api.nvim_win_get_height(0) * 0.5)
+  local header = require("alpha.themes.dashboard").section.header.val
+  local header_height = math.floor(#header * 0.7) + ext
+  local padding = win_height - header_height
+
+  return win_height < header_height and 0 or padding
+end
+
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",
@@ -5,7 +15,11 @@ return {
     { "<leader>a", ":Alpha<cr>", desc = "Alpha" },
   },
   opts = function()
+		-- require("alpha.term")
     local dashboard = require("alpha.themes.dashboard")
+    local fortune = require("alpha.fortune")()
+
+    dashboard.section.header.opts.hl = "Error"
     dashboard.section.header.val = {
       [[           .......               ]],
       [[       .~!!~^:....               ]],
@@ -31,20 +45,23 @@ return {
       [[          :~!~:.:.......         ]],
       [[             .......             ]],
     }
-    dashboard.section.buttons.val = {
-      dashboard.button("f", " " .. " Find file",
-      ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>"),
-      dashboard.button("r", " " .. " Recent files",
-      ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>"),
-      dashboard.button("g", " " .. " Grep",
-      ":lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy({grep_open_files=true,hidden=true,no_ignore=true}))<cr>"),
-      dashboard.button("e", "פּ " .. " Explore", ":NvimTreeToggle<cr>"),
-      dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<cr>"),
-      dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua<cr>"),
-      dashboard.button("q", " " .. " Quit", ":q<cr>"),
-      -- dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
-    }
 
+    dashboard.section.buttons.opts.hl = "Keyword"
+    -- dashboard.section.buttons.val = {
+    --   dashboard.button("f", " " .. " Find file",
+    --   ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>"),
+    --   dashboard.button("r", " " .. " Recent files",
+    --   ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>"),
+    --   dashboard.button("g", " " .. " Grep",
+    --   ":lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy({grep_open_files=true,hidden=true,no_ignore=true}))<cr>"),
+    --   dashboard.button("e", "פּ " .. " Explore", ":NvimTreeToggle<cr>"),
+    --   dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<cr>"),
+    --   dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua<cr>"),
+    --   dashboard.button("q", " " .. " Quit", ":q<cr>"),
+    --   dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
+    -- }
+
+    dashboard.section.footer.opts.hl = "Type"
     -- local footer = function()
     --   local t = {}
     --   local gitsigns_head = vim.g.gitsigns_head
@@ -55,12 +72,20 @@ return {
     --   table.insert(t, datetime)
     --   return table.concat(t, "  ")
     -- end
-    dashboard.section.footer.val = require("alpha.fortune")
 
-    dashboard.section.footer.opts.hl = "Type"
-    dashboard.section.header.opts.hl = "Include"
-    dashboard.section.buttons.opts.hl = "Keyword"
     dashboard.opts.opts.noautocmd = true
+		dashboard.opts.layout = {
+			{ type = "padding", val = get_top_padding(#fortune) },
+      {
+        type = "text",
+        val = fortune,
+        opts = { position = "center" }
+      },
+			{ type = "padding", val = 1 },
+      dashboard.section.header,
+			{ type = "padding", val = 2 },
+			dashboard.section.footer,
+		}
 
     return dashboard
   end,
@@ -83,7 +108,7 @@ return {
       callback = function()
         local stats = require("lazy").stats()
         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        dashboard.section.footer.val = ({"⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"})
+        dashboard.section.footer.val = ({"loaded " .. stats.count .. " plugins in " .. ms .. "ms"})
         pcall(vim.cmd.AlphaRedraw)
       end,
     })

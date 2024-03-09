@@ -44,6 +44,8 @@ return {
       "jsonls",
       -- github.com/sumneko/lua-language-server
       "lua_ls",
+      -- microsoft.github.io/pyright/#/
+      "pyright",
       -- github.com/lighttiger2505/sqls
       "sqlls",
       -- github.com/stoplightio/spectral

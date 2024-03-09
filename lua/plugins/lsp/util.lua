@@ -11,18 +11,34 @@ function M.diagnostic_goto(next, severity)
 end
 
 M.keys = {
-  { "n", "gd", "<cmd>Telescope lsp_definitions<cr>", { desc = "goto definition" } },
+  {
+    "n",
+    "gd",
+    "<cmd>Telescope lsp_definitions<cr>",
+    { desc = "goto definition" },
+  },
   { "n", "gD", vim.lsp.buf.declaration, { desc = "goto declaration" } },
-  { "n", "gI", "<cmd>Telescope lsp_implementations<cr>", { desc = "Go to implementation" } },
+  {
+    "n",
+    "gI",
+    "<cmd>Telescope lsp_implementations<cr>",
+    { desc = "Go to implementation" },
+  },
   { "n", "gl", vim.diagnostic.open_float, { desc = "line diagnostics" } },
   { "n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "references" } },
-  { "n", "gy", "<cmd>Telescope lsp_type_definitions<cr>", { desc = "Go to t[y]pe Definition" } },
+  {
+    "n",
+    "gy",
+    "<cmd>Telescope lsp_type_definitions<cr>",
+    { desc = "Go to t[y]pe Definition" },
+  },
   { "n", "K", vim.lsp.buf.hover, { desc = "hover" } },
   { "n", "gK", vim.lsp.buf.signature_help, { desc = "signature help" } },
-  { { "n", "v"}, "<leader>ca", vim.lsp.buf.code_action, { desc = "Action" } },
+  { { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Action" } },
   { "n", "<leader>bl", "<cmd>LspInfo<cr>", { desc = "Lsp info" } },
   {
-    "n", "<leader>cA",
+    "n",
+    "<leader>cA",
     function()
       vim.lsp.buf.code_action({
         context = {

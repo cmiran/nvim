@@ -6,7 +6,7 @@ return {
     -- github.com/nvim-lua/plenary.nvim
     "nvim-lua/plenary.nvim",
     -- github.com/nvim-telescope/telescope-ui-select.nvim
-    "nvim-telescope/telescope-ui-select.nvim"
+    "nvim-telescope/telescope-ui-select.nvim",
     -- github.com/nvim-telescope/telescope-fzf-native.nvim
     -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     -- github.com/nvim-telescope/telescope-github.nvim
@@ -84,7 +84,7 @@ return {
     {
       "<leader>sH",
       "<cmd>Telescope highlights<cr>",
-      desc = "Highlights"
+      desc = "Highlights",
     },
     {
       "<leader>sk",
@@ -94,7 +94,7 @@ return {
     {
       "<leader>sm",
       function()
-        require('telescope').extensions.notify.notify({
+        require("telescope").extensions.notify.notify({
           theme = "dropdown",
           layout_strategy = "vertical",
           layout_config = {
@@ -118,7 +118,7 @@ return {
     {
       "<leader>sw",
       "<cmd>Telescope grep_string<cr>",
-      desc = "Word (root dir)"
+      desc = "Word (root dir)",
     },
   },
   opts = function()
@@ -236,7 +236,7 @@ return {
       },
       extensions = {
         ["ui-select"] = {
-          require("telescope.themes").get_cursor{},
+          require("telescope.themes").get_cursor({}),
         },
         -- fzf = {
         --   fuzzy = true,                    -- false will only do exact matching
@@ -253,5 +253,5 @@ return {
     require("telescope").load_extension("noice")
     require("telescope").load_extension("notify")
     require("telescope").load_extension("ui-select")
-  end
+  end,
 }

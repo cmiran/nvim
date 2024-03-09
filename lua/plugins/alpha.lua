@@ -15,7 +15,7 @@ return {
     { "<leader>a", ":Alpha<cr>", desc = "Alpha" },
   },
   opts = function()
-		-- require("alpha.term")
+    -- require("alpha.term")
     local dashboard = require("alpha.themes.dashboard")
     local fortune = require("alpha.fortune")()
 
@@ -74,18 +74,18 @@ return {
     -- end
 
     dashboard.opts.opts.noautocmd = true
-		dashboard.opts.layout = {
-			{ type = "padding", val = get_top_padding(#fortune) },
+    dashboard.opts.layout = {
+      { type = "padding", val = get_top_padding(#fortune) },
       {
         type = "text",
         val = fortune,
-        opts = { position = "center" }
+        opts = { position = "center" },
       },
-			{ type = "padding", val = 1 },
+      { type = "padding", val = 1 },
       dashboard.section.header,
-			{ type = "padding", val = 2 },
-			dashboard.section.footer,
-		}
+      { type = "padding", val = 2 },
+      dashboard.section.footer,
+    }
 
     return dashboard
   end,
@@ -108,7 +108,8 @@ return {
       callback = function()
         local stats = require("lazy").stats()
         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        dashboard.section.footer.val = ({"loaded " .. stats.count .. " plugins in " .. ms .. "ms"})
+        dashboard.section.footer.val =
+          { "loaded " .. stats.count .. " plugins in " .. ms .. "ms" }
         pcall(vim.cmd.AlphaRedraw)
       end,
     })

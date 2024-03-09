@@ -1,19 +1,37 @@
 return {
   "akinsho/toggleterm.nvim",
-  version = '*',
+  version = "*",
   event = "VeryLazy",
   config = function()
     function _G.set_terminal_keymaps()
       local opts = { noremap = true, silent = true }
       -- vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
       -- vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<A-Left>', [[<C-\><C-n><C-W>h]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<A-Down>', [[<C-\><C-n><C-W>j]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<A-Up>', [[<C-\><C-n><C-W>k]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<A-Right>', [[<C-\><C-n><C-W>l]], opts)
+      vim.api.nvim_buf_set_keymap(
+        0,
+        "t",
+        "<A-Left>",
+        [[<C-\><C-n><C-W>h]],
+        opts
+      )
+      vim.api.nvim_buf_set_keymap(
+        0,
+        "t",
+        "<A-Down>",
+        [[<C-\><C-n><C-W>j]],
+        opts
+      )
+      vim.api.nvim_buf_set_keymap(0, "t", "<A-Up>", [[<C-\><C-n><C-W>k]], opts)
+      vim.api.nvim_buf_set_keymap(
+        0,
+        "t",
+        "<A-Right>",
+        [[<C-\><C-n><C-W>l]],
+        opts
+      )
     end
 
-    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+    vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
   end,
   init = function()
     local terminal = require("toggleterm.terminal").Terminal
@@ -80,7 +98,7 @@ return {
     local ncdu = terminal:new({
       cmd = "ncdu",
       hidden = true,
-      direction = 'float',
+      direction = "float",
       highlights = {
         NormalFloat = {
           guibg = "#000000",
@@ -95,13 +113,21 @@ return {
     end
   end,
   keys = {
-    { "<leader>\\f", ":ToggleTerm direction=float<cr>",              desc = "Float" },
-    { "<leader>\\g", ":lua _LAZYGIT_TOGGLE()<cr>",                   desc = "Lazygit" },
-    { "<leader>\\h", ":ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal" },
-    { "<leader>\\l", ":lua _LUA_TOGGLE_TOGGLE()<cr>",                desc = "Python" },
-    { "<leader>\\t", ":lua _HTOP_TOGGLE()<cr>",                      desc = "Htop" },
-    { "<leader>\\u", ":lua _NCDU_TOGGLE()<cr>",                      desc = "NCDU" },
-    { "<leader>\\v", ":ToggleTerm size=60 direction=vertical<cr>",   desc = "Sertical split" },
+    { "<leader>\\f", ":ToggleTerm direction=float<cr>", desc = "Float" },
+    { "<leader>\\g", ":lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit" },
+    {
+      "<leader>\\h",
+      ":ToggleTerm size=10 direction=horizontal<cr>",
+      desc = "Horizontal",
+    },
+    { "<leader>\\l", ":lua _LUA_TOGGLE_TOGGLE()<cr>", desc = "Python" },
+    { "<leader>\\t", ":lua _HTOP_TOGGLE()<cr>", desc = "Htop" },
+    { "<leader>\\u", ":lua _NCDU_TOGGLE()<cr>", desc = "NCDU" },
+    {
+      "<leader>\\v",
+      ":ToggleTerm size=60 direction=vertical<cr>",
+      desc = "Sertical split",
+    },
   },
   opts = {
     size = vim.api.nvim_win_get_height(0) * 0.5,

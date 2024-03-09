@@ -18,7 +18,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 -- opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 opt.ignorecase = false -- ignore case in search patterns
-opt.iskeyword:append '-' -- characters included in keywords
+opt.iskeyword:append("-") -- characters included in keywords
 opt.laststatus = 0
 opt.list = true -- show <Tab> and <EOL>
 opt.listchars:append("tab:  ") -- characters for displaying in list mode
@@ -27,7 +27,7 @@ opt.listchars:append("trail: ")
 -- opt.listchars:append "eol:↴"
 opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.number = true -- print the line number in front of each line
-opt.numberwidth = 3-- set number column width (default 4)
+opt.numberwidth = 3 -- set number column width (default 4)
 -- opt.pumblend = 10 -- popup blend
 opt.pumheight = 10 -- maximum etries in the popup menu
 opt.relativenumber = true -- show the line number relative to the line with the cursor in front of each line
@@ -37,7 +37,7 @@ opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- dont show mode since we have a statusline
 opt.showtabline = 2 -- always show tabs
-opt.signcolumn = "yes" -- when and how to display the sign column 
+opt.signcolumn = "yes" -- when and how to display the sign column
 opt.smartcase = true -- no ignore case when pattern has uppercase
 opt.smartindent = true -- make indenting smarter again
 opt.splitbelow = true -- force all horizontal splits to go below current window

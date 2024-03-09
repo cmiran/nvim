@@ -7,17 +7,27 @@ local keymap = require("util").keymap
 keymap("n", "<Down>", "gj", { desc = "Move cursor down" })
 keymap("n", "<Up>", "gk", { desc = "Move cursor up" })
 
--- navigate between windows with arrows 
+-- navigate between windows with arrows
 keymap("n", "<A-Left>", "<C-w>h", { desc = "Go to left window" })
 keymap("n", "<A-Down>", "<C-w>j", { desc = "Go to lower window" })
 keymap("n", "<A-Up>", "<C-w>k", { desc = "Go to upper window" })
 keymap("n", "<A-Right>", "<C-w>l", { desc = "Go to right window" })
 
 -- resize windows with <A-kjhl> (macos)
-keymap("n", "<A-S-Left>", ":vertical resize +2<CR>", { desc = "Increase window width" })
+keymap(
+  "n",
+  "<A-S-Left>",
+  ":vertical resize +2<CR>",
+  { desc = "Increase window width" }
+)
 keymap("n", "<A-S-Down>", ":resize +2<CR>", { desc = "Increase window height" })
 keymap("n", "<A-S-Up>", ":resize -2<CR>", { desc = "Decrease window height" })
-keymap("n", "<A-S-Right>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
+keymap(
+  "n",
+  "<A-S-Right>",
+  ":vertical resize -2<CR>",
+  { desc = "Decrease window width" }
+)
 
 -- navigate buffers
 keymap("n", "H", ":bprevious<CR>", { desc = "Previous buffer" })
@@ -27,7 +37,12 @@ keymap("n", "L", ":bnext<CR>", { desc = "Next buffer" })
 keymap("n", "<leader>Q", ":qa!<CR>", { desc = "Quit all!" })
 
 -- save file
-keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+keymap(
+  { "i", "v", "n", "s" },
+  "<C-s>",
+  "<cmd>w<cr><esc>",
+  { desc = "Save file" }
+)
 
 -- "tab" line left and right while staying in indent mode
 keymap("v", "<", "<gv", { desc = "Indent line" })
@@ -41,7 +56,7 @@ keymap("i", "˚", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 keymap("v", "∆", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 keymap("v", "˚", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
- -- keep copy past memory
+-- keep copy past memory
 keymap("v", "p", '"_dP', {})
 
 -- clear search with <esc>

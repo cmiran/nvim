@@ -4,7 +4,11 @@ return {
   event = "VeryLazy",
   keys = {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+    {
+      "<leader>bP",
+      "<Cmd>BufferLineGroupClose ungrouped<CR>",
+      desc = "Delete non-pinned buffers",
+    },
   },
   opts = {
     options = {
@@ -39,7 +43,7 @@ return {
         },
       },
       show_buffer_close_icons = false,
-      separator_style = {"", ""},
+      separator_style = { "", "" },
       enforce_regular_tabs = true,
     },
     -- highlights = {

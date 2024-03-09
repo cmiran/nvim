@@ -29,5 +29,5 @@ return {
   },
   init = function()
     vim.g.palette = require("nightfox.palette").load("nightfox")
-  end
+  end,
 }

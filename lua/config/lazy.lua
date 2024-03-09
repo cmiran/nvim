@@ -13,39 +13,36 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-require("lazy").setup(
-  {
-    { import = "plugins" },
-    { import = "plugins.lsp.nvim-lspconfig" },
-    { import = "plugins.lsp.none-ls" },
-    { import = "plugins.copilot" },
+require("lazy").setup({
+  { import = "plugins" },
+  { import = "plugins.lsp.nvim-lspconfig" },
+  { import = "plugins.lsp.none-ls" },
+  { import = "plugins.copilot" },
 
-    -- github.com/nvim-neotest/neotest
-    {
-      "nvim-neotest/neotest",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-        "nvim-neotest/neotest-go"
-      }
+  -- github.com/nvim-neotest/neotest
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-go",
     },
   },
-  {
-    performance = {
-      rtp = {
-        -- disable some rtp plugins
-        disabled_plugins = {
-          "gzip",
-          -- "matchit",
-          -- "matchparen",
-          -- "netrwPlugin",
-          "tarPlugin",
-          "tohtml",
-          "tutor",
-          "zipPlugin",
-        },
+}, {
+  performance = {
+    rtp = {
+      -- disable some rtp plugins
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
       },
     },
-  }
-)
+  },
+})

@@ -17,12 +17,12 @@ return {
         dap.listeners.after.event_initialized["dapui_config"] = function()
           dapui.open({})
         end
-        dap.listeners.before.event_terminated["dapui_config"] = function()
-          dapui.close({})
-        end
-        dap.listeners.before.event_exited["dapui_config"] = function()
-          dapui.close({})
-        end
+        -- dap.listeners.before.event_terminated["dapui_config"] = function()
+        --   dapui.close({})
+        -- end
+        -- dap.listeners.before.event_exited["dapui_config"] = function()
+        --   dapui.close({})
+        -- end
       end,
     },
 
@@ -55,14 +55,20 @@ return {
 
   config = function()
     local Util = require("util")
-    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+    vim.api.nvim_set_hl(
+      0,
+      "DapStoppedLine",
+      { default = true, link = "Visual" }
+    )
 
     for name, sign in pairs(Util.icons.dap) do
       sign = type(sign) == "table" and sign or { sign }
-      vim.fn.sign_define(
-        "Dap" .. name,
-        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-      )
+      vim.fn.sign_define("Dap" .. name, {
+        text = sign[1],
+        texthl = sign[2] or "DiagnosticInfo",
+        linehl = sign[3],
+        numhl = sign[3],
+      })
     end
   end,
 }

@@ -5,19 +5,19 @@ return {
   event = "InsertEnter",
   dependencies = {
     -- github.com/hrsh7th/cmp-buffer
-    'hrsh7th/cmp-buffer',
+    "hrsh7th/cmp-buffer",
     -- github.com/hrsh7th/cmp-path
-    'hrsh7th/cmp-path',
+    "hrsh7th/cmp-path",
     -- github.com/hrsh7th/cmp-cmdline
-    'hrsh7th/cmp-cmdline',
+    "hrsh7th/cmp-cmdline",
     --github.com/saadparwaiz1/cmp_luasnip
-    'saadparwaiz1/cmp_luasnip',
+    "saadparwaiz1/cmp_luasnip",
     -- github.com/hrsh7th/cmp-nvim-lsp
-    'hrsh7th/cmp-nvim-lsp',
+    "hrsh7th/cmp-nvim-lsp",
     -- github.com/hrsh7th/cmp-nvim-lua
-    'hrsh7th/cmp-nvim-lua',
+    "hrsh7th/cmp-nvim-lua",
     -- github.com/lukas-reineke/cmp-under-comparator
-    'lukas-reineke/cmp-under-comparator',
+    "lukas-reineke/cmp-under-comparator",
   },
   opts = function()
     local cmp = require("cmp")
@@ -27,7 +27,12 @@ return {
     local has_words_before = function()
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      return col ~= 0
+        and vim.api
+            .nvim_buf_get_lines(0, line - 1, line, true)[1]
+            :sub(col, col)
+            :match("%s")
+          == nil
     end
 
     return {
@@ -69,12 +74,12 @@ return {
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1)),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete()),
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ["<C-e>"] = cmp.mapping {
+        ["<C-e>"] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
-        },
+        }),
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
         -- Set `select` to `false` to only confirm explicitly selected items.
         ["<S-CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
@@ -83,8 +88,8 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- they way you will only jump inside the snippet region
+          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+          -- they way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -134,17 +139,17 @@ return {
         },
         {
           name = "path",
-          priority = 96,
+          priority = 97,
           group_index = 1,
         },
         {
           name = "luasnip",
-          priority = 2,
-          group_index = 2,
+          priority = 96,
+          group_index = 1,
         },
         {
           name = "cmdline",
-          priority = 0,
+          priority = 1,
           group_index = 2,
         },
       },

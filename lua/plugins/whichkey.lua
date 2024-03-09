@@ -4,13 +4,13 @@ return {
   event = "VeryLazy",
   opts = {
     plugins = {
-      marks = false,          -- shows a list of your marks on ' and `
-      registers = false,      -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      marks = false, -- shows a list of your marks on ' and `
+      registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
       presets = {
-        operators = false,    -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = false,      -- adds help for motions
+        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        motions = false, -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
-        g = false,            -- bindings for prefixed with g
+        g = false, -- bindings for prefixed with g
       },
       spelling = true,
     },
@@ -20,7 +20,7 @@ return {
       border = "shadow",
       position = "top",
       margin = { 2, 6, 0, 6 }, -- extra window margin [top, right, bottom, left]
-      padding = { 1, 2, 1, 2 } -- extra window padding [top, right, bottom, left],
+      padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left],
     },
     layout = {
       height = { min = 7 }, -- min and max height of the columns
@@ -41,7 +41,7 @@ return {
       nowait = true,
     }
     local groups = {
-      ['\\'] = { name = "terminal" },
+      ["\\"] = { name = "terminal" },
       b = { name = "buffer" },
       c = {
         name = "code",

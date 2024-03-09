@@ -5,7 +5,8 @@ local get_notification_height = function(win)
   for _, content in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
     local length = string.len(content)
     if length > 0 then
-      height = height + math.ceil(string.len(content) / math.floor(vim.o.columns * 0.42))
+      height = height
+        + math.ceil(string.len(content) / math.floor(vim.o.columns * 0.42))
     else
       height = height + 1
     end

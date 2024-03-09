@@ -6,7 +6,7 @@ return {
     -- github.com/folke/neoconf.nvim
     { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
     -- github.com/folke/neodev.nvim
-    { "folke/neodev.nvim",  opts = { experimental = { pathStrict = true } } },
+    { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
     -- github.com/hrsh7th/cmp-nvim-lsp
     "hrsh7th/cmp-nvim-lsp",
     -- github.com/ii14/emmylua-nvim
@@ -16,7 +16,7 @@ return {
     -- options for vim.diagnostic.config()
     diagnostics = {
       float = {
-        header = ""
+        header = "",
       },
       severity_sort = true,
       underline = false,
@@ -26,9 +26,7 @@ return {
         source = "if_many",
       },
     },
-    capabilities = {
-      textDocument = { completion = { completionItem = { snippetSupport = true } } },
-    },
+    capabilities = {},
     autoformat = true,
     -- options for vim.lsp.buf.format()
     format = {
@@ -63,7 +61,7 @@ return {
       -- github.com/typescript-language-server/typescript-language-server
       "tsserver",
       -- github.com/terraform-linters/tflint
-      "tflint",
+      -- "tflint",
       -- github.com/redhat-developer/yaml-language-server
       "yamlls",
     },
@@ -102,7 +100,8 @@ return {
         on_attach = opts.on_attach[server] or nil,
         capabilities = vim.deepcopy(capabilities),
       }
-      local has_custom_opts, custom_opts = pcall(require, "plugins.lsp.opts." .. server)
+      local has_custom_opts, custom_opts =
+        pcall(require, "plugins.lsp.opts." .. server)
       if has_custom_opts then
         server_opts = vim.tbl_deep_extend("force", server_opts, custom_opts)
       end

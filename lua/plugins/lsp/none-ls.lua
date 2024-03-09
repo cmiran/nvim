@@ -65,7 +65,6 @@ return {
         -- github.com/prettier/prettier
         -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
       },
-
     }
   end,
 }

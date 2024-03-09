@@ -1,7 +1,7 @@
 -- Autopairs, integrates with both cmp and treesitter
 -- github.com/windwp/nvim-autopairs
 return {
-  'windwp/nvim-autopairs',
+  "windwp/nvim-autopairs",
   opts = {
     check_ts = true,
     ts_config = {
@@ -30,6 +30,9 @@ return {
     local cmp = require("cmp")
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
-  end
+    cmp.event:on(
+      "confirm_done",
+      cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
+    )
+  end,
 }

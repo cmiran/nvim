@@ -4,5 +4,5 @@ return {
       schemaStore = { enable = true },
       keyOrdering = false,
     },
-  }
+  },
 }

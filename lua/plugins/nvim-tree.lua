@@ -8,16 +8,11 @@ local function on_attach(bufnr)
 
   api.config.mappings.default_on_attach(bufnr)
 
-  vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
-  vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
-  vim.keymap.set("n", "o", api.node.open.edit, opts("Open"))
-  vim.keymap.set("n", "w", api.node.navigate.parent_close, opts("Close Directory"))
-  vim.keymap.set("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
-  -- keymap("n", "l", api.node.open.edit, opts("Open"))
-  -- keymap("n", "<CR>", api.node.open.edit, opts("Open"))
-  -- keymap("n", "o", api.node.open.edit, opts("Open"))
-  -- keymap("n", "w", api.node.navigate.parent_close, opts("Close Directory"))
-  -- keymap("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
+  keymap("n", "l", api.node.open.edit, opts("Open"))
+  keymap("n", "<CR>", api.node.open.edit, opts("Open"))
+  keymap("n", "o", api.node.open.edit, opts("Open"))
+  keymap("n", "w", api.node.navigate.parent_close, opts("Close directory"))
+  keymap("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
 end
 
 return {

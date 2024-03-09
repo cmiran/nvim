@@ -51,13 +51,15 @@ return {
         nls.builtins.formatting.goimports,
 
         -- github.com/JohnnyMorganz/StyLua
-        nls.builtins.formatting.stylua,
-        -- nls.builtins.formatting.stylua.with({
-        --   condition = function(utils)
-        --     return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
-        --   end,
-        -- }),
-        --
+        nls.builtins.formatting.stylua.with({
+          condition = function(utils)
+            return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
+          end,
+          extra_args = {
+            "--config-path",
+            vim.fn.stdpath("config") .. ".stylua.toml",
+          },
+        }),
 
         -- developer.hashicorp.com/terraform/cli/commands/fmt
         nls.builtins.formatting.terraform_fmt,

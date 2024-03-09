@@ -80,6 +80,9 @@ return {
         -- }),
         --
 
+        -- developer.hashicorp.com/terraform/cli/commands/fmt
+        nls.builtins.formatting.terraform_fmt,
+
         -- github.com/prettier/prettier
         -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
       },

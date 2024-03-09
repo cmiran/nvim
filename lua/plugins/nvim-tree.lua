@@ -39,13 +39,24 @@ return {
       sync_root_with_cwd = true,
       view = {
         side = "left",
+        float = {
+          enable = true,
+          open_win_config = {
+            relative = "editor",
+            border = "shadow",
+            width = 30 + 2,
+            height = math.floor(vim.o.lines * 0.7) - 5,
+            row = 5,
+            col = 2,
+          },
+        },
       },
       renderer = {
         highlight_git = true,
         root_folder_modifier = ":t", -- ":~:s?$?/..?"
         indent_markers = {
           enable = true,
-          icons = { corner = "│" }
+          icons = { corner = "│" },
         },
         icons = {
           -- git_placement = "after",
@@ -73,7 +84,7 @@ return {
       },
       git = {
         ignore = false,
-      }
+      },
     }
   end,
 }

@@ -28,7 +28,7 @@ return {
     disable = {
       filetypes = {
         "help",
-        -- "NvimTree",
+        "NvimTree",
         "TelescopePrompt",
       },
     },

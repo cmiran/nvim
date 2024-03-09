@@ -166,6 +166,12 @@ return {
         },
       },
       pickers = {
+        autocommands = {
+          previewer = false,
+          layout_config = {
+            width = 0.8,
+          },
+        },
         buffers = {
           theme = "dropdown",
           previewer = false,
@@ -207,6 +213,9 @@ return {
         grep_string = {
           theme = "ivy",
           layout_strategy = "vertical",
+        },
+        help_tags = {
+          previewer = false,
         },
         highlights = {
           theme = "dropdown",

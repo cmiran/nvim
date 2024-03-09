@@ -33,32 +33,14 @@ return {
         -- github.com/streetsidesoftware/cspell
         -- code_actions.cspell,
 
-        -- github.com/L3MON4D3/LuaSnip
-        nls.builtins.completion.luasnip,
-
         -- github.com/rhysd/actionlint
         nls.builtins.diagnostics.actionlint,
-
-        -- github.com/get-alex/alex
-        -- diagnostics.alex,
-
-        -- github.com/mrtazz/checkmake
-        -- diagnostics.checkmake,
-
-        -- github.com/streetsidesoftware/cspell
-        -- nls.builtins.diagnostics.cspell,
 
         -- github.com/codespell-project/codespell
         nls.builtins.diagnostics.codespell,
 
-        -- github.com/PyCQA/flake8
-        -- diagnostics.flake8,
-
         -- github.com/protofire/solhint
         nls.builtins.diagnostics.solhint,
-
-        -- github.com/testdouble/standard
-        -- diagnostics.standardrb,
 
         -- formatting.black.with({ extra_args = { "--fast" } }),
 
@@ -67,9 +49,6 @@ return {
 
         -- pkg.go.dev/golang.org/x/tools/cmd/goimports
         nls.builtins.formatting.goimports,
-
-        -- github.com/testdouble/standard
-        -- formatting.standardrb,
 
         -- github.com/JohnnyMorganz/StyLua
         nls.builtins.formatting.stylua,

@@ -72,11 +72,13 @@ return {
         -- formatting.standardrb,
 
         -- github.com/JohnnyMorganz/StyLua
-        nls.builtins.formatting.stylua.with({
-          condition = function(utils)
-            return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
-          end,
-        }),
+        nls.builtins.formatting.stylua,
+        -- nls.builtins.formatting.stylua.with({
+        --   condition = function(utils)
+        --     return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
+        --   end,
+        -- }),
+        --
 
         -- github.com/prettier/prettier
         -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),

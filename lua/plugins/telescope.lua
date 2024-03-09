@@ -94,16 +94,14 @@ return {
     {
       "<leader>sm",
       function()
-        require('telescope').extensions.notify.notify(
-          {
-            theme = "dropdown",
-            layout_strategy = "vertical",
-            layout_config = {
-              height = 0.8,
-              width = 0.6,
-            },
-          }
-        )
+        require('telescope').extensions.notify.notify({
+          theme = "dropdown",
+          layout_strategy = "vertical",
+          layout_config = {
+            height = 0.8,
+            width = 0.6,
+          },
+        })
       end,
       desc = "Notifications",
     },
@@ -190,6 +188,14 @@ return {
         git_commits = {
           theme = "dropdown",
           previewer = false,
+          git_command = {
+            "git",
+            "log",
+            "--pretty=%h %>(12,trunc)%ad %<(7,trunc)%aN %s",
+          },
+          layout_config = {
+            width = 0.8,
+          },
         },
         git_status = {
           theme = "dropdown",

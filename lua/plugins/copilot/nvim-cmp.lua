@@ -20,28 +20,10 @@ return {
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
-    local cmp = require("cmp")
-
-    table.insert(opts.sources, 1, { name = "copilot" })
-
-    local confirm = opts.mapping["<CR>"]
-    local confirm_copilot = cmp.mapping.confirm({
-      select = true,
-      behavior = cmp.ConfirmBehavior.Replace,
+    table.insert(opts.sources, 1, {
+      name = "copilot",
+      group_index = 1,
+      priority = 100,
     })
-
-    opts.mapping = vim.tbl_extend("force", opts.mapping, {
-      ["<CR>"] = function(...)
-        local entry = cmp.get_selected_entry()
-        if entry and entry.source.name == "copilot" then
-          return confirm_copilot(...)
-        end
-        return confirm(...)
-      end,
-    })
-
-    opts.sorting.comparators = vim.tbl_extend("force", {
-      require("copilot_cmp.comparators").prioritize
-    }, opts.sorting.comparators)
   end,
 }

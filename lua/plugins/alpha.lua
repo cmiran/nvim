@@ -1,9 +1,9 @@
-local get_top_padding = function(ext)
+local function get_top_padding(ext)
   ext = ext or 0
   local win_height = math.floor(vim.api.nvim_win_get_height(0) * 0.5)
   local header = require("alpha.themes.dashboard").section.header.val
-  local header_height = math.floor(#header * 0.7) + ext
-  local padding = win_height - header_height
+  local header_height = math.floor(#header * 0.7)
+  local padding = win_height - header_height - ext
 
   return win_height < header_height and 0 or padding
 end
@@ -12,7 +12,7 @@ return {
   "goolord/alpha-nvim",
   event = "VimEnter",
   keys = {
-    { "<leader>a", ":Alpha<cr>", desc = "Alpha" },
+    { "<leader>a", "<cmd>Alpha<cr>", desc = "Alpha" },
   },
   opts = function()
     -- require("alpha.term")
@@ -101,8 +101,6 @@ return {
       })
     end
 
-    require("alpha").setup(dashboard.opts)
-
     vim.api.nvim_create_autocmd("User", {
       pattern = "LazyVimStarted",
       callback = function()
@@ -113,5 +111,7 @@ return {
         pcall(vim.cmd.AlphaRedraw)
       end,
     })
+
+    require("alpha").setup(dashboard.opts)
   end,
 }

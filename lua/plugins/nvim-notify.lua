@@ -1,4 +1,4 @@
-local get_notification_height = function(win)
+local function get_notification_height(win)
   local buf = vim.api.nvim_win_get_buf(win)
   local height = 0
 
@@ -34,12 +34,8 @@ return {
   opts = {
     background_color = "NvimTreeNormal",
     fps = 90,
-    max_height = function()
-      return math.floor(vim.o.lines * 0.75)
-    end,
-    max_width = function()
-      return math.floor(vim.o.columns * 0.42)
-    end,
+    max_height = math.floor(vim.o.lines * 0.75),
+    max_width = math.floor(vim.o.columns * 0.42),
     minimum_width = 5,
     on_open = function(win)
       if vim.api.nvim_win_is_valid(win) then

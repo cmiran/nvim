@@ -15,6 +15,7 @@ return {
             buffer = buffer,
           })
           vim.api.nvim_create_autocmd("BufWritePre", {
+            desc = "format on save",
             group = augroup,
             buffer = buffer,
             callback = function()

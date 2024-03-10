@@ -9,6 +9,7 @@ return {
   },
   init = function()
     vim.api.nvim_create_autocmd("FileType", {
+      desc = "disable mini.indentscope for certain filetypes",
       pattern = {
         "alpha",
         "help",

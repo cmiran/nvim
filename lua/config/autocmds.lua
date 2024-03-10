@@ -1,5 +1,5 @@
--- quit window with 'q' or 'ESC' on filetype
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "quit window with 'q' or 'ESC' on filetype",
   pattern = {
     "checkhealth",
     "help",
@@ -31,27 +31,27 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  desc = "check if we need to reload the file when it changed",
   command = "checktime",
 })
 
--- highlight on yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+  desc = "highlight on yank",
   callback = function()
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
 
--- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
+  desc = "resize splits if window got resized",
   callback = function()
     vim.cmd("tabdo wincmd =")
   end,
 })
 
--- go to last location when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
+  desc = "go to last location when opening a buffer",
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
     local lcount = vim.api.nvim_buf_line_count(0)
@@ -61,8 +61,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "wrap and check for spell in text filetypes",
   pattern = { "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
@@ -70,8 +70,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  desc = "auto create dir when saving a file",
   callback = function(event)
     if event.match:match("^%w%w+://") then
       return
@@ -85,6 +85,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- vim.api.nvim_create_autocmd({"FileType", "BufEnter"}, {
 --   pattern = { "help" },
 --   callback = function()
---     vim.cmd[[highlight Normal guifg=#cdcecf guibg=#131a24]]
+--     -- vim.cmd[[highlight Normal guifg=#cdcecf guibg=#131a24]]
+--     -- vim.api.nvim_win_set_hl(0, "Normal", { bg = "#131a24" })
 --   end,
 -- })

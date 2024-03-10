@@ -161,6 +161,7 @@ return {
   end,
   config = function(_, opts)
     vim.api.nvim_create_autocmd("BufEnter", {
+      desc = "append nvim_lua source to sources list for .lua files",
       pattern = { "<filetype>", "lua" },
       callback = function()
         table.insert(opts.sources, 1, {

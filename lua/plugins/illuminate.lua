@@ -31,13 +31,13 @@ return {
     map("]]", "next")
     map("[[", "prev")
 
-    -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
-    vim.api.nvim_create_autocmd("FileType", {
-      callback = function()
-        local buffer = vim.api.nvim_get_current_buf()
-        map("]]", "next", buffer)
-        map("[[", "prev", buffer)
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   desc = "set keymaps after loading ftplugins, since a lot overwrite [[ and ]]",
+    --   callback = function()
+    --     local buffer = vim.api.nvim_get_current_buf()
+    --     map("]]", "next", buffer)
+    --     map("[[", "prev", buffer)
+    --   end,
+    -- })
   end,
 }

@@ -5,12 +5,12 @@ return {
   opts = function(_, opts)
     local Util = require("util")
     local colors = {
-      [""] = Util.fg("Special"),
-      ["Normal"] = Util.fg("Special"),
+      [""] = Util.fg("DiagnosticOk"),
+      ["Normal"] = Util.fg("DiagnosticOk"),
       ["Warning"] = Util.fg("DiagnosticError"),
       ["InProgress"] = Util.fg("DiagnosticWarn"),
     }
-    table.insert(opts.sections.lualine_x, 2, {
+    table.insert(opts.sections.lualine_y, 1, {
       function()
         local icon = require("util").icons.kinds.Copilot
         local status = require("copilot.api").status.data

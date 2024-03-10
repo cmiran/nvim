@@ -41,7 +41,7 @@ return {
           title = "Neotest",
         })
       end,
-      desc = "Run All Test Files",
+      desc = "Run all",
     },
     {
       "<leader>tr",
@@ -52,7 +52,7 @@ return {
           title = "Neotest",
         })
       end,
-      desc = "Run Nearest",
+      desc = "Run nearest",
     },
     {
       "<leader>tl",
@@ -63,28 +63,28 @@ return {
           title = "Neotest",
         })
       end,
-      desc = "Run Last",
+      desc = "Run last",
     },
     {
       "<leader>ts",
       function()
         require("neotest").summary.toggle()
       end,
-      desc = "Toggle Summary",
+      desc = "Toggle summary",
     },
     {
       "<leader>to",
       function()
         require("neotest").output.open({ enter = true, auto_close = true })
       end,
-      desc = "Show Output",
+      desc = "Show output",
     },
     {
       "<leader>tO",
       function()
         require("neotest").output_panel.toggle()
       end,
-      desc = "Toggle Output Panel",
+      desc = "Toggle output panel",
     },
     {
       "<leader>tS",

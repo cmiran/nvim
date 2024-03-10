@@ -25,6 +25,10 @@ return {
       "<leader>tt",
       function()
         require("neotest").run.run(vim.fn.expand("%"))
+
+        vim.notify("Run all file test", vim.log.levels.INFO, {
+          title = "Neotest",
+        })
       end,
       desc = "Run File",
     },
@@ -32,6 +36,10 @@ return {
       "<leader>tT",
       function()
         require("neotest").run.run(vim.loop.cwd())
+
+        vim.notify("Run test suite", vim.log.levels.INFO, {
+          title = "Neotest",
+        })
       end,
       desc = "Run All Test Files",
     },
@@ -39,6 +47,10 @@ return {
       "<leader>tr",
       function()
         require("neotest").run.run()
+
+        vim.notify("Run nearest test", vim.log.levels.INFO, {
+          title = "Neotest",
+        })
       end,
       desc = "Run Nearest",
     },
@@ -46,6 +58,10 @@ return {
       "<leader>tl",
       function()
         require("neotest").run.run_last()
+
+        vim.notify("Run latest test ran", vim.log.levels.INFO, {
+          title = "Neotest",
+        })
       end,
       desc = "Run Last",
     },
@@ -74,6 +90,10 @@ return {
       "<leader>tS",
       function()
         require("neotest").run.stop()
+
+        vim.notify("Stopping nearest", vim.log.levels.WARN, {
+          title = "Neotest",
+        })
       end,
       desc = "Stop",
     },
@@ -82,11 +102,18 @@ return {
       function()
         local name = get_nearest_function_name()
         if not name then
+          vim.notify("No function found", vim.log.levels.WARN, {
+            title = "Neotest",
+          })
           return
         end
 
         require("neotest").run.run({
           extra_args = { "-run", name },
+        })
+
+        vim.notify("Testing " .. name, vim.log.levels.INFO, {
+          title = "Neotest",
         })
       end,
       desc = "Test nearest function",
@@ -159,6 +186,9 @@ return {
 
     opts.adapters = {
       require("neotest-go")({
+        experimental = {
+          test_table = true,
+        },
         args = { "-count=1" },
       }),
     }

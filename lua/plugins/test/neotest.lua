@@ -1,3 +1,15 @@
+local function get_nearest_function_name()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+
+  while node do
+    if node:type() == "function_declaration" then
+      return ts_utils.get_node_text(node:child(1))[1]
+    end
+    node = node:parent()
+  end
+end
+
 -- github.com/nvim-neotest/neotest
 return {
   "nvim-neotest/neotest",
@@ -64,6 +76,20 @@ return {
         require("neotest").run.stop()
       end,
       desc = "Stop",
+    },
+    {
+      "<leader>tf",
+      function()
+        local name = get_nearest_function_name()
+        if not name then
+          return
+        end
+
+        require("neotest").run.run({
+          extra_args = { "-run", name },
+        })
+      end,
+      desc = "Test nearest function",
     },
   },
   opts = {

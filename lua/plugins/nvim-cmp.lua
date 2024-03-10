@@ -134,17 +134,17 @@ return {
         },
         {
           name = "buffer",
-          priority = 98,
-          group_index = 1,
-        },
-        {
-          name = "path",
           priority = 97,
           group_index = 1,
         },
         {
-          name = "luasnip",
+          name = "path",
           priority = 96,
+          group_index = 1,
+        },
+        {
+          name = "luasnip",
+          priority = 95,
           group_index = 1,
         },
         {
@@ -165,8 +165,8 @@ return {
       callback = function()
         table.insert(opts.sources, 1, {
           name = "nvim_lua",
-          priority = 1,
-          group_index = 2,
+          priority = 98,
+          group_index = 1,
         })
       end,
     })

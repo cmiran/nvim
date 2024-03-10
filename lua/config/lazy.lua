@@ -18,17 +18,7 @@ require("lazy").setup({
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.none-ls" },
   { import = "plugins.copilot" },
-
-  -- github.com/nvim-neotest/neotest
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-neotest/neotest-go",
-    },
-  },
+  { import = "plugins.test" },
 }, {
   performance = {
     rtp = {

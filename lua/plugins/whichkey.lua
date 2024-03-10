@@ -60,6 +60,7 @@ return {
         name = "search",
         n = { name = "noice" },
       },
+      t = { name = "test" },
       u = { name = "ui" },
       x = { name = "extra" },
     }

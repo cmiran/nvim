@@ -11,6 +11,7 @@ return {
     transparent = true,
     groups = {
       all = {
+        FloatBorder = { bg = "bg0", fg = "bg0" },
         NotifyDEBUGBody = { bg = "bg0" },
         NotifyERRORBody = { bg = "bg0" },
         NotifyINFOBody = { bg = "bg0" },

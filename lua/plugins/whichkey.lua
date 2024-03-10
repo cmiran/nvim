@@ -1,5 +1,5 @@
+-- github.com/folke/which-key.nvim
 return {
-  -- github.com/folke/which-key.nvim
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
@@ -11,11 +11,10 @@ return {
         motions = false, -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
         g = false, -- bindings for prefixed with g
+        z = false, -- bindings for prefixed with z
       },
       spelling = true,
     },
-    -- add operators that will trigger motion and text object completion
-    -- to enable all native operators, set the preset / operators plugin above
     window = {
       border = "shadow",
       position = "top",
@@ -37,32 +36,38 @@ return {
     local wk = require("which-key")
     local defaults = {
       mode = { "n", "v" },
-      prefix = "<leader>",
       nowait = true,
     }
     local groups = {
-      ["\\"] = { name = "terminal" },
-      b = { name = "buffer" },
-      c = {
-        name = "code",
-        g = { name = "go" },
+      ["<leader>"] = {
+        name = "leader",
+        ["\\"] = { name = "terminal" },
+        b = { name = "buffer" },
+        c = {
+          name = "code",
+          g = { name = "go" },
+        },
+        d = {
+          name = "debug",
+          g = { name = "go" },
+        },
+        f = { name = "find" },
+        g = {
+          name = "git",
+          h = { name = "hunks" },
+        },
+        s = {
+          name = "search",
+          n = { name = "noice" },
+        },
+        t = { name = "test" },
+        u = { name = "ui" },
+        x = { name = "extra" },
       },
-      d = {
-        name = "debug",
-        g = { name = "go" },
-      },
-      f = { name = "find" },
-      g = {
-        name = "git",
-        h = { name = "hunks" },
-      },
-      s = {
-        name = "search",
-        n = { name = "noice" },
-      },
-      t = { name = "test" },
-      u = { name = "ui" },
-      x = { name = "extra" },
+      ["["] = { name = "goto prev" },
+      ["]"] = { name = "goto next" },
+      ["<C-w>"] = { name = "window" },
+      g = { name = "action" },
     }
 
     wk.setup(opts)

@@ -1,5 +1,6 @@
 return {
   "leoluz/nvim-dap-go",
+  enabled = false,
   ft = "go",
   dependencies = "mfussenegger/nvim-dap",
   config = function()

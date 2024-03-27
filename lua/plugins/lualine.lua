@@ -15,7 +15,6 @@ return {
         -- "trouble",
       },
       options = {
-        -- theme = require("lualine.themes.nightfox"),
         globalstatus = true,
         disabled_filetypes = { statusline = { "alpha" } },
       },
@@ -84,27 +83,27 @@ return {
             cond = require("lazy.status").has_updates,
             color = Util.fg("Special"),
           },
-          {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-          },
+          -- {
+          --   "diff",
+          --   symbols = {
+          --     added = icons.git.added,
+          --     modified = icons.git.modified,
+          --     removed = icons.git.removed,
+          --   },
+          -- },
         },
         lualine_y = {
-          {
-            "progress",
-            separator = " ",
-            padding = { left = 1, right = 0 },
-          },
-          { "location", padding = { left = 0, right = 1 } },
+          -- {
+          --   "progress",
+          --   separator = " ",
+          --   padding = { left = 1, right = 0 },
+          -- },
         },
         lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
+          { "location", padding = { left = 0, right = 1 } },
+          --   function()
+          --     return " " .. os.date("%R")
+          --   end,
         },
       },
     }

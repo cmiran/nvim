@@ -15,12 +15,9 @@ return {
     { "<leader>a", "<cmd>Alpha<cr>", desc = "Alpha" },
   },
   opts = function()
-    -- require("alpha.term")
     local dashboard = require("alpha.themes.dashboard")
     local fortune = require("alpha.fortune")()
-
-    dashboard.section.header.opts.hl = "Error"
-    dashboard.section.header.val = {
+    local logo = {
       [[           .......               ]],
       [[       .~!!~^:....               ]],
       [[     ^75Y~:..                    ]],
@@ -46,45 +43,18 @@ return {
       [[             .......             ]],
     }
 
-    dashboard.section.buttons.opts.hl = "Keyword"
-    -- dashboard.section.buttons.val = {
-    --   dashboard.button("f", " " .. " Find file",
-    --   ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>"),
-    --   dashboard.button("r", " " .. " Recent files",
-    --   ":lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown({hidden=true,no_ignore=true,previewer=false}))<cr>"),
-    --   dashboard.button("g", " " .. " Grep",
-    --   ":lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy({grep_open_files=true,hidden=true,no_ignore=true}))<cr>"),
-    --   dashboard.button("e", "פּ " .. " Explore", ":NvimTreeToggle<cr>"),
-    --   dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<cr>"),
-    --   dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua<cr>"),
-    --   dashboard.button("q", " " .. " Quit", ":q<cr>"),
-    --   dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
-    -- }
-
-    dashboard.section.footer.opts.hl = "Type"
-    -- local footer = function()
-    --   local t = {}
-    --   local gitsigns_head = vim.g.gitsigns_head
-    --   if gitsigns_head then
-    --     table.insert(t, " " .. gitsigns_head)
-    --   end
-    --   local datetime = os.date(" %H:%M   %d-%m-%Y")
-    --   table.insert(t, datetime)
-    --   return table.concat(t, "  ")
-    -- end
-
-    dashboard.opts.opts.noautocmd = true
+    dashboard.section.header.opts.hl = "Error"
+    dashboard.section.header.val = logo
+    -- dashboard.opts.opts.noautocmd = true
     dashboard.opts.layout = {
       { type = "padding", val = get_top_padding(#fortune) },
+      dashboard.section.header,
+      { type = "padding", val = 1 },
       {
         type = "text",
         val = fortune,
         opts = { position = "center" },
       },
-      { type = "padding", val = 1 },
-      dashboard.section.header,
-      { type = "padding", val = 2 },
-      dashboard.section.footer,
     }
 
     return dashboard
@@ -94,6 +64,7 @@ return {
       vim.cmd.close()
       vim.api.nvim_create_autocmd("User", {
         desc = "close Lazy and re-open when the dashboard is ready",
+        once = true,
         pattern = "AlphaReady",
         callback = function()
           require("lazy").show()
@@ -101,18 +72,40 @@ return {
       })
     end
 
-    vim.api.nvim_create_autocmd("User", {
-      desc = "update footer when LazyVimStarted",
-      pattern = "LazyVimStarted",
-      callback = function()
-        local stats = require("lazy").stats()
-        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        dashboard.section.footer.val =
-          { "loaded " .. stats.count .. " plugins in " .. ms .. "ms" }
-        pcall(vim.cmd.AlphaRedraw)
-      end,
-    })
-
     require("alpha").setup(dashboard.opts)
+
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   desc = "update footer when LazyVimStarted",
+    --   pattern = "LazyVimStarted",
+    --   callback = function()
+    --     local stats = require("lazy").stats()
+    --     local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+    --     dashboard.section.footer.val =
+    --       { "loaded " .. stats.count .. " plugins in " .. ms .. "ms" }
+    --     pcall(vim.cmd.AlphaRedraw)
+    --   end,
+    -- })
+
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   pattern = "alpha",
+    --   desc = 'hide cursor for alpha',
+    --   callback = function()
+    --     local hl = vim.api.nvim_get_hl_by_name('Cursor', true)
+    --     hl.blend = 100
+    --     vim.api.nvim_set_hl(0, 'Cursor', hl)
+    --     vim.opt.guicursor:append('a:Cursor/lCursor')
+    --   end,
+    -- })
+
+    -- vim.api.nvim_create_autocmd('BufLeave', {
+    --   buffer = 0,
+    --   desc = 'show cursor after alpha',
+    --   callback = function()
+    --     local hl = vim.api.nvim_get_hl_by_name('Cursor', true)
+    --     hl.blend = 0
+    --     vim.api.nvim_set_hl(0, 'Cursor', hl)
+    --     vim.opt.guicursor:remove('a:Cursor/lCursor')
+    --   end,
+    -- })
   end,
 }

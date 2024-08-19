@@ -2,5 +2,5 @@
 return {
   "levouh/tint.nvim",
   event = "VeryLazy",
-  config = true,
+  opts = {},
 }

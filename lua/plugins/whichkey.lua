@@ -58,5 +58,12 @@ return {
   config = function(_, opts)
     require("which-key").setup(opts)
 
+    vim.api.nvim_create_autocmd("VimResized", {
+      desc = "resize which-key float when resizing the window",
+      callback = function()
+        local Config = require("which-key.config")
+        Config.win.width = vim.o.columns - 12
+      end,
+    })
   end,
 }

@@ -23,9 +23,9 @@ return {
     },
     win = {
       no_overlap = false,
-      width = vim.o.columns - 12,
+      width = math.min(vim.o.columns - 12, 100),
       col = 6,
-      row = 2,
+      row = 3,
       border = "shadow",
       padding = { 1, 2 }, -- extra window padding [top, right, bottom, left],
       height = { min = 0 },
@@ -58,5 +58,12 @@ return {
   config = function(_, opts)
     require("which-key").setup(opts)
 
+    vim.api.nvim_create_autocmd("VimResized", {
+      desc = "resize which-key float when resizing the window",
+      callback = function()
+        local Config = require("which-key.config")
+        Config.win.width = math.min(vim.o.columns - 12, 100)
+      end,
+    })
   end,
 }

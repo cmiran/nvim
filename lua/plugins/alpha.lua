@@ -2,7 +2,7 @@ local function get_top_padding(ext)
   ext = ext or 0
   local win_height = math.floor(vim.api.nvim_win_get_height(0) * 0.5)
   local header = require("alpha.themes.dashboard").section.header.val
-  local header_height = math.floor(#header * 0.7)
+  local header_height = math.floor(#header * 0.65)
   local padding = win_height - header_height - ext
 
   return win_height < header_height and 0 or padding

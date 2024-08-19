@@ -67,7 +67,7 @@ return {
     },
     on_attach = {
       lua_ls = function(client, _)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
       end,
     },
     setup = {},

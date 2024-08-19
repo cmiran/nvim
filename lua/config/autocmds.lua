@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd("FileType", {
   desc = "quit window with 'q' or 'ESC' on filetype",
   pattern = {
+    "alpha", -- does not work
     "checkhealth",
     "help",
     "lspinfo",

@@ -28,7 +28,6 @@ return {
       --   -- return string.match(buf.path, "[^/]?/?[^/]+$")
       -- end,
       diagnostics = "nvim_lsp",
-      diagnostics_update_in_insert = true,
       diagnostics_indicator = function(_, _, diag)
         local icons = require("util").icons.diagnostics
         local ret = (diag.error and icons.Error .. diag.error .. " " or "")

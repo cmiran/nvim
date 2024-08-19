@@ -14,7 +14,6 @@ return {
       -- topdelete = { text = "" },
     },
     current_line_blame_opts = { delay = 0 },
-    current_line_blame_formatter_opts = { relative_time = false },
     on_attach = function(buffer)
       local gs = package.loaded.gitsigns
 

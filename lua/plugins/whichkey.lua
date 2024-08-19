@@ -3,6 +3,13 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
+    disable = {
+      ft = {
+        "help",
+        "NvimTree",
+        "TelescopePrompt",
+      },
+    },
     plugins = {
       marks = false, -- shows a list of your marks on ' and `
       registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -13,64 +20,43 @@ return {
         g = false, -- bindings for prefixed with g
         z = false, -- bindings for prefixed with z
       },
-      spelling = true,
     },
-    window = {
+    win = {
+      no_overlap = false,
+      width = vim.o.columns - 12,
+      col = 6,
+      row = 2,
       border = "shadow",
-      position = "top",
-      margin = { 2, 6, 0, 6 }, -- extra window margin [top, right, bottom, left]
-      padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left],
+      padding = { 1, 2 }, -- extra window padding [top, right, bottom, left],
+      height = { min = 0 },
     },
-    layout = {
-      height = { min = 7 }, -- min and max height of the columns
-    },
-    disable = {
-      filetypes = {
-        "help",
-        "NvimTree",
-        "TelescopePrompt",
-      },
+    spec = {
+      {
+        mode = { "n", "v" },
+        { "<C-w>", group = "window", nowait = true },
+        { "<leader>", group = "leader", nowait = true },
+        { "<leader>\\", group = "terminal", nowait = true },
+        { "<leader>b", group = "buffer", nowait = true },
+        { "<leader>c", group = "code", nowait = true },
+        { "<leader>cg", group = "go", nowait = true },
+        { "<leader>d", group = "debug", nowait = true },
+        { "<leader>dg", group = "go", nowait = true },
+        { "<leader>f", group = "find", nowait = true },
+        { "<leader>g", group = "git", nowait = true },
+        { "<leader>gh", group = "hunks", nowait = true },
+        { "<leader>s", group = "search", nowait = true },
+        { "<leader>sn", group = "noice", nowait = true },
+        { "<leader>t", group = "test", nowait = true },
+        { "<leader>u", group = "ui", nowait = true },
+        { "<leader>x", group = "extra", nowait = true },
+        { "[", name = "goto prev", nowait = true },
+        { "]", name = "goto next", nowait = true },
+        { "g", name = "action", nowait = true },
+      }
     },
   },
   config = function(_, opts)
-    local wk = require("which-key")
-    local defaults = {
-      mode = { "n", "v" },
-      nowait = true,
-    }
-    local groups = {
-      ["<leader>"] = {
-        name = "leader",
-        ["\\"] = { name = "terminal" },
-        b = { name = "buffer" },
-        c = {
-          name = "code",
-          g = { name = "go" },
-        },
-        d = {
-          name = "debug",
-          g = { name = "go" },
-        },
-        f = { name = "find" },
-        g = {
-          name = "git",
-          h = { name = "hunks" },
-        },
-        s = {
-          name = "search",
-          n = { name = "noice" },
-        },
-        t = { name = "test" },
-        u = { name = "ui" },
-        x = { name = "extra" },
-      },
-      ["["] = { name = "goto prev" },
-      ["]"] = { name = "goto next" },
-      ["<C-w>"] = { name = "window" },
-      g = { name = "action" },
-    }
+    require("which-key").setup(opts)
 
-    wk.setup(opts)
-    wk.register(groups, defaults)
   end,
 }

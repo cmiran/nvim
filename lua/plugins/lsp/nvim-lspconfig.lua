@@ -26,51 +26,67 @@ return {
         source = "if_many",
       },
     },
-    capabilities = {},
-    autoformat = false,
+    -- inlay_hints = {
+    --   enabled = true,
+    --   exclude = { "vue" }, -- filetypes
+    -- },
+    -- codelens = {
+    --   enabled = false,
+    -- },
+    -- document_highlight = {
+    --   enabled = true,
+    -- },
+    capabilities = {
+      workspace = {
+        fileOperations = {
+          didRename = true,
+          willRename = true,
+        },
+      },
+    },
     -- options for vim.lsp.buf.format()
     format = {
       formatting_options = nil,
       timeout_ms = nil,
     },
+
     servers = {
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#golangci_lint_ls
-      "golangci_lint_ls",
+      golangci_lint_ls = {},
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
-      "gopls",
+      gopls = {},
       -- github.com/hrsh7th/vscode-langservers-extracted
-      "jsonls",
+      jsonls = {},
       -- github.com/sumneko/lua-language-server
-      "lua_ls",
+      lua_ls = {},
       -- microsoft.github.io/pyright/#/
-      "pyright",
+      pyright = {},
       -- github.com/lighttiger2505/sqls
-      "sqlls",
+      sqlls = {},
       -- github.com/stoplightio/spectral
       -- "spectral",
       -- github.com/hyperledger/solang
-      "solang",
+      solang = {},
       -- github.com/ethereum/solc-js
-      "solc",
+      solc = {},
       -- github.com/qiuxiang/solidity-ls
-      "solidity",
+      solidity = {},
       -- github.com/juanfranblanco/vscode-solidity
-      "solidity_ls",
+      solidity_ls = {},
       -- github.com/hashicorp/terraform-ls
-      "terraformls",
+      terraformls = {},
       -- github.com/typescript-language-server/typescript-language-server
-      "tsserver",
+      tsserver = {},
       -- github.com/terraform-linters/tflint
       -- "tflint",
       -- github.com/redhat-developer/yaml-language-server
-      "yamlls",
+      yamlls = {},
     },
     on_attach = {
-      lua_ls = function(client, _)
-        client.server_capabilities.documentFormattingProvider = false
-      end,
+      -- lua_ls = function(client, _)
+      --   client.server_capabilities.documentFormattingProvider = false
+      -- end,
     },
-    setup = {},
   },
   config = function(_, opts)
     require("util").on_attach(function(client, buffer)
@@ -94,23 +110,26 @@ return {
       opts.capabilities or {}
     )
 
-    local function setup(server)
-      local server_opts = {
-        on_attach = opts.on_attach[server] or nil,
+    local function setup(name, server_opts)
+      local default_opts = {
+        -- on_attach = opts.on_attach[server] or nil,
         capabilities = capabilities,
       }
-      local has_custom_opts, custom_opts =
-        pcall(require, "plugins.lsp.opts." .. server)
 
-      if has_custom_opts then
-        server_opts = vim.tbl_deep_extend("force", server_opts, custom_opts)
-      end
+      local has_custom_opts, custom_opts = pcall(require, "plugins.lsp.opts." .. name)
 
-      require("lspconfig")[server].setup(server_opts)
+      server_opts = vim.tbl_deep_extend(
+        "force",
+        default_opts,
+        server_opts,
+        has_custom_opts and custom_opts or {}
+      )
+
+      require("lspconfig")[name].setup(server_opts)
     end
 
-    for _, s in pairs(opts.servers) do
-      setup(s)
+    for k, v in pairs(opts.servers) do
+      setup(k, v or {})
     end
   end,
 }

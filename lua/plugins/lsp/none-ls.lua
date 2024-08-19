@@ -3,6 +3,7 @@ local augroup = vim.api.nvim_create_augroup("NLSFormatting", {})
 return {
   -- github.com/nvimtools/none-ls.nvim
   "nvimtools/none-ls.nvim",
+  enabled = false,
   event = { "BufReadPre", "BufNewFile" },
   opts = function()
     local nls = require("null-ls")

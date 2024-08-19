@@ -15,9 +15,10 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   { import = "plugins" },
   { import = "plugins.lsp.nvim-lspconfig" },
-  { import = "plugins.lsp.none-ls" },
+  -- { import = "plugins.lsp.none-ls" },
+  { import = "plugins.efm" },
   { import = "plugins.copilot" },
-  { import = "plugins.test" },
+  -- { import = "plugins.test" },
 }, {
   performance = {
     rtp = {

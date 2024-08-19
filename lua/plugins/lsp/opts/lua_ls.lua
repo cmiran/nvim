@@ -1,5 +1,8 @@
 -- github.com/sumneko/lua-language-server/wiki/Settings
 return {
+  server_capabilities = {
+    documentFormattingProvider = false,
+  },
   settings = {
     Lua = {
       completion = {

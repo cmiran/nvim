@@ -27,7 +27,7 @@ return {
       },
     },
     capabilities = {},
-    autoformat = true,
+    autoformat = false,
     -- options for vim.lsp.buf.format()
     format = {
       formatting_options = nil,
@@ -74,7 +74,7 @@ return {
   },
   config = function(_, opts)
     require("util").on_attach(function(client, buffer)
-      require("plugins.lsp.util").on_attach(client, buffer)
+      require("plugins.lsp.keymap").on_attach(client, buffer)
     end)
 
     -- diagnostics
@@ -84,12 +84,11 @@ return {
       vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
     end
 
-    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+    vim.diagnostic.config(opts.diagnostics)
 
     -- servers
     local capabilities = vim.tbl_deep_extend(
       "force",
-      {},
       vim.lsp.protocol.make_client_capabilities(),
       require("cmp_nvim_lsp").default_capabilities(),
       opts.capabilities or {}
@@ -98,10 +97,11 @@ return {
     local function setup(server)
       local server_opts = {
         on_attach = opts.on_attach[server] or nil,
-        capabilities = vim.deepcopy(capabilities),
+        capabilities = capabilities,
       }
       local has_custom_opts, custom_opts =
         pcall(require, "plugins.lsp.opts." .. server)
+
       if has_custom_opts then
         server_opts = vim.tbl_deep_extend("force", server_opts, custom_opts)
       end

@@ -59,7 +59,7 @@ return {
       -- github.com/hashicorp/terraform-ls
       "terraformls",
       -- github.com/typescript-language-server/typescript-language-server
-      "tsserver",
+      "ts_ls",
       -- github.com/terraform-linters/tflint
       -- "tflint",
       -- github.com/redhat-developer/yaml-language-server

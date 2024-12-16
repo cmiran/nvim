@@ -11,24 +11,32 @@ return {
       },
     },
     plugins = {
-      marks = false, -- shows a list of your marks on ' and `
+      marks = false,     -- shows a list of your marks on ' and `
       registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
       presets = {
-        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = false, -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
-        g = false, -- bindings for prefixed with g
-        z = false, -- bindings for prefixed with z
+        -- g = false,
+        z = false,
       },
     },
     win = {
       no_overlap = false,
-      width = math.min(vim.o.columns - 12, 100),
-      col = 6,
-      row = 3,
+      width = {
+        -- min = 0,
+        max = math.max(vim.o.columns*0.35, 25),
+      },
+      height = {
+        -- min = 0,
+        max = math.max(vim.o.lines*0.5, 25),
+        -- max = 0,
+      },
+      row = 6,
+      col = 5,
       border = "shadow",
       padding = { 1, 2 }, -- extra window padding [top, right, bottom, left],
-      height = { min = 0 },
+      wo = {
+        wrap = true,
+      },
     },
     spec = {
       {
@@ -48,21 +56,10 @@ return {
         { "<leader>t", group = "test", nowait = true },
         { "<leader>u", group = "ui", nowait = true },
         { "<leader>x", group = "extra", nowait = true },
-        { "[", name = "goto prev", nowait = true },
-        { "]", name = "goto next", nowait = true },
+        { "[", name = "prev", nowait = true },
+        { "]", name = "next", nowait = true },
         { "g", name = "action", nowait = true },
       }
     },
   },
-  config = function(_, opts)
-    require("which-key").setup(opts)
-
-    vim.api.nvim_create_autocmd("VimResized", {
-      desc = "resize which-key float when resizing the window",
-      callback = function()
-        local Config = require("which-key.config")
-        Config.win.width = math.min(vim.o.columns - 12, 100)
-      end,
-    })
-  end,
 }

@@ -13,84 +13,22 @@ return {
     -- "nvim-telescope/telescope-github.nvim",
   },
   keys = {
-    {
-      "<leader>fb",
-      "<cmd>Telescope buffers<cr>",
-      desc = "Buffers",
-    },
-    {
-      "<leader>ff",
-      "<cmd>Telescope find_files<cr>",
-      desc = "Files",
-    },
-    {
-      "<leader>fr",
-      "<cmd>Telescope oldfiles<cr>",
-      desc = "Recent files",
-    },
-    {
-      "<leader>fs",
-      "<cmd>Telescope lsp_document_symbols<cr>",
-      desc = "Document Symbols",
-    },
-    {
-      "<leader>fS",
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-      desc = "Workspace Symbols",
-    },
-    {
-      "<leader>gb",
-      "<cmd>Telescope git_branches<cr>",
-      -- mode = {"n", "v"},
-      desc = "List branch(es)",
-    },
-    {
-      "<leader>gc",
-      "<cmd>Telescope git_commits<cr>",
-      -- mode = {"n", "v"},
-      desc = "List commit(s)",
-    },
-    {
-      "<leader>gs",
-      "<cmd>Telescope git_status<cr>",
-      -- mode = {"n", "v"},
-      desc = "Status",
-    },
-    {
-      "<leader>sa",
-      "<cmd>Telescope autocommands<cr>",
-      desc = "Autocommands",
-    },
-    {
-      "<leader>sc",
-      "<cmd>Telescope command_history<cr>",
-      desc = "Command history",
-    },
-    {
-      "<leader>sC",
-      "<cmd>Telescope commands<cr>",
-      desc = "Commands",
-    },
-    {
-      "<leader>sd",
-      "<cmd>Telescope diagnostics<cr>",
-      desc = "Diagnostics",
-    },
-    {
-      "<leader>sh",
-      "<cmd>Telescope help_tags<cr>",
-      desc = "Help",
-    },
-    {
-      "<leader>sH",
-      "<cmd>Telescope highlights<cr>",
-      desc = "Highlights",
-    },
-    {
-      "<leader>sk",
-      "<cmd>Telescope keymaps<cr>",
-      desc = "Keymaps",
-    },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Files" },
+    { "<leader>fg", "<cmd>Telescope grep_string<cr>", desc = "Grep" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+    { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
+    { "<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
+    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "List branch(es)" },
+    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "List commit(s)" },
+    { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Status" },
+    { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Autocommands" },
+    { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command history" },
+    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help" },
+    { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Highlights" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
     -- {
     --   "<leader>sm",
     --   function()
@@ -105,21 +43,8 @@ return {
     --   end,
     --   desc = "Notifications",
     -- },
-    {
-      "<leader>sr",
-      "<cmd>Telescope resume<cr>",
-      desc = "Resume",
-    },
-    {
-      "<leader>so",
-      "<cmd>Telescope vim_options<cr>",
-      desc = "Options",
-    },
-    {
-      "<leader>sw",
-      "<cmd>Telescope grep_string<cr>",
-      desc = "Word (root dir)",
-    },
+    { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume" },
+    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
   },
   opts = function()
     local actions = require("telescope.actions")

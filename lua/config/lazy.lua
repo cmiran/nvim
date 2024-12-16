@@ -17,6 +17,7 @@ require("lazy").setup({
   { import = "plugins.lsp.nvim-lspconfig" },
   { import = "plugins.lsp.none-ls" },
   { import = "plugins.copilot" },
+  { import = "plugins.lazydev" },
   { import = "plugins.test" },
 }, {
   performance = {

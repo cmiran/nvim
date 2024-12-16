@@ -4,7 +4,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     -- github.com/folke/neoconf.nvim
-    { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+    { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
     -- github.com/folke/neodev.nvim
     { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
     -- github.com/hrsh7th/cmp-nvim-lsp

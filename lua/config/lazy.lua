@@ -13,13 +13,20 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
-  { import = "plugins" },
-  { import = "plugins.lsp.nvim-lspconfig" },
-  { import = "plugins.lsp.none-ls" },
-  { import = "plugins.copilot" },
-  { import = "plugins.lazydev" },
-  { import = "plugins.test" },
-}, {
+  checker = {
+    enabled = true,
+  },
+  install = {
+    colorscheme = { "nightfox" },
+  },
+  spec = {
+    { import = "plugins" },
+    { import = "plugins.lsp.nvim-lspconfig" },
+    { import = "plugins.lsp.none-ls" },
+    { import = "plugins.copilot" },
+    { import = "plugins.lazydev" },
+    -- { import = "plugins.test" },
+  },
   performance = {
     rtp = {
       disabled_plugins = {

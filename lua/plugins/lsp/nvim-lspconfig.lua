@@ -8,7 +8,7 @@ return {
     -- github.com/folke/neodev.nvim
     { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
     -- github.com/hrsh7th/cmp-nvim-lsp
-    "hrsh7th/cmp-nvim-lsp",
+    -- "hrsh7th/cmp-nvim-lsp",
     -- github.com/ii14/emmylua-nvim
     "ii14/emmylua-nvim",
   },
@@ -90,7 +90,8 @@ return {
     local capabilities = vim.tbl_deep_extend(
       "force",
       vim.lsp.protocol.make_client_capabilities(),
-      require("cmp_nvim_lsp").default_capabilities(),
+      -- require("cmp_nvim_lsp").default_capabilities(),
+      require("blink.cmp").get_lsp_capabilities(),
       opts.capabilities or {}
     )
 

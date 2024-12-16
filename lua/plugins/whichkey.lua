@@ -45,7 +45,6 @@ return {
         { "<leader>g", group = "git", nowait = true },
         { "<leader>gh", group = "hunks", nowait = true },
         { "<leader>s", group = "search", nowait = true },
-        { "<leader>sn", group = "noice", nowait = true },
         { "<leader>t", group = "test", nowait = true },
         { "<leader>u", group = "ui", nowait = true },
         { "<leader>x", group = "extra", nowait = true },

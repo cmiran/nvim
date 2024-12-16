@@ -91,20 +91,20 @@ return {
       "<cmd>Telescope keymaps<cr>",
       desc = "Keymaps",
     },
-    {
-      "<leader>sm",
-      function()
-        require("telescope").extensions.notify.notify({
-          theme = "dropdown",
-          layout_strategy = "vertical",
-          layout_config = {
-            height = 0.8,
-            width = 0.6,
-          },
-        })
-      end,
-      desc = "Notifications",
-    },
+    -- {
+    --   "<leader>sm",
+    --   function()
+    --     require("telescope").extensions.notify.notify({
+    --       theme = "dropdown",
+    --       layout_strategy = "vertical",
+    --       layout_config = {
+    --         height = 0.8,
+    --         width = 0.6,
+    --       },
+    --     })
+    --   end,
+    --   desc = "Notifications",
+    -- },
     {
       "<leader>sr",
       "<cmd>Telescope resume<cr>",
@@ -251,7 +251,7 @@ return {
     require("telescope").setup(opts)
     -- require("telescope").load_extension("fzf")
     require("telescope").load_extension("noice")
-    require("telescope").load_extension("notify")
+    -- require("telescope").load_extension("notify")
     require("telescope").load_extension("ui-select")
   end,
 }

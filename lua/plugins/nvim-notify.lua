@@ -16,6 +16,7 @@ local function get_notification_height(win)
 end
 
 return {
+  enabled = false,
   -- github.com/rcarriga/nvim-notify
   "rcarriga/nvim-notify",
   dependencies = {

@@ -3,6 +3,15 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
+    indent = {
+      enabled = true,
+      animate = {
+        duration = {
+          step = 15, -- ms per step
+          total = 0xFFFFFFFF, -- maximum duration
+        },
+      },
+    },
     lazygit = {
       enabled = true,
     },
@@ -64,6 +73,7 @@ return {
         Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
         Snacks.toggle.diagnostics():map("<leader>ud")
         Snacks.toggle.dim():map("<leader>uD")
+        Snacks.toggle.indent():map("<leader>ug")
         Snacks.toggle.inlay_hints():map("<leader>uh")
         Snacks.toggle.line_number():map("<leader>ul")
         Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uL")

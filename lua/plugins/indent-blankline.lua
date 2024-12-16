@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   -- github.com/lukas-reineke/indent-blankline.nvim
   "lukas-reineke/indent-blankline.nvim",
   event = { "BufReadPost", "BufNewFile" },

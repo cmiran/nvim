@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   -- github.com/echasnovski/mini.indentscope
   "echasnovski/mini.indentscope",
   event = { "BufReadPre", "BufNewFile" },

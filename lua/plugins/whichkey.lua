@@ -6,7 +6,7 @@ return {
     disable = {
       ft = {
         "help",
-        "NvimTree",
+        -- "NvimTree",
         "TelescopePrompt",
       },
     },
@@ -58,7 +58,8 @@ return {
         { "<leader>x", group = "extra", nowait = true },
         { "[", name = "prev", nowait = true },
         { "]", name = "next", nowait = true },
-        { "g", name = "action", nowait = true },
+        { "g", name = "gaction", nowait = true },
+        { "a", name = "zaction", nowait = true },
       }
     },
   },

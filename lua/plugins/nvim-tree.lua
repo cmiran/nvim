@@ -1,6 +1,7 @@
 local function on_attach(bufnr)
   local api = require("nvim-tree.api")
   local keymap = require("util").keymap
+  local wk = require("which-key")
 
   local function opts(desc)
     return { desc = "nvim-tree: " .. desc, buffer = bufnr }
@@ -14,6 +15,13 @@ local function on_attach(bufnr)
   keymap("n", "w", api.node.navigate.parent_close, opts("Close directory"))
   keymap("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
   keymap("n", "<ESC>", api.tree.close, opts("Close"))
+  keymap("n", " ",
+    function()
+      api.tree.close()
+      wk.show({keys="<Leader>"})
+    end,
+    opts("WhichKey")
+  )
 end
 
 return {

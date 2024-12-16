@@ -2,10 +2,9 @@ return {
   -- github.com/nvim-treesitter/nvim-treesitter
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
-    -- github.com/nvim-treesitter/playground
-    "nvim-treesitter/playground",
     -- github.com/nvim-treesitter/nvim-treesitter-textobjects
     "nvim-treesitter/nvim-treesitter-textobjects",
     -- github.com/JoosepAlviste/nvim-ts-context-commentstring
@@ -75,29 +74,6 @@ return {
       enable = false,
       disable = { "" },
     },
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25, -- debounced time for highlighting nodes in the playground from source code
-      persist_queries = false, -- whether the query persists across vim sessions
-      keybindings = {
-        toggle_query_editor = "o",
-        toggle_hl_groups = "i",
-        toggle_injected_languages = "t",
-        toggle_anonymous_nodes = "a",
-        toggle_language_display = "I",
-        focus_language = "f",
-        unfocus_language = "F",
-        update = "R",
-        goto_node = "<cr>",
-        show_help = "?",
-      },
-      query_linter = {
-        enable = true,
-        use_virtual_text = true,
-        lint_events = { "BufWrite", "CursorHold" },
-      },
-    },
     rainbow = {
       enable = false,
       -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -123,7 +99,4 @@ return {
     -- },
     -- highlight_current_scope = { enable = false },
   },
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-  end,
 }

@@ -5,10 +5,7 @@ local M = {}
 ---@param rhs any
 ---@param opts table
 function M.keymap(mode, lhs, rhs, opts)
-  opts = opts or {}
-  opts.noremap = true
-  opts.nowait = true
-  opts.silent = true
+  opts = opts or {noremap = true, nowait = true, silent = true}
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 

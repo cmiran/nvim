@@ -62,9 +62,6 @@ keymap("v", "p", '"_dP', {})
 -- clear search with <esc>
 keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
 
--- new file
-keymap("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
-
 -- show highlight group under cursor
 keymap("n", "<leader>ui", vim.show_pos, { desc = "Inspect under cursor" })
 

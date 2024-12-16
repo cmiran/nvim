@@ -33,7 +33,7 @@ return {
     views = {
       cmdline_popup = {
         border = {
-          style = "none",
+          style = "shadow",
           padding = { 1, 1 },
         },
         position = {
@@ -48,7 +48,7 @@ return {
       },
       cmdline_popupmenu = {
         border = {
-          style = "none",
+          style = "shadow",
           padding = { 0, 1, 1, 1 },
         },
         position = {
@@ -63,7 +63,7 @@ return {
       },
       popupmenu = {
         border = {
-          style = "none",
+          style = "shadow",
         },
         win_options = {
           winhighlight = {
@@ -74,7 +74,7 @@ return {
       },
       popup = {
         border = {
-          style = "none",
+          style = "shadow",
         },
         win_options = {
           winhighlight = {
@@ -93,34 +93,6 @@ return {
       end,
       mode = "c",
       desc = "Redirect Cmdline",
-    },
-    {
-      "<leader>snl",
-      function()
-        require("noice").cmd("last")
-      end,
-      desc = "Noice Last Message",
-    },
-    {
-      "<leader>snh",
-      function()
-        require("noice").cmd("history")
-      end,
-      desc = "Noice History",
-    },
-    {
-      "<leader>sna",
-      function()
-        require("noice").cmd("all")
-      end,
-      desc = "Noice All",
-    },
-    {
-      "<leader>snd",
-      function()
-        require("noice").cmd("dismiss")
-      end,
-      desc = "Dismiss All",
     },
     {
       "<c-f>",

@@ -28,16 +28,11 @@ return {
       },
     },
     sources = {
-      completion = {
-        enabled_providers = { "copilot" },
-      },
+      default = { "copilot" },
       providers = {
         copilot = {
           async = true,
-          ellipsis = true,
           name = "Copilot",
-          -- kind = "Copilot",
-          -- kind_icons = "",
           module = "blink-cmp-copilot",
         },
       },

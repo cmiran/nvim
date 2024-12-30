@@ -10,15 +10,13 @@ return {
       },
     },
     sources = {
-      completion = {
-        enabled_providers = { "lazydev" },
-        -- enabled_providers = function(ctx)
-        --   if vim.bo.filetype == "lua" then
-        --     return { "lazydev" }
-        --   end
-        --   return {}
-        -- end,
-      },
+      default = { "lazydev" },
+      -- default = function(ctx)
+      --   if vim.bo.filetype == "lua" then
+      --     return { "lazydev" }
+      --   end
+      --   return {}
+      -- end,
       providers = {
         lazydev = {
           async = true,

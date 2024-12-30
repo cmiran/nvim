@@ -58,9 +58,7 @@ return {
       enabled = true,
     },
     sources = {
-      completion = {
-        enabled_providers = { "lsp", "path", "snippets", "buffer" },
-      },
+      default = { "lsp", "path", "snippets", "buffer" },
       providers = {
         lsp = {
           async = true,
@@ -69,5 +67,5 @@ return {
       },
     },
   },
-  opts_extend = { "sources.completion.enabled_providers" }
+  opts_extend = { "sources.default" }
 }

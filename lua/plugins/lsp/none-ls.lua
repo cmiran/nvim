@@ -40,6 +40,9 @@ return {
         -- github.com/codespell-project/codespell
         nls.builtins.diagnostics.codespell,
 
+        -- github.com/nvimtools/none-ls.nvim
+        nls.builtins.diagnostics.hadolint,
+
         -- github.com/protofire/solhint
         nls.builtins.diagnostics.solhint,
 

@@ -35,8 +35,11 @@ return {
     },
     servers = {
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#golangci_lint_ls
+      -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
+      "dockerls",
+      -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls
       "golangci_lint_ls",
-      -- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+      -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
       "gopls",
       -- github.com/hrsh7th/vscode-langservers-extracted
       "jsonls",

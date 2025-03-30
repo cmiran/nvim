@@ -23,7 +23,7 @@ return {
           --     end,
           --   },
           -- },
-          treesitter = { 'lsp', "copilot" },
+          treesitter = { "lsp", "copilot" },
         },
       },
     },

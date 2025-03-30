@@ -37,6 +37,7 @@ return {
       "make",
       "markdown",
       "markdown_inline",
+      "proto",
       "query",
       "regex",
       "ruby",

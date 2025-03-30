@@ -34,7 +34,8 @@ return {
       timeout_ms = nil,
     },
     servers = {
-      -- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#golangci_lint_ls
+      -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
+      "buf_ls",
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
       "dockerls",
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls

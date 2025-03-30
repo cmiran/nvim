@@ -36,6 +36,19 @@ function M.file_exists(path)
   return f ~= nil
 end
 
+-- get all lines from a file, returns an empty
+-- list/table if the file does not exist
+---@param path string
+---@return table
+function M.lines_from(path)
+  if not M.file_exists(path) then return {} end
+  local lines = {}
+  for line in io.lines(path) do
+    lines[#lines + 1] = line
+  end
+  return lines
+end
+
 ---@param paths string[]
 ---@return boolean
 function M.config_file_exists_at_root_pattern(paths)

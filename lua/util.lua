@@ -27,11 +27,13 @@ function M.has(plugin)
   return require("lazy.core.config").plugins[plugin] ~= nil
 end
 
+-- see if the file exists
 ---@param path string
 ---@return boolean
 function M.file_exists(path)
-  local file = io.open(path, "r")
-  return io.close(file)["suc"]
+  local f = io.open(path, "rb")
+  if f then f:close() end
+  return f ~= nil
 end
 
 ---@param paths string[]

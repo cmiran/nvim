@@ -31,13 +31,6 @@ return {
         semicolon = "Disable",
         setType = true,
       },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.fn.expand("$VIMRUNTIME/lua"),
-          vim.fn.stdpath("config") .. "/lua",
-        },
-      },
     },
   },
 }

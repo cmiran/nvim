@@ -44,6 +44,7 @@ return {
         { "<C-w>", group = "window", nowait = true },
         { "<leader>", group = "leader", nowait = true },
         { "<leader>\\", group = "terminal", nowait = true },
+        { "<leader>a", group = "ai", nowait = true },
         { "<leader>b", group = "buffer", nowait = true },
         { "<leader>c", group = "code", nowait = true },
         { "<leader>cg", group = "go", nowait = true },

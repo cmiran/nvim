@@ -3,6 +3,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "alpha", -- does not work
     "checkhealth",
+    "CodeCompanion",
     "help",
     "lspinfo",
     "man",

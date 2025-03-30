@@ -36,6 +36,8 @@ return {
     servers = {
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
       "buf_ls",
+      -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ccls
+      "ccls",
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
       "dockerls",
       -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls

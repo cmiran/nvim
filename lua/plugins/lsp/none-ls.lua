@@ -1,5 +1,3 @@
-local augroup = vim.api.nvim_create_augroup("NLSFormatting", {})
-
 return {
   -- github.com/nvimtools/none-ls.nvim
   "nvimtools/none-ls.nvim",
@@ -10,6 +8,8 @@ return {
       debug = false,
       on_attach = function(client, buffer)
         if client.supports_method("textDocument/formatting") then
+          local augroup = vim.api.nvim_create_augroup("NLSFormatting", {})
+
           vim.api.nvim_clear_autocmds({
             group = augroup,
             buffer = buffer,
@@ -47,6 +47,14 @@ return {
         nls.builtins.diagnostics.solhint,
 
         -- formatting.black.with({ extra_args = { "--fast" } }),
+
+        -- github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md#forge_fmt
+        nls.builtins.formatting.forge_fmt.with({
+          extra_args = { "--include-path 'foundry.toml'" },
+          -- condition = function(utils)
+          --   return utils.root_has_file({ "./contracts/foundry.toml" })
+          -- end,
+        }),
 
         -- https://github.com/mvdan/gofumpt
         nls.builtins.formatting.gofumpt,

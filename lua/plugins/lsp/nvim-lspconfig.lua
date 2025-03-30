@@ -11,6 +11,7 @@ return {
     -- "hrsh7th/cmp-nvim-lsp",
     -- github.com/ii14/emmylua-nvim
     "ii14/emmylua-nvim",
+    "saghen/blink.cmp",
   },
   opts = {
     -- options for vim.diagnostic.config()
@@ -55,13 +56,11 @@ return {
       -- github.com/stoplightio/spectral
       -- "spectral",
       -- github.com/hyperledger/solang
-      "solang",
+      -- "solang",
       -- github.com/ethereum/solc-js
-      "solc",
-      -- github.com/qiuxiang/solidity-ls
-      "solidity",
-      -- github.com/juanfranblanco/vscode-solidity
-      "solidity_ls",
+      -- "solc",
+      -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solidity_ls_nomicfoundation
+      "solidity_ls_nomicfoundation",
       -- github.com/hashicorp/terraform-ls
       "terraformls",
       -- github.com/typescript-language-server/typescript-language-server

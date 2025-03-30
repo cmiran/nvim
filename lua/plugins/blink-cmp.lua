@@ -22,7 +22,10 @@ return {
     },
     completion = {
       list = {
-        selection = "manual",
+        selection = {
+          preselect = false,
+          auto_insert = true,
+        },
       },
       documentation = {
         auto_show = true,

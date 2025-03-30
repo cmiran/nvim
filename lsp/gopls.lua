@@ -1,8 +1,23 @@
+-- github.com/golang/tools/tree/master/gopls
+---@type vim.lsp.Config
 return {
+  cmd = { "gopls" },
+  filetypes = {
+    "go",
+    "gomod",
+    "gosum",
+    "gowork",
+    "gotmpl",
+  },
+  root_markers = {
+    "go.mod",
+    "go.sum",
+  },
   settings = {
     gopls = {
       analyses = {
         fieldalignment = true,
+        inferTypeArgs = true,
         nilness = true,
         unusedparams = true,
         unusedwrite = true,

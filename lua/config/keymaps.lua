@@ -1,5 +1,4 @@
 local keymap = require("util").keymap
-
 -- remap space as leader key
 -- keymap("", "<Space>", "<Nop>", opts)
 
@@ -67,6 +66,15 @@ keymap("n", "<leader>ui", vim.show_pos, { desc = "Inspect under cursor" })
 
 keymap("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location list" })
 keymap("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix list" })
+
+local function beautify_json()
+  -- vim.cmd("redir => g:_command_output | silent " .. cmd .. " | redir END ")
+  vim.cmd("silent !jq < %")
+  if vim.v.shell_error == 0 then
+    vim.cmd("%!jq '.'")
+  end
+end
+keymap("n", "<leader>cb", function() beautify_json() end, { desc = "Beautify JSON" })
 
 -- better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_{ desc = "" })

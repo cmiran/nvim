@@ -12,6 +12,26 @@ function M.diagnostic_jump(count, severity)
   end
 end
 
+function M.toggle_virtual_lines_diagnostic()
+  local current_config = vim.diagnostic.config()
+  local virtual_lines = current_config.virtual_lines
+  local status, new_config
+
+  if not virtual_lines then
+    status = "enabled"
+    new_config = { virtual_lines = true }
+  elseif type(virtual_lines) == "boolean" and virtual_lines then
+    status = "enabled current line"
+    new_config = { virtual_lines = { current_line = true } }
+  else
+    status = "disabled"
+    new_config = { virtual_lines = false }
+  end
+
+  vim.diagnostic.config(new_config)
+  vim.notify("Diagnostics virtual lines " .. status)
+end
+
 local keys = {
   -- { "n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" } },
   {
@@ -20,7 +40,7 @@ local keys = {
     "<cmd>Telescope lsp_definitions<cr>",
     { desc = "goto definition" },
   },
-  { "n", "gD", vim.lsp.buf.declaration, { desc = "goto declaration" } },
+  { "n", "gD", vim.lsp.buf.declaration,             { desc = "goto declaration" } },
   -- { "n", "gI", vim.lsp.buf.implementation, { desc = "goto Implementation" } },
   {
     "n",
@@ -28,7 +48,7 @@ local keys = {
     "<cmd>Telescope lsp_implementations<cr>",
     { desc = "Go to implementation" },
   },
-  { "n", "gl", vim.diagnostic.open_float, { desc = "line diagnostics" } },
+  { "n", "gl", vim.diagnostic.open_float,           { desc = "line diagnostics" } },
   -- { "n", "gr", vim.lsp.buf.references, { desc = "references", nowait = true } },
   { "n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "references" } },
   -- { "n", "gy", vim.lsp.buf.type_definition, { desc = "goto t[y]pe Definition" } },
@@ -38,9 +58,9 @@ local keys = {
     "<cmd>Telescope lsp_type_definitions<cr>",
     { desc = "goto t[y]pe Definition" },
   },
-  { "n", "K", vim.lsp.buf.hover, { desc = "hover" } },
-  { "n", "gK", vim.lsp.buf.signature_help, { desc = "signature help" } },
-  { { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "action" } },
+  { "n",          "K",          vim.lsp.buf.hover,          { desc = "hover" } },
+  { "n",          "gK",         vim.lsp.buf.signature_help, { desc = "signature help" } },
+  { { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,    { desc = "action" } },
   {
     "n",
     "<leader>cA",
@@ -56,19 +76,20 @@ local keys = {
     end,
     { desc = "Source Action" },
   },
-  { "n", "<leader>cl", vim.lsp.codelens.run, { desc = "CodeLens action" } },
-  { "n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Quickfix" } },
-  { "n", "<leader>cf", vim.lsp.buf.format, { desc = "Format" } },
-  { "n", "<leader>cr", vim.lsp.buf.rename, { desc = "Global rename" } },
-  { "i", "<c-k>", vim.lsp.buf.signature_help, { desc = "signature help" } },
-  { "n", "]e", M.diagnostic_jump(1, "ERROR"), { desc = "Next error" } },
-  { "n", "[e", M.diagnostic_jump(-1, "ERROR"), { desc = "Prev error" } },
-  { "n", "]i", M.diagnostic_jump(1, "INFO"), { desc = "Next info" } },
-  { "n", "[i", M.diagnostic_jump(-1, "INFO"), { desc = "Prev info" } },
-  { "n", "]t", M.diagnostic_jump(1, "HINT"), { desc = "Next hint" } },
-  { "n", "[t", M.diagnostic_jump(-1, "HINT"), { desc = "Prev hint" } },
-  { "n", "]w", M.diagnostic_jump(1, "WARN"), { desc = "Next warning" } },
-  { "n", "[w", M.diagnostic_jump(-1, "WARN"), { desc = "Prev warning" } },
+  { "n", "<leader>cl", vim.lsp.codelens.run,              { desc = "CodeLens action" } },
+  { "n", "<leader>cq", vim.diagnostic.setloclist,         { desc = "Quickfix" } },
+  { "n", "<leader>cf", vim.lsp.buf.format,                { desc = "Format" } },
+  { "n", "<leader>cr", vim.lsp.buf.rename,                { desc = "Global rename" } },
+  { "i", "<c-k>",      vim.lsp.buf.signature_help,        { desc = "signature help" } },
+  { "n", "]e",         M.diagnostic_jump(1, "ERROR"),     { desc = "Next error" } },
+  { "n", "[e",         M.diagnostic_jump(-1, "ERROR"),    { desc = "Prev error" } },
+  { "n", "]i",         M.diagnostic_jump(1, "INFO"),      { desc = "Next info" } },
+  { "n", "[i",         M.diagnostic_jump(-1, "INFO"),     { desc = "Prev info" } },
+  { "n", "]t",         M.diagnostic_jump(1, "HINT"),      { desc = "Next hint" } },
+  { "n", "[t",         M.diagnostic_jump(-1, "HINT"),     { desc = "Prev hint" } },
+  { "n", "]w",         M.diagnostic_jump(1, "WARN"),      { desc = "Next warning" } },
+  { "n", "[w",         M.diagnostic_jump(-1, "WARN"),     { desc = "Prev warning" } },
+  { "n", "<leader>ul", M.toggle_virtual_lines_diagnostic, { desc = "Toggle line diagnostics" } },
 }
 
 ---@param buffer integer
@@ -83,21 +104,21 @@ end
 -- This is where you enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "LSP on-attach",
-	callback = function(event)
+  desc = "LSP on-attach",
+  callback = function(event)
     M.on_attach(event.buf)
-	end,
+  end,
 })
 
 -- This is copied straight from blink
 -- https://cmp.saghen.dev/installation#merging-lsp-capabilities
 local capabilities = {
-	textDocument = {
-		foldingRange = {
-			dynamicRegistration = false,
-			lineFoldingOnly = true,
-		},
-	},
+  textDocument = {
+    foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    },
+  },
 }
 
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
@@ -105,8 +126,8 @@ capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 -- Setup language servers.
 
 vim.lsp.config("*", {
-	capabilities = capabilities,
-	root_markers = { ".git" },
+  capabilities = capabilities,
+  root_markers = { ".git" },
 })
 
 -- Enable each language server by filename under the lsp/ folder
@@ -136,7 +157,7 @@ vim.lsp.enable(
     -- "solc",
     -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solidity_ls_nomicfoundation
     "solidity_ls_nomicfoundation",
-    -- github.com/joe-re/sql-language-server 
+    -- github.com/joe-re/sql-language-server
     "sqlls",
     -- github.com/hashicorp/terraform-ls
     "terraformls",
@@ -145,13 +166,13 @@ vim.lsp.enable(
     -- github.com/terraform-linters/tflint
     -- "tflint",
     -- github.com/redhat-developer/yaml-language-server
-    "yamlls",}
+    "yamlls", }
 )
 
 vim.diagnostic.config({
   -- Alternatively, customize specific options
   virtual_lines = {
-   -- Only show virtual line diagnostics for the current cursor line
-   current_line = true,
+    -- Only show virtual line diagnostics for the current cursor line
+    current_line = true,
   },
 })

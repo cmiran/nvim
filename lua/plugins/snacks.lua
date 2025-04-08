@@ -75,8 +75,8 @@ return {
         Snacks.toggle.dim():map("<leader>uD")
         Snacks.toggle.indent():map("<leader>ug")
         Snacks.toggle.inlay_hints():map("<leader>uh")
-        Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uL")
+        Snacks.toggle.line_number():map("<leader>un")
+        Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uN")
         Snacks.toggle.treesitter({ name = "treesitter context" }):map("<leader>uT")
       end,
     })

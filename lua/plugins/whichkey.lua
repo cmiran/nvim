@@ -53,6 +53,7 @@ return {
         { "<leader>f", group = "find", nowait = true },
         { "<leader>g", group = "git", nowait = true },
         { "<leader>gh", group = "hunks", nowait = true },
+        { "<leader>p", group = "plugins", nowait = true },
         { "<leader>s", group = "search", nowait = true },
         { "<leader>t", group = "test", nowait = true },
         { "<leader>u", group = "ui", nowait = true },

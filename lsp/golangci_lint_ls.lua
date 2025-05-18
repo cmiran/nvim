@@ -7,7 +7,8 @@ return {
     "gosum",
   },
   init_options = {
-    command = { 'golangci-lint', 'run', '--out-format', 'json' },
+    -- command = { "golangci-lint", "run", "--out-format", "json" },
+    command = { "golangci-lint", "run", "--output.json.path=stdout", "--show-stats=false" },
   },
   root_markers = {
     ".golangci.yml",

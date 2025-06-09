@@ -77,7 +77,7 @@ return {
         Snacks.toggle.inlay_hints():map("<leader>uh")
         Snacks.toggle.line_number():map("<leader>un")
         Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>uN")
-        Snacks.toggle.treesitter({ name = "treesitter context" }):map("<leader>uT")
+        Snacks.toggle.treesitter({ name = "treesitter" }):map("<leader>uT")
       end,
     })
   end,

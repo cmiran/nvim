@@ -4,24 +4,24 @@ return {
   dependencies = {
     -- github.com/nvim-treesitter/nvim-treesitter
     "nvim-treesitter/nvim-treesitter",
-    -- github.com/rcarriga/nvim-notify
-    -- "rcarriga/nvim-notify",
   },
   event = "VeryLazy",
-  -- opts = function()
-  --   local tsc = require("treesitter-context")
-  --   Snacks.toggle({
-  --     name = "treesitter context",
-  --     get = tsc.enabled,
-  --     set = function(state)
-  --       if state then
-  --         tsc.enable()
-  --       else
-  --         tsc.disable()
-  --       end
-  --     end,
-  --   }):map("<leader>ut")
-  --   return { mode = "cursor", max_lines = 3 }
-  -- end,
-  opts = {}
+  opts = {},
+  config = function(_, opts)
+    local tsc = require("treesitter-context")
+
+    Snacks.toggle({
+      name = "treesitter context",
+      get = tsc.enabled,
+      set = function(state)
+        if state then
+          tsc.enable()
+        else
+          tsc.disable()
+        end
+      end,
+    }):map("<leader>uC")
+
+    tsc.setup(opts)
+  end,
 }

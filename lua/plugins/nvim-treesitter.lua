@@ -100,4 +100,7 @@ return {
     -- },
     -- highlight_current_scope = { enable = false },
   },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
 }

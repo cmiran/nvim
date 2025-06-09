@@ -11,11 +11,13 @@ return {
       },
     },
     plugins = {
-      marks = false,     -- shows a list of your marks on ' and `
-      registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      marks = false,
+      registers = false,
+      spelling = { enabled = false },
       presets = {
-        text_objects = false, -- help for text objects triggered after entering an operator
-        -- g = false,
+        windows = false,
+        nav = false,
+        g = false,
         z = false,
       },
     },

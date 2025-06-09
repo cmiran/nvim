@@ -9,7 +9,6 @@ return {
     return {
       extensions = {
         "lazy",
-        "nvim-dap-ui",
         "nvim-tree",
         "toggleterm",
         -- "trouble",
@@ -69,15 +68,6 @@ return {
                 and require("noice").api.status.mode.has()
             end,
             color = Util.fg("Constant"),
-          },
-          {
-            function()
-              return "  " .. require("dap").status()
-            end,
-            cond = function()
-              return package.loaded["dap"] and require("dap").status() ~= ""
-            end,
-            color = Util.fg("Debug"),
           },
           {
             require("lazy.status").updates,

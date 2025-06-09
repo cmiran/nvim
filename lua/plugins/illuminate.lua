@@ -7,7 +7,7 @@ return {
     { "[[", desc = "Prev Reference" },
   },
   opts = {
-    delay = 200,
+    delay = 100,
     filetypes_denylist = {
       "alpha",
       "NvimTree",

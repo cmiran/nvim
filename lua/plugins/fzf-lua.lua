@@ -102,6 +102,26 @@ return {
       })
     end, {})
 
+    -- vim.api.nvim_create_autocmd({ "WinLeave" }, {
+    --   callback = function()
+    --     local win = vim.api.nvim_get_current_win()
+    --     local buf = vim.api.nvim_win_get_buf(win)
+    --     local buf_name = vim.api.nvim_buf_get_name(buf)
+    --     local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+    --     if filetype == 'fzf' or buf_name:match("fzf") then
+    --       vim.schedule(function()
+    --         if vim.api.nvim_win_is_valid(win) then
+    --           local wins = vim.api.nvim_tabpage_list_wins(0)
+    --           if #wins > 1 then
+    --             vim.api.nvim_win_close(win, true)
+    --           end
+    --         end
+    --       end)
+    --     end
+    --   end,
+    --   pattern = "*",
+    -- })
+
     require("fzf-lua").setup(opts)
   end,
 }

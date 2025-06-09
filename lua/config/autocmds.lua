@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType", {
-  desc = "quit window with 'q' or 'ESC' on filetype",
+  desc = "quit window with 'q' on filetype",
   pattern = {
     "alpha", -- does not work
     "checkhealth",
@@ -18,17 +18,11 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set(
-      "n",
-      "q",
-      "<cmd>close<cr>",
-      { buffer = event.buf, silent = true }
-    )
-    vim.keymap.set(
-      "n",
-      "<esc>",
-      "<cmd>close<cr>",
-      { buffer = event.buf, silent = true }
+    vim.keymap.set("n", "q", function()
+        vim.cmd("close")
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end,
+      { buffer = event.buf, silent = true, desc = "Quit buffer" }
     )
   end,
 })
@@ -131,4 +125,3 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 --     end
 --   end,
 -- })
-

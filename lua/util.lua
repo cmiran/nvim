@@ -156,4 +156,14 @@ function M.fg(name)
   return fg and { fg = string.format("#%06x", fg) }
 end
 
+M.timers = {}
+function M.debounce(name, fn, delay)
+  delay = delay or 100
+  if M.timers[name] then
+    M.timers[name]:stop()
+    M.timers[name]:close()
+  end
+  M.timers[name] = vim.defer_fn(fn, delay)
+end
+
 return M

@@ -7,8 +7,6 @@ return {
   dependencies = {
     -- github.com/nvim-treesitter/nvim-treesitter-textobjects
     "nvim-treesitter/nvim-treesitter-textobjects",
-    -- github.com/JoosepAlviste/nvim-ts-context-commentstring
-    "JoosepAlviste/nvim-ts-context-commentstring",
     -- github.com/p00f/nvim-ts-rainbow
     "p00f/nvim-ts-rainbow",
   },

@@ -38,14 +38,14 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "highlight on yank",
   callback = function()
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
 
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+vim.api.nvim_create_autocmd("VimResized", {
   desc = "resize splits if window got resized",
   callback = function()
     vim.cmd("tabdo wincmd =")
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "auto create dir when saving a file",
   callback = function(event)
     if event.match:match("^%w%w+://") then
@@ -83,9 +83,9 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('ModeChanged', {
+vim.api.nvim_create_autocmd("ModeChanged", {
   desc = "redraw the diagnostics when the mode change",
-  group = vim.api.nvim_create_augroup('diagnostic_redraw', {}),
+  group = vim.api.nvim_create_augroup("diagnostic_redraw", {}),
   callback = function()
     pcall(vim.diagnostic.show)
   end

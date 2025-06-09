@@ -39,7 +39,7 @@ return {
     "NvimTreeToggle",
   },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "tree" },
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>",    desc = "tree" },
     { "<leader>m", "<cmd>NvimTreeOpen /tmp<cr>", desc = "tree /tmp" },
   },
   opts = function()

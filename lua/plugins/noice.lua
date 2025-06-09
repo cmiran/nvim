@@ -1,6 +1,6 @@
 local function get_popup_position()
-  local win_height = vim.api.nvim_get_option("lines")
-  return win_height / 2.7
+  local win_height = vim.api.nvim_win_get_height(0)
+  return win_height * 0.45
 end
 
 return {

@@ -14,7 +14,7 @@ end
 
 function M.toggle_virtual_lines_diagnostic()
   local current_config = vim.diagnostic.config()
-  local virtual_lines = current_config.virtual_lines
+  local virtual_lines = current_config.virtual_lines ---@diagnostic disable-line: need-check-nil
   local status, new_config
 
   if not virtual_lines then
@@ -31,6 +31,112 @@ function M.toggle_virtual_lines_diagnostic()
   vim.diagnostic.config(new_config)
   vim.notify("Diagnostics virtual lines " .. status)
 end
+
+vim.api.nvim_create_user_command('LspToggleVirtualLinesDiagnostic', function()
+  M.toggle_virtual_lines_diagnostic()
+end, { desc = "Toggle virtual lines diagnostics" })
+
+function M.restart_lsp(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+  for _, client in ipairs(clients) do
+    vim.lsp.stop_client(client.id)
+  end
+
+  vim.defer_fn(function()
+    vim.cmd('edit')
+  end, 100)
+end
+
+vim.api.nvim_create_user_command('LspRestart', function()
+  M.restart_lsp()
+end, { desc = "Restart LSP for the current buffer" })
+
+function M.lsp_status()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
+  local msg = {}
+
+  if #clients == 0 then
+    vim.notify("No LSP clients attached", vim.log.levels.WARN)
+    return
+  end
+
+  msg[#msg + 1] = "LSP Status for buffer " .. bufnr .. ":"
+  msg[#msg + 1] = "─────────────────────────────────"
+
+  for i, client in ipairs(clients) do
+    msg[#msg + 1] = string.format("Client %d: %s (ID: %d)", i, client.name, client.id)
+    msg[#msg + 1] = "  Root: " .. (client.config.root_dir or "N/A")
+    msg[#msg + 1] = "  Filetypes: " .. table.concat(client.config.filetypes or {}, ", ")
+
+    -- Check capabilities
+    local caps = client.server_capabilities
+    local features = {}
+    if caps.completionProvider then table.insert(features, "completion") end
+    if caps.hoverProvider then table.insert(features, "hover") end
+    if caps.definitionProvider then table.insert(features, "definition") end
+    if caps.referencesProvider then table.insert(features, "references") end
+    if caps.renameProvider then table.insert(features, "rename") end
+    if caps.codeActionProvider then table.insert(features, "code_action") end
+    if caps.documentFormattingProvider then table.insert(features, "formatting") end
+
+    msg[#msg + 1] = "  Features: " .. table.concat(features, ", ")
+    msg[#msg + 1] = ""
+  end
+
+  vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)
+end
+
+vim.api.nvim_create_user_command('LspStatus', M.lsp_status, { desc = "Show detailed LSP status" })
+
+function M.check_lsp_capabilities()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
+  local msg = {}
+
+  if #clients == 0 then
+    vim.notify("No LSP clients attached", vim.log.levels.WARN)
+    return
+  end
+
+  for _, client in ipairs(clients) do
+    msg[#msg + 1] = "LSP Client: " .. client.name
+    local caps = client.server_capabilities
+
+    local capability_list = {
+      { "Completion",                caps.completionProvider },
+      { "Hover",                     caps.hoverProvider },
+      { "Signature Help",            caps.signatureHelpProvider },
+      { "Go to Definition",          caps.definitionProvider },
+      { "Go to Declaration",         caps.declarationProvider },
+      { "Go to Implementation",      caps.implementationProvider },
+      { "Go to Type Definition",     caps.typeDefinitionProvider },
+      { "Find References",           caps.referencesProvider },
+      { "Document Highlight",        caps.documentHighlightProvider },
+      { "Document Symbol",           caps.documentSymbolProvider },
+      { "Workspace Symbol",          caps.workspaceSymbolProvider },
+      { "Code Action",               caps.codeActionProvider },
+      { "Code Lens",                 caps.codeLensProvider },
+      { "Document Formatting",       caps.documentFormattingProvider },
+      { "Document Range Formatting", caps.documentRangeFormattingProvider },
+      { "Rename",                    caps.renameProvider },
+      { "Folding Range",             caps.foldingRangeProvider },
+      { "Selection Range",           caps.selectionRangeProvider },
+    }
+
+    for _, cap in ipairs(capability_list) do
+      local status = cap[2] and "✓" or "✗"
+      msg[#msg + 1] = string.format("  %s %s", status, cap[1])
+    end
+    msg[#msg + 1] = ""
+  end
+
+  vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)
+end
+
+vim.api.nvim_create_user_command('LspCapabilities', M.check_lsp_capabilities, { desc = "Show LSP capabilities" })
 
 local keys = {
   -- { "n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" } },
@@ -56,7 +162,7 @@ local keys = {
     "n",
     "gy",
     "<cmd>Telescope lsp_type_definitions<cr>",
-    { desc = "goto t[y]pe Definition" },
+    { desc = "Goto t[y]pe Definition" },
   },
   { "n",          "K",          vim.lsp.buf.hover,          { desc = "hover" } },
   { "n",          "gK",         vim.lsp.buf.signature_help, { desc = "signature help" } },
@@ -80,7 +186,10 @@ local keys = {
   { "n", "<leader>cq", vim.diagnostic.setloclist,         { desc = "Quickfix" } },
   { "n", "<leader>cf", vim.lsp.buf.format,                { desc = "Format" } },
   { "n", "<leader>cr", vim.lsp.buf.rename,                { desc = "Global rename" } },
-  { "i", "<c-k>",      vim.lsp.buf.signature_help,        { desc = "signature help" } },
+  { "n", "<leader>lt", M.toggle_virtual_lines_diagnostic, { desc = "Toggle line diagnostics" } },
+  { "n", "<leader>lr", M.restart_lsp,                     { desc = "Restart" } },
+  { "n", "<leader>ls", M.lsp_status,                      { desc = "Status" } },
+  { "i", "<c-k>",      vim.lsp.buf.signature_help,        { desc = "Signature help" } },
   { "n", "]e",         M.diagnostic_jump(1, "ERROR"),     { desc = "Next error" } },
   { "n", "[e",         M.diagnostic_jump(-1, "ERROR"),    { desc = "Prev error" } },
   { "n", "]i",         M.diagnostic_jump(1, "INFO"),      { desc = "Next info" } },
@@ -89,7 +198,6 @@ local keys = {
   { "n", "[t",         M.diagnostic_jump(-1, "HINT"),     { desc = "Prev hint" } },
   { "n", "]w",         M.diagnostic_jump(1, "WARN"),      { desc = "Next warning" } },
   { "n", "[w",         M.diagnostic_jump(-1, "WARN"),     { desc = "Prev warning" } },
-  { "n", "<leader>ul", M.toggle_virtual_lines_diagnostic, { desc = "Toggle line diagnostics" } },
 }
 
 ---@param buffer integer
@@ -124,7 +232,6 @@ local capabilities = {
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 -- Setup language servers.
-
 vim.lsp.config("*", {
   capabilities = capabilities,
   root_markers = { ".git" },
@@ -166,7 +273,8 @@ vim.lsp.enable(
     -- github.com/terraform-linters/tflint
     -- "tflint",
     -- github.com/redhat-developer/yaml-language-server
-    "yamlls", }
+    "yamlls",
+  }
 )
 
 vim.diagnostic.config({

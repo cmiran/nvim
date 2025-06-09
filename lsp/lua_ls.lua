@@ -15,6 +15,12 @@ return {
   },
   settings = {
     Lua = {
+      diagnostics = {
+        globals = {
+          "vim",
+          "Snacks",
+        },
+      },
       completion = {
         callSnippet = "Both",
         displayContext = 1,

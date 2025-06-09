@@ -70,18 +70,37 @@ return {
     },
     rainbow = {
       enable = false,
-      extended_mode = true, -- also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-      max_file_lines = nil, -- do not enable for files with more than n lines, int
+      extended_mode = true,   -- also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+      max_file_lines = nil,   -- do not enable for files with more than n lines, int
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
     },
-    -- refactor = {
-    -- highlight_definitions = {
-    --   enable = true,
-    --   -- Set to false if you have an `updatetime` of ~100.
-    --   clear_on_cursor_move = true,
-    -- },
-    -- highlight_current_scope = { enable = false },
+    textobjects = {
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_next_start = {
+          ["]f"] = "@function.outer",
+          ["]c"] = "@class.outer",
+          ["]a"] = "@parameter.inner",
+        },
+        goto_next_end = {
+          ["]F"] = "@function.outer",
+          ["]C"] = "@class.outer",
+          ["]A"] = "@parameter.outer",
+        },
+        goto_previous_start = {
+          ["[f"] = "@function.outer",
+          ["[c"] = "@class.outer",
+          ["[a"] = "@parameter.inner",
+        },
+        goto_previous_end = {
+          ["[F"] = "@function.outer",
+          ["[C"] = "@class.outer",
+          ["[A"] = "@parameter.outer",
+        },
+      },
+    },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)

@@ -50,6 +50,7 @@ return {
         { "<leader>b", group = "buffer", nowait = true },
         { "<leader>c", group = "code", nowait = true },
         { "<leader>cg", group = "go", nowait = true },
+        { "<leader>cm", group = "markdown", nowait = true },
         { "<leader>d", group = "debug", nowait = true },
         { "<leader>dg", group = "go", nowait = true },
         { "<leader>f", group = "find", nowait = true },

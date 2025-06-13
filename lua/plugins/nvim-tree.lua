@@ -18,7 +18,7 @@ local function on_attach(bufnr)
   keymap("n", " ",
     function()
       api.tree.close()
-      wk.show({keys="<Leader>"})
+      wk.show({ keys = "<Leader>" })
     end,
     opts("WhichKey")
   )
@@ -39,7 +39,8 @@ return {
     "NvimTreeToggle",
   },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle tree" },
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "tree" },
+    { "<leader>m", "<cmd>NvimTreeOpen /tmp<cr>", desc = "tree /tmp" },
   },
   opts = function()
     return {

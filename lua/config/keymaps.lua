@@ -32,8 +32,8 @@ keymap(
 keymap("n", "H", ":bprevious<CR>", { desc = "Previous buffer" })
 keymap("n", "L", ":bnext<CR>", { desc = "Next buffer" })
 
--- quit all!
-keymap("n", "<leader>Q", ":qa!<CR>", { desc = "Quit all!" })
+--new temp file
+keymap("n", "<leader>n", ":e /tmp/", { desc = "New temp file" })
 
 -- save file
 keymap(

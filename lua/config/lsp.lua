@@ -73,7 +73,14 @@ function M.lsp_status()
 
     -- Check capabilities
     local caps = client.server_capabilities
+    if not caps then
+      msg[#msg + 1] = "  No capabilities reported"
+      msg[#msg + 1] = ""
+      do break end
+    end
+
     local features = {}
+
     if caps.completionProvider then table.insert(features, "completion") end
     if caps.hoverProvider then table.insert(features, "hover") end
     if caps.definitionProvider then table.insert(features, "definition") end
@@ -104,6 +111,11 @@ function M.check_lsp_capabilities()
   for _, client in ipairs(clients) do
     msg[#msg + 1] = "LSP Client: " .. client.name
     local caps = client.server_capabilities
+    if not caps then
+      msg[#msg + 1] = "  No capabilities reported"
+      msg[#msg + 1] = ""
+      do break end
+    end
 
     local capability_list = {
       { "Completion",                caps.completionProvider },
@@ -139,65 +151,25 @@ end
 vim.api.nvim_create_user_command('LspCapabilities', M.check_lsp_capabilities, { desc = "Show LSP capabilities" })
 
 local keys = {
-  -- { "n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" } },
-  {
-    "n",
-    "gd",
-    "<cmd>Telescope lsp_definitions<cr>",
-    { desc = "goto definition" },
-  },
-  { "n", "gD", vim.lsp.buf.declaration,             { desc = "goto declaration" } },
-  -- { "n", "gI", vim.lsp.buf.implementation, { desc = "goto Implementation" } },
-  {
-    "n",
-    "gI",
-    "<cmd>Telescope lsp_implementations<cr>",
-    { desc = "Go to implementation" },
-  },
-  { "n", "gl", vim.diagnostic.open_float,           { desc = "line diagnostics" } },
-  -- { "n", "gr", vim.lsp.buf.references, { desc = "references", nowait = true } },
-  { "n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "references" } },
-  -- { "n", "gy", vim.lsp.buf.type_definition, { desc = "goto t[y]pe Definition" } },
-  {
-    "n",
-    "gy",
-    "<cmd>Telescope lsp_type_definitions<cr>",
-    { desc = "Goto t[y]pe Definition" },
-  },
-  { "n",          "K",          vim.lsp.buf.hover,          { desc = "hover" } },
-  { "n",          "gK",         vim.lsp.buf.signature_help, { desc = "signature help" } },
-  { { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,    { desc = "action" } },
-  {
-    "n",
-    "<leader>cA",
-    function()
-      vim.lsp.buf.code_action({
-        context = {
-          only = {
-            "source",
-          },
-          diagnostics = {},
-        },
-      })
-    end,
-    { desc = "Source Action" },
-  },
-  { "n", "<leader>cl", vim.lsp.codelens.run,              { desc = "CodeLens action" } },
-  { "n", "<leader>cq", vim.diagnostic.setloclist,         { desc = "Quickfix" } },
-  { "n", "<leader>cf", vim.lsp.buf.format,                { desc = "Format" } },
-  { "n", "<leader>cr", vim.lsp.buf.rename,                { desc = "Global rename" } },
-  { "n", "<leader>lt", M.toggle_virtual_lines_diagnostic, { desc = "Toggle line diagnostics" } },
-  { "n", "<leader>lr", M.restart_lsp,                     { desc = "Restart" } },
-  { "n", "<leader>ls", M.lsp_status,                      { desc = "Status" } },
-  { "i", "<c-k>",      vim.lsp.buf.signature_help,        { desc = "Signature help" } },
-  { "n", "]e",         M.diagnostic_jump(1, "ERROR"),     { desc = "Next error" } },
-  { "n", "[e",         M.diagnostic_jump(-1, "ERROR"),    { desc = "Prev error" } },
-  { "n", "]i",         M.diagnostic_jump(1, "INFO"),      { desc = "Next info" } },
-  { "n", "[i",         M.diagnostic_jump(-1, "INFO"),     { desc = "Prev info" } },
-  { "n", "]t",         M.diagnostic_jump(1, "HINT"),      { desc = "Next hint" } },
-  { "n", "[t",         M.diagnostic_jump(-1, "HINT"),     { desc = "Prev hint" } },
-  { "n", "]w",         M.diagnostic_jump(1, "WARN"),      { desc = "Next warning" } },
-  { "n", "[w",         M.diagnostic_jump(-1, "WARN"),     { desc = "Prev warning" } },
+  { "n",          "gl",         vim.diagnostic.open_float,                    { desc = "line diagnostics" } },
+  { "n",          "K",          vim.lsp.buf.hover,                            { desc = "Lsp Hover" } },
+  { "n",          "gK",         vim.lsp.buf.signature_help,                   { desc = "LSP Signature help" } },
+  { "n",          "<leader>cl", vim.lsp.codelens.run,                         { desc = "CodeLens action" } },
+  { "n",          "<leader>cq", vim.diagnostic.setloclist,                    { desc = "Quickfix" } },
+  { "n",          "<leader>cf", vim.lsp.buf.format,                           { desc = "Format" } },
+  { "n",          "<leader>cr", vim.lsp.buf.rename,                           { desc = "Global rename" } },
+  { "n",          "<leader>lr", M.restart_lsp,                                { desc = "Restart" } },
+  { "n",          "<leader>lS", M.lsp_status,                                 { desc = "Status" } },
+  { "n",          "<leader>lT", M.toggle_virtual_lines_diagnostic,            { desc = "Toggle line diagnostics" } },
+  { "i",          "<c-k>",      vim.lsp.buf.signature_help,                   { desc = "Signature help" } },
+  { "n",          "]e",         M.diagnostic_jump(1, "ERROR"),                { desc = "Next error" } },
+  { "n",          "[e",         M.diagnostic_jump(-1, "ERROR"),               { desc = "Prev error" } },
+  { "n",          "]i",         M.diagnostic_jump(1, "INFO"),                 { desc = "Next info" } },
+  { "n",          "[i",         M.diagnostic_jump(-1, "INFO"),                { desc = "Prev info" } },
+  { "n",          "]t",         M.diagnostic_jump(1, "HINT"),                 { desc = "Next hint" } },
+  { "n",          "[t",         M.diagnostic_jump(-1, "HINT"),                { desc = "Prev hint" } },
+  { "n",          "]w",         M.diagnostic_jump(1, "WARN"),                 { desc = "Next warning" } },
+  { "n",          "[w",         M.diagnostic_jump(-1, "WARN"),                { desc = "Prev warning" } },
 }
 
 ---@param buffer integer
@@ -282,5 +254,8 @@ vim.diagnostic.config({
   virtual_lines = {
     -- Only show virtual line diagnostics for the current cursor line
     current_line = true,
+  },
+  float = {
+    border = "shadow",
   },
 })

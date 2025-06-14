@@ -12,6 +12,7 @@ return {
     groups = {
       all = {
         FloatBorder = { bg = "bg0", fg = "bg0" },
+        FzfLuaNormal = { bg = "bg0" },
         NotifyDEBUGBody = { bg = "bg0" },
         NotifyERRORBody = { bg = "bg0" },
         NotifyINFOBody = { bg = "bg0" },

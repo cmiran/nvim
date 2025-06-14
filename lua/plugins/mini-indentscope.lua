@@ -14,10 +14,12 @@ return {
       pattern = {
         "alpha",
         "help",
+        "fzf",
         "lazy",
         -- "neo-tree",
         "NvimTree",
         "Noice",
+        "notify",
         -- "Trouble",
       },
       callback = function()

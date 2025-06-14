@@ -4,7 +4,7 @@ return {
   lazy = false,
   opts = {
     indent = {
-      enabled = true,
+      enabled = false,
       animate = {
         duration = {
           step = 15, -- ms per step

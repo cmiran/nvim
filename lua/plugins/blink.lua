@@ -1,10 +1,14 @@
+---@type LazySpec
 return {
+  -- "github.com/Saghen/blink.cmp",
   "saghen/blink.cmp",
   dependencies = {
     "rafamadriz/friendly-snippets",
   },
   event = "LspAttach",
-  version = "v0.*",
+  version = "1.*",
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
   opts = {
     appearance = {
       nerd_font_variant = "mono",
@@ -70,5 +74,25 @@ return {
       },
     },
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
+  config = function(_, opts)
+    require("blink.cmp").setup(opts)
+    -- require("blink.cmp.snippets").load_friendly_snippets()
+
+    -- NvimTree: set_win_config to not throw error when window is closed
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "BlinkReady",
+      callback = function()
+        local ok, window = pcall(require, "blink.cmp.lib.window")
+        if not ok then return end
+
+        local orig = window.set_win_config
+        window.set_win_config = function(self, config)
+          if self.win and vim.api.nvim_win_is_valid(self.win) then
+            return orig(self, config)
+          end
+        end
+      end,
+    })
+  end,
 }

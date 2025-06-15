@@ -57,6 +57,7 @@ return {
         { "<leader>l", group = "lsp", nowait = true },
         { "<leader>y", group = "notification", nowait = true },
         { "<leader>p", group = "plugin", nowait = true },
+        { "<leader>s", desc = "Select", nowait = true }, -- override treesitter default description
         { "<leader>t", group = "test", nowait = true },
         { "<leader>u", group = "ui", nowait = true },
         { "[", name = "prev", nowait = true },

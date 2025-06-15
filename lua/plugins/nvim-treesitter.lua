@@ -10,6 +10,9 @@ return {
     -- github.com/p00f/nvim-ts-rainbow
     "p00f/nvim-ts-rainbow",
   },
+  keys = {
+    "<Leader>s",
+  },
   opts = {
     auto_install = true,
     sync_install = false,
@@ -62,16 +65,16 @@ return {
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "<Leader>cs",
+        init_selection = "<Leader>s",
         node_incremental = "+",
         scope_incremental = false,
-        node_decremental = "-",
+        node_decremental = "_",
       },
     },
     rainbow = {
       enable = false,
-      extended_mode = true,   -- also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-      max_file_lines = nil,   -- do not enable for files with more than n lines, int
+      extended_mode = true, -- also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+      max_file_lines = nil, -- do not enable for files with more than n lines, int
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
     },

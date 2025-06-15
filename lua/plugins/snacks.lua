@@ -3,15 +3,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    indent = {
-      enabled = false,
-      animate = {
-        duration = {
-          step = 15, -- ms per step
-          total = 0xFFFFFFFF, -- maximum duration
-        },
-      },
-    },
     lazygit = {
       enabled = true,
     },

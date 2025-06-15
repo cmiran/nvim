@@ -39,4 +39,8 @@ require("lazy").setup({
       },
     },
   },
+  ui = {
+    backdrop = 100,
+    border = "shadow",
+  }
 })

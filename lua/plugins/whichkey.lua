@@ -1,13 +1,11 @@
--- github.com/folke/which-key.nvim
 return {
+  -- github.com/folke/which-key.nvim
   "folke/which-key.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   event = "VeryLazy",
   opts = {
     disable = {
-      ft = {
-        "help",
-        -- "NvimTree",
-      },
+      ft = { "help" },
     },
     plugins = {
       marks = false,
@@ -23,18 +21,16 @@ return {
     win = {
       no_overlap = false,
       width = {
-        -- min = 0,
         max = math.max(vim.o.columns*0.30, 25),
       },
       height = {
         min = 0,
         max = math.max(vim.o.lines*0.75, 25),
-        -- max = 0,
       },
       row = 6,
       col = 5,
       border = "shadow",
-      padding = { 1, 2 }, -- extra window padding [top, right, bottom, left],
+      padding = { 1, 2 }, -- top, right, bottom, left
       wo = {
         wrap = true,
       },
@@ -49,8 +45,6 @@ return {
         { "<leader>c", group = "code", nowait = true },
         { "<leader>cg", group = "go", nowait = true },
         { "<leader>cm", group = "markdown", nowait = true },
-        { "<leader>d", group = "debug", nowait = true },
-        { "<leader>dg", group = "go", nowait = true },
         { "<leader>f", group = "find", nowait = true },
         { "<leader>g", group = "git", nowait = true },
         { "<leader>gh", group = "hunk", nowait = true },

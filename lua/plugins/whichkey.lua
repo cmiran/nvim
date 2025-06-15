@@ -21,14 +21,14 @@ return {
     win = {
       no_overlap = false,
       width = {
-        max = math.max(vim.o.columns*0.30, 25),
+        max = math.max(vim.o.columns*0.40, 25),
       },
       height = {
         min = 0,
         max = math.max(vim.o.lines*0.75, 25),
       },
       row = 6,
-      col = 5,
+      col = 2,
       border = "shadow",
       padding = { 1, 2 }, -- top, right, bottom, left
       wo = {

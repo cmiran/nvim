@@ -1,7 +1,6 @@
 local function on_attach(bufnr)
   local api = require("nvim-tree.api")
   local keymap = require("util").keymap
-  local wk = require("which-key")
 
   local function opts(desc)
     return { desc = desc, buffer = bufnr }
@@ -77,14 +76,15 @@ local function on_attach(bufnr)
   keymap("n", "<ESC>", api.tree.close, opts("Close"))
 end
 
-local function win_config()
+local function win_config(height)
+  local width = math.floor(vim.o.columns * 0.37)
   return {
     relative = "editor",
     border = "shadow",
-    width = math.floor(vim.o.columns * 0.4),
-    height = math.floor(vim.o.lines * 0.7),
+    width = width,
+    height = math.min(math.floor(vim.o.lines * 0.7), height or math.huge),
     row = 6,
-    col = math.floor(vim.o.columns * 0.565),
+    col = vim.o.columns - width - 2,
   }
 end
 
@@ -154,18 +154,26 @@ return {
     },
   },
   config = function(_, opts)
-    vim.api.nvim_create_autocmd("VimResized", {
+    require("nvim-tree").setup(opts)
+
+    vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "WinEnter", "TextChanged", "TextChangedI" }, {
+      pattern = "*",
       callback = function()
         local view = require("nvim-tree.view")
         if not view.is_visible() then return end
 
         local win = view.get_winnr()
-        if not vim.api.nvim_win_is_valid(win) then return end
+        if not win or not vim.api.nvim_win_is_valid(win) then return end
 
-        pcall(vim.api.nvim_win_set_config, win, win_config())
+        local buf = vim.api.nvim_win_get_buf(win)
+        local buf_name = vim.api.nvim_buf_get_name(buf)
+        if not buf_name:match("NvimTree") then return end
+
+        local line_count = vim.api.nvim_buf_line_count(buf)
+        local current_config = vim.api.nvim_win_get_config(win)
+        local new_config = vim.tbl_deep_extend("force", current_config, win_config(line_count))
+        vim.api.nvim_win_set_config(win, new_config)
       end,
     })
-
-    require("nvim-tree").setup(opts)
   end,
 }

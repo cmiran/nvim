@@ -59,7 +59,6 @@ return {
         { "<leader>p", group = "plugin", nowait = true },
         { "<leader>t", group = "test", nowait = true },
         { "<leader>u", group = "ui", nowait = true },
-        { "<leader>x", group = "extra", nowait = true },
         { "[", name = "prev", nowait = true },
         { "]", name = "next", nowait = true },
         { "g", name = "gaction", nowait = true },

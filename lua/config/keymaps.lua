@@ -64,9 +64,6 @@ keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
 -- show highlight group under cursor
 keymap("n", "<leader>ui", vim.show_pos, { desc = "Inspect under cursor" })
 
-keymap("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location list" })
-keymap("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix list" })
-
 local function beautify_json()
   -- vim.cmd("redir => g:_command_output | silent " .. cmd .. " | redir END ")
   vim.cmd("silent !jq < %")

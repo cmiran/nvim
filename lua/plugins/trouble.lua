@@ -1,22 +1,17 @@
 return {
+  -- github.com/folke/trouble.nvim
   "folke/trouble.nvim",
   cmd = "Trouble",
-  opts = { use_diagnostic_signs = true },
   keys = {
     {
-      "<leader>xx",
-      "<cmd>Trouble diagnostics<cr>",
-      desc = "Diagnostics (Trouble)",
+      "<leader>ld",
+      "<cmd>Trouble diagnostics win.position={6,0.98} win.size={width=0.4,height=0.7}<cr>",
+      desc = "Diagnostics",
     },
     {
-      "<leader>xL",
-      "<cmd>Trouble loclist<cr>",
-      desc = "Location List (Trouble)",
-    },
-    {
-      "<leader>xQ",
-      "<cmd>Trouble quickfix<cr>",
-      desc = "Quickfix List (Trouble)",
+      "<leader>lt",
+      "<cmd>Trouble lsp_document_symbols win.position={6,0.98} win.size={width=0.4,height=0.7}<cr>",
+      desc = "Document symbol tree",
     },
     {
       "[q",
@@ -30,7 +25,7 @@ return {
           end
         end
       end,
-      desc = "Previous trouble/quickfix item",
+      desc = "Prev trouble/quickfix item",
     },
     {
       "]q",
@@ -46,5 +41,15 @@ return {
       end,
       desc = "Next trouble/quickfix item",
     },
+  },
+  opts = {
+    use_diagnostic_signs = true,
+    focus = true,
+    max_items = 2000,
+    ---@type trouble.Window.opts
+    win = {
+      type = "float",
+      border = "shadow",
+    }
   },
 }

@@ -7,7 +7,6 @@ return {
       ft = {
         "help",
         -- "NvimTree",
-        "TelescopePrompt",
       },
     },
     plugins = {
@@ -58,7 +57,6 @@ return {
         { "<leader>l", group = "lsp", nowait = true },
         { "<leader>y", group = "notification", nowait = true },
         { "<leader>p", group = "plugin", nowait = true },
-        { "<leader>s", group = "search", nowait = true },
         { "<leader>t", group = "test", nowait = true },
         { "<leader>u", group = "ui", nowait = true },
         { "<leader>x", group = "extra", nowait = true },

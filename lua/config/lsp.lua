@@ -222,6 +222,8 @@ vim.lsp.enable(
     "golangci_lint_ls",
     -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
     "gopls",
+    -- github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
+    "graphql",
     -- github.com/hrsh7th/vscode-langservers-extracted
     "jsonls",
     -- github.com/sumneko/lua-language-server

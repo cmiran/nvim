@@ -1,6 +1,7 @@
 return {
   -- github.com/L3MON4D3/LuaSnip/
   "L3MON4D3/LuaSnip",
+  event = "InsertEnter",
   dependencies = {
     -- github.com/rafamadriz/friendly-snippets
     "rafamadriz/friendly-snippets",

@@ -21,7 +21,6 @@ require("lazy").setup({
   },
   spec = {
     { import = "plugins" },
-    { import = "plugins.copilot" },
     -- { import = "plugins.test" },
   },
   performance = {

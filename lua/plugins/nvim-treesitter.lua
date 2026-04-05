@@ -4,10 +4,6 @@ return {
   build = ":TSUpdate",
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    -- github.com/nvim-treesitter/nvim-treesitter-textobjects
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
   keys = {
     "<Leader>s",
   },
@@ -46,13 +42,6 @@ return {
       "vim",
       "yaml",
     },
-    autopairs = {
-      enable = true,
-    },
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
@@ -67,32 +56,6 @@ return {
         node_incremental = "+",
         scope_incremental = false,
         node_decremental = "_",
-      },
-    },
-    textobjects = {
-      move = {
-        enable = true,
-        set_jumps = true,
-        goto_next_start = {
-          ["]f"] = "@function.outer",
-          ["]c"] = "@class.outer",
-          ["]a"] = "@parameter.inner",
-        },
-        goto_next_end = {
-          ["]F"] = "@function.outer",
-          ["]C"] = "@class.outer",
-          ["]A"] = "@parameter.outer",
-        },
-        goto_previous_start = {
-          ["[f"] = "@function.outer",
-          ["[c"] = "@class.outer",
-          ["[a"] = "@parameter.inner",
-        },
-        goto_previous_end = {
-          ["[F"] = "@function.outer",
-          ["[C"] = "@class.outer",
-          ["[A"] = "@parameter.outer",
-        },
       },
     },
   },

@@ -16,4 +16,14 @@ return {
       "TelescopePrompt",
     },
   },
+  dependencies = {
+    {
+      "nvim-treesitter/nvim-treesitter",
+      opts = {
+        autopairs = {
+          enable = true,
+        },
+      },
+    },
+  },
 }

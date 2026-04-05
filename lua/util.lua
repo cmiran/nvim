@@ -15,7 +15,7 @@ function M.on_attach(on_attach)
     desc = "attach lsp client",
     callback = function(args)
       local buffer = args.buf
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local client = vim.lsp.get_clients({ id = args.data.client_id })[1]
       on_attach(client, buffer)
     end,
   })
@@ -150,9 +150,8 @@ M.icons = {
 ---@return {foreground?:number}?
 function M.fg(name)
   ---@type {foreground?:number}?
-  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
-      or vim.api.nvim_get_hl_by_name(name, true)
-  local fg = hl and hl.fg or hl.foreground
+  local hl = vim.api.nvim_get_hl(0, { name = name })
+  local fg = hl and (hl.fg or hl.foreground)
   return fg and { fg = string.format("#%06x", fg) }
 end
 

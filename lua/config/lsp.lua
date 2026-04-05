@@ -55,7 +55,7 @@ end, { desc = "Restart LSP for the current buffer" })
 
 function M.lsp_status()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
   local msg = {}
 
   if #clients == 0 then
@@ -101,7 +101,7 @@ vim.api.nvim_create_user_command('LspStatus', M.lsp_status, { desc = "Show detai
 
 function M.check_lsp_capabilities()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr })
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
   local msg = {}
 
   if #clients == 0 then

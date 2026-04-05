@@ -53,62 +53,88 @@ vim.api.nvim_create_user_command("LspRestart", function()
   M.restart_lsp()
 end, { desc = "Restart LSP for the current buffer" })
 
-function M.lsp_status()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients({ bufnr = bufnr })
-  local msg = {}
+---@param client vim.lsp.Client
+---@param msg string[]
+local function format_client(client, msg)
+  msg[#msg + 1] =
+      string.format("  %s (ID: %d)", client.name, client.id)
+  msg[#msg + 1] = "    Root: " .. (client.config.root_dir or "N/A")
+  msg[#msg + 1] = "    Filetypes: "
+      .. table.concat(client.config.filetypes or {}, ", ")
 
-  if #clients == 0 then
-    vim.notify("No LSP clients attached", vim.log.levels.WARN)
+  local caps = client.server_capabilities
+  if not caps then
+    msg[#msg + 1] = "    No capabilities reported"
+    msg[#msg + 1] = ""
     return
   end
 
-  msg[#msg + 1] = "LSP Status for buffer " .. bufnr .. ":"
-  msg[#msg + 1] =
-    "─────────────────────────────────"
+  local features = {}
 
-  for i, client in ipairs(clients) do
-    msg[#msg + 1] =
-      string.format("Client %d: %s (ID: %d)", i, client.name, client.id)
-    msg[#msg + 1] = "  Root: " .. (client.config.root_dir or "N/A")
-    msg[#msg + 1] = "  Filetypes: "
-      .. table.concat(client.config.filetypes or {}, ", ")
+  if caps.completionProvider then
+    table.insert(features, "completion")
+  end
+  if caps.hoverProvider then
+    table.insert(features, "hover")
+  end
+  if caps.definitionProvider then
+    table.insert(features, "definition")
+  end
+  if caps.referencesProvider then
+    table.insert(features, "references")
+  end
+  if caps.renameProvider then
+    table.insert(features, "rename")
+  end
+  if caps.codeActionProvider then
+    table.insert(features, "code_action")
+  end
+  if caps.documentFormattingProvider then
+    table.insert(features, "formatting")
+  end
 
-    -- Check capabilities
-    local caps = client.server_capabilities
-    if not caps then
-      msg[#msg + 1] = "  No capabilities reported"
-      msg[#msg + 1] = ""
-      goto continue
-    end
+  msg[#msg + 1] = "    Features: " .. table.concat(features, ", ")
+  msg[#msg + 1] = ""
+end
 
-    local features = {}
+function M.lsp_status()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local buf_clients = vim.lsp.get_clients({ bufnr = bufnr })
+  local all_clients = vim.lsp.get_clients()
+  local msg = {}
 
-    if caps.completionProvider then
-      table.insert(features, "completion")
-    end
-    if caps.hoverProvider then
-      table.insert(features, "hover")
-    end
-    if caps.definitionProvider then
-      table.insert(features, "definition")
-    end
-    if caps.referencesProvider then
-      table.insert(features, "references")
-    end
-    if caps.renameProvider then
-      table.insert(features, "rename")
-    end
-    if caps.codeActionProvider then
-      table.insert(features, "code_action")
-    end
-    if caps.documentFormattingProvider then
-      table.insert(features, "formatting")
-    end
+  -- Find clients not attached to the current buffer
+  local buf_client_ids = {}
+  for _, client in ipairs(buf_clients) do
+    buf_client_ids[client.id] = true
+  end
 
-    msg[#msg + 1] = "  Features: " .. table.concat(features, ", ")
-    msg[#msg + 1] = ""
-    ::continue::
+  local other_clients = {}
+  for _, client in ipairs(all_clients) do
+    if not buf_client_ids[client.id] then
+      table.insert(other_clients, client)
+    end
+  end
+
+  if #buf_clients == 0 and #other_clients == 0 then
+    vim.notify("No LSP clients running", vim.log.levels.WARN)
+    return
+  end
+
+  if #buf_clients > 0 then
+    msg[#msg + 1] = "Buffer " .. bufnr .. " (" .. #buf_clients .. "):"
+    msg[#msg + 1] = "─────────────────────────────────"
+    for _, client in ipairs(buf_clients) do
+      format_client(client, msg)
+    end
+  end
+
+  if #other_clients > 0 then
+    msg[#msg + 1] = "Other (" .. #other_clients .. "):"
+    msg[#msg + 1] = "─────────────────────────────────"
+    for _, client in ipairs(other_clients) do
+      format_client(client, msg)
+    end
   end
 
   vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)
@@ -140,24 +166,24 @@ function M.check_lsp_capabilities()
     end
 
     local capability_list = {
-      { "Completion", caps.completionProvider },
-      { "Hover", caps.hoverProvider },
-      { "Signature Help", caps.signatureHelpProvider },
-      { "Go to Definition", caps.definitionProvider },
-      { "Go to Declaration", caps.declarationProvider },
-      { "Go to Implementation", caps.implementationProvider },
-      { "Go to Type Definition", caps.typeDefinitionProvider },
-      { "Find References", caps.referencesProvider },
-      { "Document Highlight", caps.documentHighlightProvider },
-      { "Document Symbol", caps.documentSymbolProvider },
-      { "Workspace Symbol", caps.workspaceSymbolProvider },
-      { "Code Action", caps.codeActionProvider },
-      { "Code Lens", caps.codeLensProvider },
-      { "Document Formatting", caps.documentFormattingProvider },
+      { "Completion",                caps.completionProvider },
+      { "Hover",                     caps.hoverProvider },
+      { "Signature Help",            caps.signatureHelpProvider },
+      { "Go to Definition",          caps.definitionProvider },
+      { "Go to Declaration",         caps.declarationProvider },
+      { "Go to Implementation",      caps.implementationProvider },
+      { "Go to Type Definition",     caps.typeDefinitionProvider },
+      { "Find References",           caps.referencesProvider },
+      { "Document Highlight",        caps.documentHighlightProvider },
+      { "Document Symbol",           caps.documentSymbolProvider },
+      { "Workspace Symbol",          caps.workspaceSymbolProvider },
+      { "Code Action",               caps.codeActionProvider },
+      { "Code Lens",                 caps.codeLensProvider },
+      { "Document Formatting",       caps.documentFormattingProvider },
       { "Document Range Formatting", caps.documentRangeFormattingProvider },
-      { "Rename", caps.renameProvider },
-      { "Folding Range", caps.foldingRangeProvider },
-      { "Selection Range", caps.selectionRangeProvider },
+      { "Rename",                    caps.renameProvider },
+      { "Folding Range",             caps.foldingRangeProvider },
+      { "Selection Range",           caps.selectionRangeProvider },
     }
 
     for _, cap in ipairs(capability_list) do

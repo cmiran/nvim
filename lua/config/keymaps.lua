@@ -65,7 +65,10 @@ keymap({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
 keymap("n", "<leader>ui", vim.show_pos, { desc = "Inspect under cursor" })
 
 local function beautify_json()
-  -- vim.cmd("redir => g:_command_output | silent " .. cmd .. " | redir END ")
+  if vim.fn.executable("jq") ~= 1 then
+    vim.notify("jq is not installed", vim.log.levels.ERROR)
+    return
+  end
   vim.cmd("silent !jq < %")
   if vim.v.shell_error == 0 then
     vim.cmd("%!jq '.'")

@@ -4,6 +4,7 @@ return {
   dependencies = {
     -- github.com/nvim-treesitter/nvim-treesitter
     "nvim-treesitter/nvim-treesitter",
+    "folke/snacks.nvim",
   },
   event = "VeryLazy",
   config = function(_, opts)

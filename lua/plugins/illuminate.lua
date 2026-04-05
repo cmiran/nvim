@@ -1,6 +1,7 @@
 return {
   -- github.com/RRethy/vim-illuminate
   "RRethy/vim-illuminate",
+  dependencies = { "folke/snacks.nvim" },
   event = { "BufReadPost", "BufNewFile" },
   keys = {
     { "]]", desc = "Next Reference" },

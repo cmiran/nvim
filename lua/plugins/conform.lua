@@ -1,6 +1,7 @@
 return {
   -- github.com/stevearc/conform.nvim
   "stevearc/conform.nvim",
+  dependencies = { "folke/snacks.nvim" },
   event = { "BufEnter", "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {

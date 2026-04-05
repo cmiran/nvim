@@ -3,6 +3,7 @@ return {
   lazy = false,
   dependencies = {
     "MunifTanjim/nui.nvim",
+    "folke/snacks.nvim",
   },
   opts = {
     enabled = false,

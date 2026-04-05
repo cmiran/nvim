@@ -1,6 +1,7 @@
 return {
   -- github.com/lukas-reineke/indent-blankline.nvim
   "lukas-reineke/indent-blankline.nvim",
+  dependencies = { "folke/snacks.nvim" },
   event = { "BufReadPost", "BufNewFile" },
   main = "ibl",
   ---@module "ibl"

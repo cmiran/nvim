@@ -30,7 +30,7 @@ return {
       row = 6,
       col = 2,
       border = "shadow",
-      padding = { 1, 2 }, -- top, right, bottom, left
+      padding = { 1, 1 }, -- top, right, bottom, left
       wo = {
         wrap = true,
       },

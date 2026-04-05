@@ -84,11 +84,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd("ModeChanged", {
-  desc = "redraw the diagnostics when the mode change",
+  desc = "redraw the diagnostics on major mode transitions",
   group = vim.api.nvim_create_augroup("diagnostic_redraw", {}),
+  pattern = { "*:n", "*:i", "*:v" },
   callback = function()
     pcall(vim.diagnostic.show)
-  end
+  end,
 })
 
 -- change background color for help

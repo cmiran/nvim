@@ -6,7 +6,7 @@ return {
     -- github.com/JoosepAlviste/nvim-ts-context-commentstring
     -- "JoosepAlviste/nvim-ts-context-commentstring",
   },
-  lazy = false,
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
     ignore = "^$", -- ignores empty lines
     -- pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),

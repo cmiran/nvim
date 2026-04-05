@@ -12,9 +12,9 @@ Personal Neovim configuration using lazy.nvim as the plugin manager. Primarily t
 
 **Directory structure:**
 - `lua/config/` — Core config: `options.lua`, `keymaps.lua`, `autocmds.lua`, `lazy.lua` (plugin manager setup), `lsp.lua` (LSP keybindings, capabilities, `vim.lsp.enable()` calls, diagnostics config)
-- `lua/plugins/` — One file per plugin, each returns a lazy.nvim spec table. Subdirs (`copilot/`, `lazydev/`) are imported separately in `lazy.lua`
+- `lua/plugins/` — One file per plugin, each returns a lazy.nvim spec table. Auto-imported via `{ import = "plugins" }` in `lazy.lua`
 - `lsp/` — Native Neovim LSP config files (one per server), loaded by `vim.lsp.config()` / `vim.lsp.enable()`
-- `lua/util.lua` — Shared helpers: `keymap()` wrapper, `icons` table, `on_attach()`, `has()`, `debounce()`, `fg()`
+- `lua/util.lua` — Shared helpers: `keymap()` wrapper, `icons` table, `on_attach()`, `has()`, `file_exists()`, `config_file_exists_at_root_pattern()`, `lazy_notify()`, `debounce()`, `fg()`
 - `after/ftplugin/` — Filetype-specific overrides
 - `queries/go/` — Custom treesitter queries (SQL injection highlighting in Go strings)
 
@@ -24,7 +24,7 @@ Personal Neovim configuration using lazy.nvim as the plugin manager. Primarily t
 - **Indentation:** 2 spaces (tabs expanded), enforced by options
 - **Plugin specs:** Each plugin is a single file in `lua/plugins/` returning a lazy.nvim spec. Use lazy-loading via `event`, `cmd`, `keys`, or `ft` fields
 - **LSP setup:** Uses Neovim's native `vim.lsp.config()` + `vim.lsp.enable()` (not nvim-lspconfig). Server configs live in `lsp/*.lua`. Capabilities are merged with blink.cmp
-- **Formatting:** conform.nvim with format-on-save (disable with `:FormatDisable`, toggle with `<leader>cF`). none-ls is present but disabled
+- **Formatting:** conform.nvim with format-on-save (disable with `:FormatDisable`, toggle with `<leader>cF`)
 - **Completion:** blink.cmp (v1.x) with enter-to-accept preset
 - **Keymaps:** Use `require("util").keymap()` wrapper which defaults to `noremap`, `nowait`, `silent`
 

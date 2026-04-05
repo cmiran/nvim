@@ -10,6 +10,7 @@ end
 
 return {
   "goolord/alpha-nvim",
+  enabled = false,
   event = "VimEnter",
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
@@ -42,7 +43,6 @@ return {
 
     dashboard.section.header.opts.hl = "Error"
     dashboard.section.header.val = logo
-    -- dashboard.opts.opts.noautocmd = true
     dashboard.opts.layout = {
       { type = "padding", val = get_top_padding(#fortune) },
       dashboard.section.header,

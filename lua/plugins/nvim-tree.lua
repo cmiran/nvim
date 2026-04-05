@@ -1,12 +1,13 @@
-local function on_attach(bufnr)
+---@param buf integer
+local function on_attach(buf)
   local api = require("nvim-tree.api")
   local keymap = require("util").keymap
 
   local function opts(desc)
-    return { desc = desc, buffer = bufnr }
+    return { desc = desc, buffer = buf }
   end
 
-  api.map.on_attach.default(bufnr)
+  api.map.on_attach.default(buf)
 
   -- Default keymaps
   keymap("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
@@ -137,8 +138,21 @@ local function resize_nvim_tree()
 
   local line_count = vim.api.nvim_buf_line_count(buf)
   local current_config = vim.api.nvim_win_get_config(win)
-  local new_config =
-    vim.tbl_deep_extend("force", current_config, win_config(line_count))
+  local target_config = win_config(line_count)
+
+  if current_config.width == target_config.width
+      and current_config.height == target_config.height
+      and current_config.row == target_config.row
+      and current_config.col == target_config.col
+  then
+    return
+  end
+
+  local new_config = vim.tbl_deep_extend(
+    "force",
+    current_config,
+    target_config
+  )
   vim.api.nvim_win_set_config(win, new_config)
 end
 
@@ -157,7 +171,7 @@ return {
     "NvimTreeToggle",
   },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Tree" },
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>",    desc = "Tree" },
     { "<leader>m", "<cmd>NvimTreeOpen /tmp<cr>", desc = "Tree /tmp" },
   },
   opts = {

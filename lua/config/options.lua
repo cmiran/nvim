@@ -17,7 +17,7 @@ opt.fillchars = { eob = " " } -- characters to use for displaying special items
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 -- opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
-opt.ignorecase = false -- ignore case in search patterns
+opt.ignorecase = true -- ignore case in search patterns
 opt.iskeyword:append("-") -- characters included in keywords
 opt.laststatus = 0
 opt.list = true -- show <Tab> and <EOL>

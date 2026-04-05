@@ -5,7 +5,11 @@ local M = {}
 ---@param rhs any
 ---@param opts table
 function M.keymap(mode, lhs, rhs, opts)
-  opts = vim.tbl_extend("keep", opts or {}, { noremap = true, nowait = true, silent = true })
+  opts = vim.tbl_extend(
+    "keep",
+    opts or {},
+    { noremap = true, nowait = true, silent = true }
+  )
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -32,7 +36,9 @@ end
 ---@return boolean
 function M.file_exists(path)
   local f = io.open(path, "rb")
-  if f then f:close() end
+  if f then
+    f:close()
+  end
   return f ~= nil
 end
 
@@ -160,7 +166,9 @@ function M.debounce(name, fn, delay)
   delay = delay or 100
   if M.timers[name] then
     M.timers[name]:stop()
-    pcall(function() M.timers[name]:close() end)
+    pcall(function()
+      M.timers[name]:close()
+    end)
   end
   M.timers[name] = vim.defer_fn(function()
     M.timers[name] = nil

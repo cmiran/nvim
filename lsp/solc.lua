@@ -1,6 +1,6 @@
 return {
-  cmd = { 'solc', '--lsp' },
-  filetypes = { 'solidity' },
+  cmd = { "solc", "--lsp" },
+  filetypes = { "solidity" },
   root_markers = {
     "hardhat.config.js",
     "hardhat.config.ts",

@@ -1,10 +1,10 @@
 -- github.com/hrsh7th/vscode-langservers-extracted
 ---@type vim.lsp.Config
 return {
-  cmd = { 'vscode-json-language-server', '--stdio' },
+  cmd = { "vscode-json-language-server", "--stdio" },
   filetypes = {
-    'json',
-    'jsonc',
+    "json",
+    "jsonc",
   },
   init_options = {
     provideFormatter = true,

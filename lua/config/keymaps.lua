@@ -74,7 +74,9 @@ local function beautify_json()
     vim.cmd("%!jq '.'")
   end
 end
-keymap("n", "<leader>cb", function() beautify_json() end, { desc = "Beautify JSON" })
+keymap("n", "<leader>cb", function()
+  beautify_json()
+end, { desc = "Beautify JSON" })
 
 -- better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_{ desc = "" })

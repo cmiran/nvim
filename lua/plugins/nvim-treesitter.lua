@@ -38,7 +38,7 @@ return {
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   event = { "BufReadPost", "BufNewFile" },
   init = function()
-    vim.api.nvim_create_autocmd('FileType', {
+    vim.api.nvim_create_autocmd("FileType", {
       callback = function()
         -- Enable treesitter highlighting and disable regex syntax
         pcall(vim.treesitter.start)

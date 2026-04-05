@@ -5,5 +5,5 @@ return {
     "sql",
     "mysql",
   },
-  root_markers = { ".sqllsrc.json" }
+  root_markers = { ".sqllsrc.json" },
 }

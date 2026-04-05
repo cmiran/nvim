@@ -34,14 +34,15 @@ return {
         setType = true,
       },
       workspace = {
-        library = vim.list_extend(
-          {
-            vim.env.VIMRUNTIME,
-            "${3rd}/luv/library",
-            "${3rd}/busted/library",
-          },
-          vim.fn.glob(vim.fn.stdpath("data") .. "/lazy/*/lua", true, true)
-        ),
+        library = vim.list_extend({
+          vim.env.VIMRUNTIME,
+          "${3rd}/luv/library",
+          "${3rd}/busted/library",
+        }, vim.fn.glob(
+          vim.fn.stdpath("data") .. "/lazy/*/lua",
+          true,
+          true
+        )),
         checkThirdParty = false,
       },
     },

@@ -32,7 +32,7 @@ function M.toggle_virtual_lines_diagnostic()
   vim.notify("Diagnostics virtual lines " .. status)
 end
 
-vim.api.nvim_create_user_command('LspToggleVirtualLinesDiagnostic', function()
+vim.api.nvim_create_user_command("LspToggleVirtualLinesDiagnostic", function()
   M.toggle_virtual_lines_diagnostic()
 end, { desc = "Toggle virtual lines diagnostics" })
 
@@ -45,11 +45,11 @@ function M.restart_lsp(bufnr)
   end
 
   vim.defer_fn(function()
-    vim.cmd('edit')
+    vim.cmd("edit")
   end, 100)
 end
 
-vim.api.nvim_create_user_command('LspRestart', function()
+vim.api.nvim_create_user_command("LspRestart", function()
   M.restart_lsp()
 end, { desc = "Restart LSP for the current buffer" })
 
@@ -64,12 +64,15 @@ function M.lsp_status()
   end
 
   msg[#msg + 1] = "LSP Status for buffer " .. bufnr .. ":"
-  msg[#msg + 1] = "─────────────────────────────────"
+  msg[#msg + 1] =
+    "─────────────────────────────────"
 
   for i, client in ipairs(clients) do
-    msg[#msg + 1] = string.format("Client %d: %s (ID: %d)", i, client.name, client.id)
+    msg[#msg + 1] =
+      string.format("Client %d: %s (ID: %d)", i, client.name, client.id)
     msg[#msg + 1] = "  Root: " .. (client.config.root_dir or "N/A")
-    msg[#msg + 1] = "  Filetypes: " .. table.concat(client.config.filetypes or {}, ", ")
+    msg[#msg + 1] = "  Filetypes: "
+      .. table.concat(client.config.filetypes or {}, ", ")
 
     -- Check capabilities
     local caps = client.server_capabilities
@@ -81,13 +84,27 @@ function M.lsp_status()
 
     local features = {}
 
-    if caps.completionProvider then table.insert(features, "completion") end
-    if caps.hoverProvider then table.insert(features, "hover") end
-    if caps.definitionProvider then table.insert(features, "definition") end
-    if caps.referencesProvider then table.insert(features, "references") end
-    if caps.renameProvider then table.insert(features, "rename") end
-    if caps.codeActionProvider then table.insert(features, "code_action") end
-    if caps.documentFormattingProvider then table.insert(features, "formatting") end
+    if caps.completionProvider then
+      table.insert(features, "completion")
+    end
+    if caps.hoverProvider then
+      table.insert(features, "hover")
+    end
+    if caps.definitionProvider then
+      table.insert(features, "definition")
+    end
+    if caps.referencesProvider then
+      table.insert(features, "references")
+    end
+    if caps.renameProvider then
+      table.insert(features, "rename")
+    end
+    if caps.codeActionProvider then
+      table.insert(features, "code_action")
+    end
+    if caps.documentFormattingProvider then
+      table.insert(features, "formatting")
+    end
 
     msg[#msg + 1] = "  Features: " .. table.concat(features, ", ")
     msg[#msg + 1] = ""
@@ -97,7 +114,11 @@ function M.lsp_status()
   vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)
 end
 
-vim.api.nvim_create_user_command('LspStatus', M.lsp_status, { desc = "Show detailed LSP status" })
+vim.api.nvim_create_user_command(
+  "LspStatus",
+  M.lsp_status,
+  { desc = "Show detailed LSP status" }
+)
 
 function M.check_lsp_capabilities()
   local bufnr = vim.api.nvim_get_current_buf()
@@ -119,24 +140,24 @@ function M.check_lsp_capabilities()
     end
 
     local capability_list = {
-      { "Completion",                caps.completionProvider },
-      { "Hover",                     caps.hoverProvider },
-      { "Signature Help",            caps.signatureHelpProvider },
-      { "Go to Definition",          caps.definitionProvider },
-      { "Go to Declaration",         caps.declarationProvider },
-      { "Go to Implementation",      caps.implementationProvider },
-      { "Go to Type Definition",     caps.typeDefinitionProvider },
-      { "Find References",           caps.referencesProvider },
-      { "Document Highlight",        caps.documentHighlightProvider },
-      { "Document Symbol",           caps.documentSymbolProvider },
-      { "Workspace Symbol",          caps.workspaceSymbolProvider },
-      { "Code Action",               caps.codeActionProvider },
-      { "Code Lens",                 caps.codeLensProvider },
-      { "Document Formatting",       caps.documentFormattingProvider },
+      { "Completion", caps.completionProvider },
+      { "Hover", caps.hoverProvider },
+      { "Signature Help", caps.signatureHelpProvider },
+      { "Go to Definition", caps.definitionProvider },
+      { "Go to Declaration", caps.declarationProvider },
+      { "Go to Implementation", caps.implementationProvider },
+      { "Go to Type Definition", caps.typeDefinitionProvider },
+      { "Find References", caps.referencesProvider },
+      { "Document Highlight", caps.documentHighlightProvider },
+      { "Document Symbol", caps.documentSymbolProvider },
+      { "Workspace Symbol", caps.workspaceSymbolProvider },
+      { "Code Action", caps.codeActionProvider },
+      { "Code Lens", caps.codeLensProvider },
+      { "Document Formatting", caps.documentFormattingProvider },
       { "Document Range Formatting", caps.documentRangeFormattingProvider },
-      { "Rename",                    caps.renameProvider },
-      { "Folding Range",             caps.foldingRangeProvider },
-      { "Selection Range",           caps.selectionRangeProvider },
+      { "Rename", caps.renameProvider },
+      { "Folding Range", caps.foldingRangeProvider },
+      { "Selection Range", caps.selectionRangeProvider },
     }
 
     for _, cap in ipairs(capability_list) do
@@ -150,27 +171,116 @@ function M.check_lsp_capabilities()
   vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)
 end
 
-vim.api.nvim_create_user_command('LspCapabilities', M.check_lsp_capabilities, { desc = "Show LSP capabilities" })
+vim.api.nvim_create_user_command(
+  "LspCapabilities",
+  M.check_lsp_capabilities,
+  { desc = "Show LSP capabilities" }
+)
 
 local keys = {
-  { "n", "gl",         vim.diagnostic.open_float,         { desc = "line diagnostics" } },
-  { "n", "K",          vim.lsp.buf.hover,                 { desc = "Lsp Hover" } },
-  { "n", "gK",         vim.lsp.buf.signature_help,        { desc = "LSP Signature help" } },
-  { "n", "<leader>cl", vim.lsp.codelens.run,              { desc = "CodeLens action" } },
-  { "n", "<leader>cq", vim.diagnostic.setloclist,         { desc = "Quickfix" } },
-  { "n", "<leader>cr", vim.lsp.buf.rename,                { desc = "Global rename" } },
-  { "n", "<leader>lr", M.restart_lsp,                     { desc = "Restart" } },
-  { "n", "<leader>lS", M.lsp_status,                      { desc = "Status" } },
-  { "n", "<leader>lT", M.toggle_virtual_lines_diagnostic, { desc = "Toggle line diagnostics" } },
-  { "i", "<c-k>",      vim.lsp.buf.signature_help,        { desc = "Signature help" } },
-  { "n", "]e",         M.diagnostic_jump(1, "ERROR"),     { desc = "Next error" } },
-  { "n", "[e",         M.diagnostic_jump(-1, "ERROR"),    { desc = "Prev error" } },
-  { "n", "]i",         M.diagnostic_jump(1, "INFO"),      { desc = "Next info" } },
-  { "n", "[i",         M.diagnostic_jump(-1, "INFO"),     { desc = "Prev info" } },
-  { "n", "]t",         M.diagnostic_jump(1, "HINT"),      { desc = "Next hint" } },
-  { "n", "[t",         M.diagnostic_jump(-1, "HINT"),     { desc = "Prev hint" } },
-  { "n", "]w",         M.diagnostic_jump(1, "WARN"),      { desc = "Next warning" } },
-  { "n", "[w",         M.diagnostic_jump(-1, "WARN"),     { desc = "Prev warning" } },
+  {
+    "n",
+    "gl",
+    vim.diagnostic.open_float,
+    { desc = "line diagnostics" },
+  },
+  {
+    "n",
+    "K",
+    vim.lsp.buf.hover,
+    { desc = "Lsp Hover" },
+  },
+  {
+    "n",
+    "gK",
+    vim.lsp.buf.signature_help,
+    { desc = "LSP Signature help" },
+  },
+  {
+    "n",
+    "<leader>cl",
+    vim.lsp.codelens.run,
+    { desc = "CodeLens action" },
+  },
+  {
+    "n",
+    "<leader>cq",
+    vim.diagnostic.setloclist,
+    { desc = "Quickfix" },
+  },
+  {
+    "n",
+    "<leader>cr",
+    vim.lsp.buf.rename,
+    { desc = "Global rename" },
+  },
+  {
+    "n",
+    "<leader>lr",
+    M.restart_lsp,
+    { desc = "Restart" },
+  },
+  { "n", "<leader>lS", M.lsp_status, { desc = "Status" } },
+  {
+    "n",
+    "<leader>lT",
+    M.toggle_virtual_lines_diagnostic,
+    { desc = "Toggle line diagnostics" },
+  },
+  {
+    "i",
+    "<c-k>",
+    vim.lsp.buf.signature_help,
+    { desc = "Signature help" },
+  },
+  {
+    "n",
+    "]e",
+    M.diagnostic_jump(1, "ERROR"),
+    { desc = "Next error" },
+  },
+  {
+    "n",
+    "[e",
+    M.diagnostic_jump(-1, "ERROR"),
+    { desc = "Prev error" },
+  },
+  {
+    "n",
+    "]i",
+    M.diagnostic_jump(1, "INFO"),
+    { desc = "Next info" },
+  },
+  {
+    "n",
+    "[i",
+    M.diagnostic_jump(-1, "INFO"),
+    { desc = "Prev info" },
+  },
+  {
+    "n",
+    "]t",
+    M.diagnostic_jump(1, "HINT"),
+    { desc = "Next hint" },
+  },
+  {
+    "n",
+    "[t",
+    M.diagnostic_jump(-1, "HINT"),
+    { desc = "Prev hint" },
+  },
+  {
+    "n",
+    "]w",
+    M.diagnostic_jump(1, "WARN"),
+    { desc = "Next warning" },
+  },
+  {
+    "n",
+    "[w",
+    M.diagnostic_jump(-1, "WARN"),
+    { desc = "Prev warning" },
+  },
 }
 
 ---@param buffer integer
@@ -211,46 +321,44 @@ vim.lsp.config("*", {
 })
 
 -- Enable each language server by filename under the lsp/ folder
-vim.lsp.enable(
-  {
-    -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
-    "buf_ls",
-    -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ccls
-    -- "ccls",
-    -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
-    "dockerls",
-    -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls
-    "golangci_lint_ls",
-    -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
-    "gopls",
-    -- github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
-    "graphql",
-    -- github.com/hrsh7th/vscode-langservers-extracted
-    "jsonls",
-    -- github.com/sumneko/lua-language-server
-    "lua_ls",
-    -- microsoft.github.io/pyright/#/
-    -- "pyright",
-    -- github.com/stoplightio/spectral
-    -- "spectral",
-    -- github.com/hyperledger/solang
-    -- "solang",
-    -- github.com/ethereum/solc-js
-    -- "solc",
-    -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solidity_ls_nomicfoundation
-    "solidity_ls_nomicfoundation",
-    -- github.com/joe-re/sql-language-server
-    "sqlls",
-    -- github.com/hashicorp/terraform-ls
-    "terraformls",
-    -- github.com/typescript-language-server/typescript-language-server
-    "ts_ls",
-    -- github.com/terraform-linters/tflint
-    -- "tflint",
-    -- github.com/redhat-developer/yaml-language-server
-    "yamlls",
-  }
-)
+vim.lsp.enable({
+  -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls
+  "buf_ls",
+  -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ccls
+  -- "ccls",
+  -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dockerls
+  "dockerls",
+  -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls
+  "golangci_lint_ls",
+  -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gopls
+  "gopls",
+  -- github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli
+  "graphql",
+  -- github.com/hrsh7th/vscode-langservers-extracted
+  "jsonls",
+  -- github.com/sumneko/lua-language-server
+  "lua_ls",
+  -- microsoft.github.io/pyright/#/
+  -- "pyright",
+  -- github.com/stoplightio/spectral
+  -- "spectral",
+  -- github.com/hyperledger/solang
+  -- "solang",
+  -- github.com/ethereum/solc-js
+  -- "solc",
+  -- github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solidity_ls_nomicfoundation
+  "solidity_ls_nomicfoundation",
+  -- github.com/joe-re/sql-language-server
+  "sqlls",
+  -- github.com/hashicorp/terraform-ls
+  "terraformls",
+  -- github.com/typescript-language-server/typescript-language-server
+  "ts_ls",
+  -- github.com/terraform-linters/tflint
+  -- "tflint",
+  -- github.com/redhat-developer/yaml-language-server
+  "yamlls",
+})
 
 vim.diagnostic.config({
   -- Alternatively, customize specific options

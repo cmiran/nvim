@@ -5,7 +5,13 @@ return {
   event = { "BufEnter", "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
-    { "<leader>cf", function() require("conform").format() end, desc = "Format" },
+    {
+      "<leader>cf",
+      function()
+        require("conform").format()
+      end,
+      desc = "Format",
+    },
   },
   ---@module "conform"
   ---@type conform.setupOpts
@@ -24,7 +30,7 @@ return {
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
         return
       end
-      return { timeout_ms = 600, }
+      return { timeout_ms = 600 }
     end,
   },
   config = function(_, opts)

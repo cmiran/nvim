@@ -17,7 +17,11 @@ return {
     { "<leader>fW", "<cmd>FzfLuaGrepCWORD<cr>", desc = "String under cursor" },
     { "gd", "<cmd>FzfLua lsp_definitions<cr>", desc = "Lsp definition" },
     { "gD", "<cmd>FzfLua lsp_declaration<cr>", desc = "Lsp declaration" },
-    { "gi", "<cmd>FzfLua lsp_implementations<cr>", desc = "Lsp implementation" },
+    {
+      "gi",
+      "<cmd>FzfLua lsp_implementations<cr>",
+      desc = "Lsp implementation",
+    },
     { "gr", "<cmd>FzfLua lsp_references<cr>", desc = "references" },
     { "gt", "<cmd>FzfLua lsp_typedefs<cr>", desc = "Lsp type Definition" },
     {
@@ -27,8 +31,16 @@ return {
       mode = { "n", "v" },
     },
     { "<leader>lf", "<cmd>FzfLua lsp_finder", desc = "Find all" },
-    { "<leader>ls", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Find document symbols" },
-    { "<leader>lw", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "Find workspace symbols" },
+    {
+      "<leader>ls",
+      "<cmd>FzfLua lsp_document_symbols<cr>",
+      desc = "Find document symbols",
+    },
+    {
+      "<leader>lw",
+      "<cmd>FzfLua lsp_live_workspace_symbols<cr>",
+      desc = "Find workspace symbols",
+    },
   },
   opts = {
     "ivy",

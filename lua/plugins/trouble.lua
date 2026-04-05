@@ -22,6 +22,6 @@ return {
     win = {
       type = "float",
       border = "shadow",
-    }
+    },
   },
 }

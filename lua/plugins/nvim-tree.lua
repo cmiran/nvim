@@ -10,7 +10,12 @@ local function on_attach(bufnr)
 
   -- Default keymaps
   keymap("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
-  keymap("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
+  keymap(
+    "n",
+    "<C-e>",
+    api.node.open.replace_tree_buffer,
+    opts("Open: In Place")
+  )
   keymap("n", "<C-k>", api.node.show_info_popup, opts("Info"))
   keymap("n", "<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
   keymap("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
@@ -27,9 +32,19 @@ local function on_attach(bufnr)
   keymap("n", "bd", api.marks.bulk.delete, opts("Delete Bookmarked"))
   keymap("n", "bt", api.marks.bulk.trash, opts("Trash Bookmarked"))
   keymap("n", "bmv", api.marks.bulk.move, opts("Move Bookmarked"))
-  keymap("n", "B", api.filter.no_buffer.toggle, opts("Toggle Filter: No Buffer"))
+  keymap(
+    "n",
+    "B",
+    api.filter.no_buffer.toggle,
+    opts("Toggle Filter: No Buffer")
+  )
   keymap("n", "c", api.fs.copy.node, opts("Copy"))
-  keymap("n", "C", api.filter.git.clean.toggle, opts("Toggle Filter: Git Clean"))
+  keymap(
+    "n",
+    "C",
+    api.filter.git.clean.toggle,
+    opts("Toggle Filter: Git Clean")
+  )
   keymap("n", "[c", api.node.navigate.git.prev, opts("Prev Git"))
   keymap("n", "]c", api.node.navigate.git.next, opts("Next Git"))
   keymap("n", "d", api.fs.remove, opts("Delete"))
@@ -44,14 +59,29 @@ local function on_attach(bufnr)
   keymap("n", "gy", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
   keymap("n", "ge", api.fs.copy.basename, opts("Copy Basename"))
   keymap("n", "H", api.filter.dotfiles.toggle, opts("Toggle Filter: Dotfiles"))
-  keymap("n", "I", api.filter.git.ignored.toggle, opts("Toggle Filter: Git Ignore"))
+  keymap(
+    "n",
+    "I",
+    api.filter.git.ignored.toggle,
+    opts("Toggle Filter: Git Ignore")
+  )
   keymap("n", "J", api.node.navigate.sibling.last, opts("Last Sibling"))
   keymap("n", "K", api.node.navigate.sibling.first, opts("First Sibling"))
   keymap("n", "L", api.node.open.toggle_group_empty, opts("Toggle Group Empty"))
-  keymap("n", "M", api.filter.no_bookmark.toggle, opts("Toggle Filter: No Bookmark"))
+  keymap(
+    "n",
+    "M",
+    api.filter.no_bookmark.toggle,
+    opts("Toggle Filter: No Bookmark")
+  )
   keymap("n", "m", api.marks.toggle, opts("Toggle Bookmark"))
   keymap("n", "o", api.node.open.edit, opts("Open"))
-  keymap("n", "O", api.node.open.no_window_picker, opts("Open: No Window Picker"))
+  keymap(
+    "n",
+    "O",
+    api.node.open.no_window_picker,
+    opts("Open: No Window Picker")
+  )
   keymap("n", "p", api.fs.paste, opts("Paste"))
   keymap("n", "P", api.node.navigate.parent, opts("Parent Directory"))
   keymap("n", "q", api.tree.close, opts("Close"))
@@ -90,18 +120,25 @@ end
 
 local function resize_nvim_tree()
   local view = require("nvim-tree.view")
-  if not view.is_visible() then return end
+  if not view.is_visible() then
+    return
+  end
 
   local win = view.get_winnr()
-  if not win or not vim.api.nvim_win_is_valid(win) then return end
+  if not win or not vim.api.nvim_win_is_valid(win) then
+    return
+  end
 
   local buf = vim.api.nvim_win_get_buf(win)
   local buf_name = vim.api.nvim_buf_get_name(buf)
-  if not buf_name:match("NvimTree") then return end
+  if not buf_name:match("NvimTree") then
+    return
+  end
 
   local line_count = vim.api.nvim_buf_line_count(buf)
   local current_config = vim.api.nvim_win_get_config(win)
-  local new_config = vim.tbl_deep_extend("force", current_config, win_config(line_count))
+  local new_config =
+    vim.tbl_deep_extend("force", current_config, win_config(line_count))
   vim.api.nvim_win_set_config(win, new_config)
 end
 
@@ -120,7 +157,7 @@ return {
     "NvimTreeToggle",
   },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>",    desc = "Tree" },
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Tree" },
     { "<leader>m", "<cmd>NvimTreeOpen /tmp<cr>", desc = "Tree /tmp" },
   },
   opts = {
@@ -131,7 +168,7 @@ return {
       preserve_window_proportions = true,
       float = {
         enable = true,
-        open_win_config = win_config
+        open_win_config = win_config,
       },
     },
     renderer = {
@@ -173,9 +210,19 @@ return {
   config = function(_, opts)
     require("nvim-tree").setup(opts)
 
-    vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "WinEnter", "TextChanged", "TextChangedI" }, {
-      desc = "adapt floating window size on resize or window focus",
-      callback = resize_nvim_tree,
-    })
+    vim.api.nvim_create_autocmd(
+      {
+        "VimResized",
+        "BufEnter",
+        "BufWinEnter",
+        "WinEnter",
+        "TextChanged",
+        "TextChangedI",
+      },
+      {
+        desc = "adapt floating window size on resize or window focus",
+        callback = resize_nvim_tree,
+      }
+    )
   end,
 }

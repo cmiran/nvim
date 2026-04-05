@@ -21,11 +21,11 @@ return {
     win = {
       no_overlap = false,
       width = {
-        max = math.max(vim.o.columns*0.40, 25),
+        max = math.max(vim.o.columns * 0.40, 25),
       },
       height = {
         min = 0,
-        max = math.max(vim.o.lines*0.75, 25),
+        max = math.max(vim.o.lines * 0.75, 25),
       },
       row = 6,
       col = 2,
@@ -58,7 +58,7 @@ return {
         { "]", name = "next", nowait = true },
         { "g", name = "gaction", nowait = true },
         { "a", name = "zaction", nowait = true },
-      }
+      },
     },
   },
 }

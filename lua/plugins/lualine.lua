@@ -28,7 +28,7 @@ return {
             "searchcount",
             maxcount = 9999,
             timeout = 500,
-          }
+          },
         },
         lualine_x = {
           {
@@ -36,7 +36,8 @@ return {
               return require("noice").api.status.command.get()
             end,
             cond = function()
-              return package.loaded["noice"] and require("noice").api.status.command.has()
+              return package.loaded["noice"]
+                and require("noice").api.status.command.has()
             end,
             color = util.fg("Statement"),
           },

@@ -1,7 +1,7 @@
 ---@type vim.lsp.Config
 return {
-  cmd = { 'docker-langserver', '--stdio' },
-  filetypes = { 'dockerfile' },
+  cmd = { "docker-langserver", "--stdio" },
+  filetypes = { "dockerfile" },
   settings = {
     docker = {
       languageserver = {
@@ -9,6 +9,6 @@ return {
           ignoreMultilineInstructions = true,
         },
       },
-    }
-  }
+    },
+  },
 }

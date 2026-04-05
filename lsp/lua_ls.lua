@@ -1,6 +1,4 @@
--- github.com/sumneko/lua-language-server/wiki/Settings
 ---@type vim.lsp.Config
----return {
 return {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
@@ -15,19 +13,17 @@ return {
   },
   settings = {
     Lua = {
+      runtime = {
+        version = "LuaJIT",
+        path = { "lua/?.lua", "lua/?/init.lua" },
+      },
       diagnostics = {
-        globals = {
-          "vim",
-          "Snacks",
-        },
+        globals = { "vim", "Snacks" },
       },
       completion = {
         callSnippet = "Both",
         displayContext = 1,
         keywordSnippet = "Both",
-      },
-      format = {
-        enable = true,
       },
       hint = {
         enable = true,
@@ -38,7 +34,14 @@ return {
         setType = true,
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = vim.list_extend(
+          {
+            vim.env.VIMRUNTIME,
+            "${3rd}/luv/library",
+            "${3rd}/busted/library",
+          },
+          vim.fn.glob(vim.fn.stdpath("data") .. "/lazy/*/lua", true, true)
+        ),
         checkThirdParty = false,
       },
     },

@@ -3,7 +3,7 @@ local function get_nearest_function_name()
   local node = ts_utils.get_node_at_cursor()
 
   while node do
-    if node:type() == "function_declaration" then
+    if node:type() == "function_declaration" and node:child(1) then
       return ts_utils.get_node_text(node:child(1))[1]
     end
     node = node:parent()

@@ -51,7 +51,7 @@ return {
     Snacks.toggle({
       name = "autoformat-on-save",
       get = function()
-        return vim.b.disable_autoformat ~= true or vim.g.disable_autoformat ~= true
+        return not vim.g.disable_autoformat and not vim.b.disable_autoformat
       end,
       set = function(state)
         vim.b.disable_autoformat = not state

@@ -74,7 +74,7 @@ return {
       },
     },
   },
-  opts_extend = { "sources.default" },
+  opts_extend = { "sources.default", "completion.menu.draw.treesitter" },
   config = function(_, opts)
     require("blink.cmp").setup(opts)
     -- require("blink.cmp.snippets").load_friendly_snippets()

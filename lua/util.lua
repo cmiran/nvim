@@ -5,7 +5,7 @@ local M = {}
 ---@param rhs any
 ---@param opts table
 function M.keymap(mode, lhs, rhs, opts)
-  opts = opts or {noremap = true, nowait = true, silent = true}
+  opts = opts or { noremap = true, nowait = true, silent = true }
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -151,9 +151,22 @@ M.icons = {
 function M.fg(name)
   ---@type {foreground?:number}?
   local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
-    or vim.api.nvim_get_hl_by_name(name, true)
+      or vim.api.nvim_get_hl_by_name(name, true)
   local fg = hl and hl.fg or hl.foreground
   return fg and { fg = string.format("#%06x", fg) }
+end
+
+M.timers = {}
+function M.debounce(name, fn, delay)
+  delay = delay or 100
+  if M.timers[name] then
+    M.timers[name]:stop()
+    pcall(function() M.timers[name]:close() end)
+  end
+  M.timers[name] = vim.defer_fn(function()
+    M.timers[name] = nil
+    fn()
+  end, delay)
 end
 
 return M

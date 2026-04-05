@@ -76,7 +76,7 @@ function M.lsp_status()
     if not caps then
       msg[#msg + 1] = "  No capabilities reported"
       msg[#msg + 1] = ""
-      do break end
+      goto continue
     end
 
     local features = {}
@@ -91,6 +91,7 @@ function M.lsp_status()
 
     msg[#msg + 1] = "  Features: " .. table.concat(features, ", ")
     msg[#msg + 1] = ""
+    ::continue::
   end
 
   vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)
@@ -114,7 +115,7 @@ function M.check_lsp_capabilities()
     if not caps then
       msg[#msg + 1] = "  No capabilities reported"
       msg[#msg + 1] = ""
-      do break end
+      goto continue_caps
     end
 
     local capability_list = {
@@ -143,6 +144,7 @@ function M.check_lsp_capabilities()
       msg[#msg + 1] = string.format("  %s %s", status, cap[1])
     end
     msg[#msg + 1] = ""
+    ::continue_caps::
   end
 
   vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO)

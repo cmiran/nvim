@@ -1,6 +1,5 @@
--- Autopairs, integrates with both cmp and treesitter
--- github.com/windwp/nvim-autopairs
 return {
+  -- github.com/windwp/nvim-autopairs
   "windwp/nvim-autopairs",
   opts = {
     check_ts = true,

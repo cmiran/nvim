@@ -6,9 +6,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   event = "VeryLazy",
-  opts = {},
   config = function(_, opts)
     local tsc = require("treesitter-context")
+
+    tsc.setup(opts)
 
     Snacks.toggle({
       name = "treesitter context",
@@ -21,7 +22,5 @@ return {
         end
       end,
     }):map("<leader>uC")
-
-    tsc.setup(opts)
   end,
 }

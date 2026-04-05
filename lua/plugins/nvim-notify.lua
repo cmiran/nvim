@@ -40,7 +40,7 @@ return {
     minimum_width = 5,
     on_open = function(win)
       if vim.api.nvim_win_is_valid(win) then
-        vim.api.nvim_win_set_option(win, "wrap", true)
+        vim.wo[win].wrap = true
         vim.api.nvim_win_set_config(win, {
           -- border = "solid",
           height = get_notification_height(win),

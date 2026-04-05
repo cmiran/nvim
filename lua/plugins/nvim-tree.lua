@@ -107,8 +107,29 @@ local function on_attach(buf)
   keymap("n", "<ESC>", api.tree.close, opts("Close"))
 end
 
-local function win_config(height)
-  local width = math.floor(vim.o.columns * 0.37)
+---@param buf integer
+---@return integer
+local function get_max_line_width(buf)
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local max_width = 0
+  for _, line in ipairs(lines) do
+    local width = vim.fn.strdisplaywidth(line)
+    if width > max_width then
+      max_width = width
+    end
+  end
+  return max_width
+end
+
+---@param height integer
+---@param content_width integer
+---@return table
+local function win_config(height, content_width)
+  content_width = content_width or 0
+  local min_width = math.floor(vim.o.columns * 0.1)
+  local max_width = math.floor(vim.o.columns * 0.37)
+  local width = math.max(min_width, math.min(max_width, content_width + 2))
+
   return {
     relative = "editor",
     border = "shadow",
@@ -137,8 +158,9 @@ local function resize_nvim_tree()
   end
 
   local line_count = vim.api.nvim_buf_line_count(buf)
+  local content_width = get_max_line_width(buf)
   local current_config = vim.api.nvim_win_get_config(win)
-  local target_config = win_config(line_count)
+  local target_config = win_config(line_count, content_width)
 
   if current_config.width == target_config.width
       and current_config.height == target_config.height

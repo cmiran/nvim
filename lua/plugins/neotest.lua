@@ -14,9 +14,10 @@ end
 return {
   "nvim-neotest/neotest",
   dependencies = {
+    "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
     "antoinemadec/FixCursorHold.nvim",
+    "nvim-treesitter/nvim-treesitter",
     "folke/trouble.nvim",
     "nvim-neotest/neotest-go",
   },
@@ -148,10 +149,10 @@ return {
       virtual_text = {
         format = function(diagnostic)
           local message = diagnostic.message
-            :gsub("\n", " ")
-            :gsub("\t", " ")
-            :gsub("%s+", " ")
-            :gsub("^%s+", "")
+              :gsub("\n", " ")
+              :gsub("\t", " ")
+              :gsub("%s+", " ")
+              :gsub("^%s+", "")
           return message
         end,
       },

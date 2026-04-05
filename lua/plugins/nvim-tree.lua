@@ -88,6 +88,23 @@ local function win_config(height)
   }
 end
 
+local function resize_nvim_tree()
+  local view = require("nvim-tree.view")
+  if not view.is_visible() then return end
+
+  local win = view.get_winnr()
+  if not win or not vim.api.nvim_win_is_valid(win) then return end
+
+  local buf = vim.api.nvim_win_get_buf(win)
+  local buf_name = vim.api.nvim_buf_get_name(buf)
+  if not buf_name:match("NvimTree") then return end
+
+  local line_count = vim.api.nvim_buf_line_count(buf)
+  local current_config = vim.api.nvim_win_get_config(win)
+  local new_config = vim.tbl_deep_extend("force", current_config, win_config(line_count))
+  vim.api.nvim_win_set_config(win, new_config)
+end
+
 return {
   -- github.com/kyazdani42/nvim-tree.lua/
   "nvim-tree/nvim-tree.lua",
@@ -157,23 +174,8 @@ return {
     require("nvim-tree").setup(opts)
 
     vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "WinEnter", "TextChanged", "TextChangedI" }, {
-      pattern = "*",
-      callback = function()
-        local view = require("nvim-tree.view")
-        if not view.is_visible() then return end
-
-        local win = view.get_winnr()
-        if not win or not vim.api.nvim_win_is_valid(win) then return end
-
-        local buf = vim.api.nvim_win_get_buf(win)
-        local buf_name = vim.api.nvim_buf_get_name(buf)
-        if not buf_name:match("NvimTree") then return end
-
-        local line_count = vim.api.nvim_buf_line_count(buf)
-        local current_config = vim.api.nvim_win_get_config(win)
-        local new_config = vim.tbl_deep_extend("force", current_config, win_config(line_count))
-        vim.api.nvim_win_set_config(win, new_config)
-      end,
+      desc = "adapt floating window size on resize or window focus",
+      callback = resize_nvim_tree,
     })
   end,
 }

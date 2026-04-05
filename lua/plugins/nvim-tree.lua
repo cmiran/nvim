@@ -6,7 +6,7 @@ local function on_attach(bufnr)
     return { desc = desc, buffer = bufnr }
   end
 
-  api.config.mappings.default_on_attach(bufnr)
+  api.map.on_attach.default(bufnr)
 
   -- Default keymaps
   keymap("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
@@ -27,9 +27,9 @@ local function on_attach(bufnr)
   keymap("n", "bd", api.marks.bulk.delete, opts("Delete Bookmarked"))
   keymap("n", "bt", api.marks.bulk.trash, opts("Trash Bookmarked"))
   keymap("n", "bmv", api.marks.bulk.move, opts("Move Bookmarked"))
-  keymap("n", "B", api.tree.toggle_no_buffer_filter, opts("Toggle Filter: No Buffer"))
+  keymap("n", "B", api.filter.no_buffer.toggle, opts("Toggle Filter: No Buffer"))
   keymap("n", "c", api.fs.copy.node, opts("Copy"))
-  keymap("n", "C", api.tree.toggle_git_clean_filter, opts("Toggle Filter: Git Clean"))
+  keymap("n", "C", api.filter.git.clean.toggle, opts("Toggle Filter: Git Clean"))
   keymap("n", "[c", api.node.navigate.git.prev, opts("Prev Git"))
   keymap("n", "]c", api.node.navigate.git.next, opts("Next Git"))
   keymap("n", "d", api.fs.remove, opts("Delete"))
@@ -38,17 +38,17 @@ local function on_attach(bufnr)
   keymap("n", "e", api.fs.rename_basename, opts("Rename: Basename"))
   keymap("n", "]e", api.node.navigate.diagnostics.next, opts("Next Diagnostic"))
   keymap("n", "[e", api.node.navigate.diagnostics.prev, opts("Prev Diagnostic"))
-  keymap("n", "F", api.live_filter.clear, opts("Live Filter: Clear"))
-  keymap("n", "f", api.live_filter.start, opts("Live Filter: Start"))
+  keymap("n", "F", api.filter.live.clear, opts("Live Filter: Clear"))
+  keymap("n", "f", api.filter.live.start, opts("Live Filter: Start"))
   keymap("n", "g?", api.tree.toggle_help, opts("Help"))
   keymap("n", "gy", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
   keymap("n", "ge", api.fs.copy.basename, opts("Copy Basename"))
-  keymap("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Filter: Dotfiles"))
-  keymap("n", "I", api.tree.toggle_gitignore_filter, opts("Toggle Filter: Git Ignore"))
+  keymap("n", "H", api.filter.dotfiles.toggle, opts("Toggle Filter: Dotfiles"))
+  keymap("n", "I", api.filter.git.ignored.toggle, opts("Toggle Filter: Git Ignore"))
   keymap("n", "J", api.node.navigate.sibling.last, opts("Last Sibling"))
   keymap("n", "K", api.node.navigate.sibling.first, opts("First Sibling"))
   keymap("n", "L", api.node.open.toggle_group_empty, opts("Toggle Group Empty"))
-  keymap("n", "M", api.tree.toggle_no_bookmark_filter, opts("Toggle Filter: No Bookmark"))
+  keymap("n", "M", api.filter.no_bookmark.toggle, opts("Toggle Filter: No Bookmark"))
   keymap("n", "m", api.marks.toggle, opts("Toggle Bookmark"))
   keymap("n", "o", api.node.open.edit, opts("Open"))
   keymap("n", "O", api.node.open.no_window_picker, opts("Open: No Window Picker"))
@@ -60,7 +60,7 @@ local function on_attach(bufnr)
   keymap("n", "s", api.node.run.system, opts("Run System"))
   keymap("n", "S", api.tree.search_node, opts("Search"))
   keymap("n", "u", api.fs.rename_full, opts("Rename: Full Path"))
-  keymap("n", "U", api.tree.toggle_custom_filter, opts("Toggle Filter: Hidden"))
+  keymap("n", "U", api.filter.custom.toggle, opts("Toggle Filter: Hidden"))
   keymap("n", "W", api.tree.collapse_all, opts("Collapse All"))
   keymap("n", "x", api.fs.cut, opts("Cut"))
   keymap("n", "y", api.fs.copy.filename, opts("Copy Name"))
@@ -136,7 +136,7 @@ return {
     },
     renderer = {
       highlight_git = true,
-      root_folder_modifier = ":t", -- ":~:s?$?/..?"
+      root_folder_label = ":t", -- ":~:s?$?/..?"
       indent_markers = {
         enable = false,
         icons = {
@@ -166,8 +166,8 @@ return {
         },
       },
     },
-    git = {
-      ignore = false,
+    filters = {
+      git_ignored = false,
     },
   },
   config = function(_, opts)

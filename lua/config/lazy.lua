@@ -18,6 +18,7 @@ require("lazy").setup({
   },
   install = {
     colorscheme = { "nightfox" },
+    missing = false,
   },
   spec = {
     { import = "plugins" },

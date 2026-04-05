@@ -2,4 +2,3 @@ after/
 queries/
 .luarc.json
 lazy-lock.json
-wip*

@@ -1,4 +1,5 @@
 return {
+  -- github.com/folke/snacks.nvim
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
@@ -74,19 +75,19 @@ return {
 
         -- Create some toggle mappings
         Snacks.toggle
-          .option(
-            "conceallevel",
-            { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }
-          )
-          :map("<leader>uc")
+            .option(
+              "conceallevel",
+              { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }
+            )
+            :map("<leader>uc")
         Snacks.toggle.diagnostics():map("<leader>ud")
         Snacks.toggle.dim():map("<leader>uD")
         Snacks.toggle.indent():map("<leader>ug")
         Snacks.toggle.inlay_hints():map("<leader>uh")
         Snacks.toggle.line_number():map("<leader>un")
         Snacks.toggle
-          .option("relativenumber", { name = "relative number" })
-          :map("<leader>uN")
+            .option("relativenumber", { name = "relative number" })
+            :map("<leader>uN")
         Snacks.toggle.treesitter({ name = "treesitter" }):map("<leader>uT")
       end,
     })

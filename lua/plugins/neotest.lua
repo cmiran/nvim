@@ -1,10 +1,9 @@
 local function get_nearest_function_name()
-  local ts_utils = require("nvim-treesitter.ts_utils")
-  local node = ts_utils.get_node_at_cursor()
+  local node = vim.treesitter.get_node()
 
   while node do
     if node:type() == "function_declaration" and node:child(1) then
-      return ts_utils.get_node_text(node:child(1))[1]
+      return vim.treesitter.get_node_text(node:child(1), 0)
     end
     node = node:parent()
   end
@@ -19,7 +18,7 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
     "folke/trouble.nvim",
-    "nvim-neotest/neotest-go",
+    "fredrikaverpil/neotest-golang",
   },
   keys = {
     {
@@ -149,10 +148,10 @@ return {
       virtual_text = {
         format = function(diagnostic)
           local message = diagnostic.message
-            :gsub("\n", " ")
-            :gsub("\t", " ")
-            :gsub("%s+", " ")
-            :gsub("^%s+", "")
+              :gsub("\n", " ")
+              :gsub("\t", " ")
+              :gsub("%s+", " ")
+              :gsub("^%s+", "")
           return message
         end,
       },

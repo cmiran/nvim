@@ -3,21 +3,31 @@ return {
   "ibhagwan/fzf-lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader>fb", "<cmd>FzfLua buffers<cr>",                    desc = "Buffers" },
-    { "<leader>ff", "<cmd>FzfLua files<cr>",                      desc = "Files" },
-    { "<leader>fg", "<cmd>FzfLuaLiveGrep<cr>",                    desc = "Grep" },
-    { "<leader>fr", "<cmd>FzfLua oldfiles<cr>",                   desc = "Recent files" },
-    { "<leader>fv", "<cmd>FzfLuaGrepVisual<cr>",                  desc = "Visual selection",      mode = "v" },
-    { "<leader>fw", "<cmd>FzfLuaGrepCword<cr>",                   desc = "Word under cusror" },
-    { "<leader>fW", "<cmd>FzfLuaGrepCWORD<cr>",                   desc = "String under cusror" },
-    { "gd",         "<cmd>FzfLua lsp_definitions<cr>",            desc = "Lsp definition" },
-    { "gD",         "<cmd>FzfLua lsp_declaration<cr>",            desc = "Lsp declaration" },
-    { "gi",         "<cmd>FzfLua lsp_implementations<cr>",        desc = "Lsp implementation" },
-    { "gr",         "<cmd>FzfLua lsp_references<cr>",             desc = "references" },
-    { "gt",         "<cmd>FzfLua lsp_typedefs<cr>",               desc = "Lsp type Definition" },
-    { "<leader>ca", "<cmd>FzfLuaLspCodeActions<cr>",              desc = "Action",                mode = { "n", "v" } },
-    { "<leader>lf", "<cmd>FzfLua lsp_finder",                     desc = "Find all" },
-    { "<leader>ls", "<cmd>FzfLua lsp_document_symbols<cr>",       desc = "Find document symbols" },
+    { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
+    { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Files" },
+    { "<leader>fg", "<cmd>FzfLuaLiveGrep<cr>", desc = "Grep" },
+    { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent files" },
+    {
+      "<leader>fv",
+      "<cmd>FzfLuaGrepVisual<cr>",
+      desc = "Visual selection",
+      mode = { "n", "v" },
+    },
+    { "<leader>fw", "<cmd>FzfLuaGrepCword<cr>", desc = "Word under cursor" },
+    { "<leader>fW", "<cmd>FzfLuaGrepCWORD<cr>", desc = "String under cursor" },
+    { "gd", "<cmd>FzfLua lsp_definitions<cr>", desc = "Lsp definition" },
+    { "gD", "<cmd>FzfLua lsp_declaration<cr>", desc = "Lsp declaration" },
+    { "gi", "<cmd>FzfLua lsp_implementations<cr>", desc = "Lsp implementation" },
+    { "gr", "<cmd>FzfLua lsp_references<cr>", desc = "references" },
+    { "gt", "<cmd>FzfLua lsp_typedefs<cr>", desc = "Lsp type Definition" },
+    {
+      "<leader>ca",
+      "<cmd>FzfLuaLspCodeActions<cr>",
+      desc = "Action",
+      mode = { "n", "v" },
+    },
+    { "<leader>lf", "<cmd>FzfLua lsp_finder", desc = "Find all" },
+    { "<leader>ls", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Find document symbols" },
     { "<leader>lw", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "Find workspace symbols" },
   },
   opts = {
@@ -37,71 +47,35 @@ return {
     },
   },
   config = function(_, opts)
+    require("fzf-lua").setup(opts)
+
+    local vertical_winopts = {
+      height = 0.4,
+      preview = {
+        border = "shadow",
+        layout = "vertical",
+        scrollbar = false,
+      },
+    }
+
     vim.api.nvim_create_user_command("FzfLuaLiveGrep", function()
-      require("fzf-lua").live_grep({
-        winopts = {
-          height = 0.4,
-          preview = {
-            border = "shadow",
-            layout = "vertical",
-            scrollbar = false,
-          }
-        },
-      })
+      require("fzf-lua").live_grep({ winopts = vertical_winopts })
     end, {})
 
     vim.api.nvim_create_user_command("FzfLuaGrepCword", function()
-      require("fzf-lua").grep_cword({
-        winopts = {
-          height = 0.4,
-          preview = {
-            border = "shadow",
-            layout = "vertical",
-            scrollbar = false,
-          }
-        },
-      })
+      require("fzf-lua").grep_cword({ winopts = vertical_winopts })
     end, {})
 
     vim.api.nvim_create_user_command("FzfLuaGrepCWORD", function()
-      require("fzf-lua").grep_cWORD({
-        winopts = {
-          height = 0.4,
-          preview = {
-            border = "shadow",
-            layout = "vertical",
-            scrollbar = false,
-          }
-        },
-      })
+      require("fzf-lua").grep_cWORD({ winopts = vertical_winopts })
     end, {})
 
     vim.api.nvim_create_user_command("FzfLuaGrepVisual", function()
-      require("fzf-lua").grep_visual({
-        winopts = {
-          height = 0.4,
-          preview = {
-            border = "shadow",
-            layout = "vertical",
-            scrollbar = false,
-          }
-        },
-      })
+      require("fzf-lua").grep_visual({ winopts = vertical_winopts })
     end, {})
 
     vim.api.nvim_create_user_command("FzfLuaLspCodeActions", function()
-      require("fzf-lua").lsp_code_actions({
-        winopts = {
-          height = 0.4,
-          preview = {
-            border = "shadow",
-            layout = "vertical",
-            scrollbar = false,
-          }
-        },
-      })
+      require("fzf-lua").lsp_code_actions({ winopts = vertical_winopts })
     end, {})
-
-    require("fzf-lua").setup(opts)
   end,
 }

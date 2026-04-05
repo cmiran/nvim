@@ -7,8 +7,6 @@ return {
   dependencies = {
     -- github.com/nvim-treesitter/nvim-treesitter-textobjects
     "nvim-treesitter/nvim-treesitter-textobjects",
-    -- github.com/p00f/nvim-ts-rainbow
-    "p00f/nvim-ts-rainbow",
   },
   keys = {
     "<Leader>s",
@@ -70,13 +68,6 @@ return {
         scope_incremental = false,
         node_decremental = "_",
       },
-    },
-    rainbow = {
-      enable = false,
-      extended_mode = true, -- also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-      max_file_lines = nil, -- do not enable for files with more than n lines, int
-      -- colors = {}, -- table of hex strings
-      -- termcolors = {} -- table of colour name strings
     },
     textobjects = {
       move = {

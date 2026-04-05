@@ -35,7 +35,7 @@ return {
     {
       "<leader>tT",
       function()
-        require("neotest").run.run(vim.loop.cwd())
+        require("neotest").run.run(vim.uv.cwd())
 
         vim.notify("Run test suite", vim.log.levels.INFO, {
           title = "Neotest",

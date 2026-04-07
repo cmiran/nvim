@@ -1,23 +1,6 @@
 local function get_popup_position()
-  return vim.o.lines * 0.65
-end
-
-local function resize_cmdline_popup()
-  local row = get_popup_position()
-  local views = require("noice.config").options.views
-  views.cmdline_popup.position.row = row
-  views.cmdline_popupmenu.position.row = row + 3
-  for _, v in ipairs(require("noice.view")._views) do
-    if v.opts.view == "cmdline_popup" or v.opts.view == "cmdline_popupmenu" then
-      local new_row = v.opts.view == "cmdline_popup" and row or row + 3
-      v.view._view_opts.position.row = new_row
-      v.view._opts.position.row = new_row
-      if v.view._nui then
-        v.view._nui:unmount()
-        v.view._nui = nil
-      end
-    end
-  end
+  local win_height = vim.api.nvim_win_get_height(0)
+  return win_height * 0.45
 end
 
 return {
@@ -51,7 +34,7 @@ return {
       cmdline_popup = {
         border = {
           style = "shadow",
-          padding = { 0, 0, 0, 1 },
+          padding = { 1, 1 },
         },
         position = {
           row = get_popup_position(),
@@ -136,22 +119,4 @@ return {
       mode = { "i", "n", "s" },
     },
   },
-  config = function(_, opts)
-    require("noice").setup(opts)
-
-    vim.api.nvim_create_autocmd(
-      {
-        "VimResized",
-        "BufEnter",
-        "BufWinEnter",
-        "WinEnter",
-        "TextChanged",
-        "TextChangedI",
-      },
-      {
-        desc = "adapt floating window size on resize or window focus",
-        callback = resize_cmdline_popup,
-      }
-    )
-  end,
 }
